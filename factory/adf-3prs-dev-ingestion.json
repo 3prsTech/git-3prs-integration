@@ -1,0 +1,9 @@
+{
+	"name": "adf-3prs-dev-ingestion",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "5084c7b4-11d3-4a1a-afb6-64a166596daa",
+		"tenantId": "14e4fe51-b31b-443a-9fda-3594d9c7e300"
+	}
+}
