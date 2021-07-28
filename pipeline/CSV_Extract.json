@@ -33,6 +33,21 @@
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
+					"validateDataConsistency": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							},
+							"path": "csvfiles/policy_register/00logging"
+						}
+					},
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
