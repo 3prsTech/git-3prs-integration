@@ -14,7 +14,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "csvfiles/policy_register/sandcreekoutfitters/EPP_InForceRegister_2022-03-01.csv"
+					},
+					{
+						"name": "Destination",
+						"value": "stage.EPP_InForceRegister"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
