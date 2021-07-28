@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "SandCreekOutfitters",
+				"name": "ingest_SandCreekOutfitters",
 				"description": "data ingestion for Sand Creek Outfitters",
 				"type": "Copy",
 				"dependsOn": [],
