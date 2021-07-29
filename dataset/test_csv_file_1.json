@@ -1,0 +1,156 @@
+{
+	"name": "test_csv_file_1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EPP_InForceRegister_2022-03-01.csv",
+				"container": "test"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ReportDate",
+				"type": "String"
+			},
+			{
+				"name": "MasterAgreementID",
+				"type": "String"
+			},
+			{
+				"name": "ProgramID",
+				"type": "String"
+			},
+			{
+				"name": "CertificateNumber",
+				"type": "String"
+			},
+			{
+				"name": "ProductSKU",
+				"type": "String"
+			},
+			{
+				"name": "SubscriberFirst",
+				"type": "String"
+			},
+			{
+				"name": "SubscriberLast",
+				"type": "String"
+			},
+			{
+				"name": "SubscriberMiddle",
+				"type": "String"
+			},
+			{
+				"name": "SubscriberPrefix",
+				"type": "String"
+			},
+			{
+				"name": "SubscriberSuffix",
+				"type": "String"
+			},
+			{
+				"name": "SubscriberEmail",
+				"type": "String"
+			},
+			{
+				"name": "MailingAddress1",
+				"type": "String"
+			},
+			{
+				"name": "MailingAddress2",
+				"type": "String"
+			},
+			{
+				"name": "MailingCity",
+				"type": "String"
+			},
+			{
+				"name": "MailingStateCode",
+				"type": "String"
+			},
+			{
+				"name": "MailingPostalCode",
+				"type": "String"
+			},
+			{
+				"name": "CoveredDevicePhoneNumber",
+				"type": "String"
+			},
+			{
+				"name": "Pet1Name",
+				"type": "String"
+			},
+			{
+				"name": "Pet1Gender",
+				"type": "String"
+			},
+			{
+				"name": "Pet1Type",
+				"type": "String"
+			},
+			{
+				"name": "Pet1Breed",
+				"type": "String"
+			},
+			{
+				"name": "Pet1Age",
+				"type": "String"
+			},
+			{
+				"name": "Pet2Name",
+				"type": "String"
+			},
+			{
+				"name": "Pet2Gender",
+				"type": "String"
+			},
+			{
+				"name": "Pet2Type",
+				"type": "String"
+			},
+			{
+				"name": "Pet2Breed",
+				"type": "String"
+			},
+			{
+				"name": "Pet2Age",
+				"type": "String"
+			},
+			{
+				"name": "Pet3Name",
+				"type": "String"
+			},
+			{
+				"name": "Pet3Gender",
+				"type": "String"
+			},
+			{
+				"name": "Pet3Type",
+				"type": "String"
+			},
+			{
+				"name": "Pet3Breed",
+				"type": "String"
+			},
+			{
+				"name": "Pet3Age",
+				"type": "String"
+			},
+			{
+				"name": "EnrollmentDate",
+				"type": "String"
+			}
+		]
+	}
+}
