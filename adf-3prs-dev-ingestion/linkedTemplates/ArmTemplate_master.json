@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-3prs-dev-ingestion"
 		},
+		"3prsDevODS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of '3prsDevODS'"
+		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
@@ -14,10 +18,6 @@
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
-		},
-		"3prsDevODS_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of '3prsDevODS'"
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
@@ -54,14 +54,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"3prsDevODS_connectionString": {
+						"value": "[parameters('3prsDevODS_connectionString')]"
+					},
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
-					},
-					"3prsDevODS_connectionString": {
-						"value": "[parameters('3prsDevODS_connectionString')]"
 					},
 					"trigger1_properties_typeProperties_scope": {
 						"value": "[parameters('trigger1_properties_typeProperties_scope')]"

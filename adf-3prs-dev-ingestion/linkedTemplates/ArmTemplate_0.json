@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-3prs-dev-ingestion"
 		},
+		"3prsDevODS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of '3prsDevODS'"
+		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
@@ -14,10 +18,6 @@
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
-		},
-		"3prsDevODS_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of '3prsDevODS'"
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
@@ -32,6 +32,20 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/3prsDevODS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "sql-3prs-dev-ods-110",
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('3prsDevODS_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -57,174 +71,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/3prsDevODS')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "sql-3prs-dev-ods-110",
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('3prsDevODS_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dev_stage_EPP_InForceRegister')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "3prsDevODS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ReportDate",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MasterAgreementID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProgramID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CertificateNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProductSKU",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberFirst",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberLast",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberMiddle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberPrefix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberSuffix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberEmail",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingCity",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingStateCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingPostalCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CoveredDevicePhoneNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "EnrollmentDate",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "stage",
-					"table": "EPP_InForceRegister"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/3prsDevODS')]"
-			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PolicyRegisterCSV_SandCreekOutfitters')]",
@@ -386,6 +232,160 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dev_stage_InForceRegister')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "3prsDevODS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ReportDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MasterAgreementID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProgramID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CertificateNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProductSKU",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberFirst",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberLast",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberMiddle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberPrefix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberSuffix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberEmail",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingAddress1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingAddress2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingCity",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingStateCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingPostalCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CoveredDevicePhoneNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EnrollmentDate",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "stage",
+					"table": "InForceRegister"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/3prsDevODS')]"
 			]
 		},
 		{
@@ -1027,7 +1027,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_stage_EPP_InForceRegister",
+								"referenceName": "dev_stage_InForceRegister",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -1039,7 +1039,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/PolicyRegisterCSV_SandCreekOutfitters')]",
-				"[concat(variables('factoryId'), '/datasets/dev_stage_EPP_InForceRegister')]",
+				"[concat(variables('factoryId'), '/datasets/dev_stage_InForceRegister')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
@@ -1495,7 +1495,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_stage_EPP_InForceRegister",
+								"referenceName": "dev_stage_InForceRegister",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -1506,7 +1506,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/test_csv_file_1')]",
-				"[concat(variables('factoryId'), '/datasets/dev_stage_EPP_InForceRegister')]"
+				"[concat(variables('factoryId'), '/datasets/dev_stage_InForceRegister')]"
 			]
 		},
 		{

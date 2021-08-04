@@ -5,13 +5,13 @@
 		"factoryName": {
 			"value": "adf-3prs-dev-ingestion"
 		},
+		"3prsDevODS_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage1_connectionString": {
 			"value": ""
 		},
 		"AzureSqlDatabase1_connectionString": {
-			"value": ""
-		},
-		"3prsDevODS_connectionString": {
 			"value": ""
 		},
 		"trigger1_properties_typeProperties_scope": {
