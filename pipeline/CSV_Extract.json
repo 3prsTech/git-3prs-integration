@@ -473,7 +473,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_stage_EPP_InForceRegister",
+						"referenceName": "dev_stage_InForceRegister",
 						"type": "DatasetReference"
 					}
 				]
