@@ -1,5 +1,5 @@
 {
-	"name": "dev_stage_EPP_InForceRegister",
+	"name": "dev_stage_InForceRegister",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "3prsDevODS",
