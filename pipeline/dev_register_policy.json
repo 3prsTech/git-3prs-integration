@@ -1,5 +1,5 @@
 {
-	"name": "CSV_Extract",
+	"name": "dev_register_policy",
 	"properties": {
 		"activities": [
 			{
@@ -38,8 +38,8 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"writeBehavior": "insert",
-						"disableMetricsCollection": false
+						"disableMetricsCollection": false,
+						"writeBehavior": "insert"
 					},
 					"enableStaging": false,
 					"validateDataConsistency": true,
@@ -467,7 +467,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "PolicyRegisterCSV_SandCreekOutfitters",
+						"referenceName": "csv_PolicyRegister_SandCreekOutfitters",
 						"type": "DatasetReference"
 					}
 				],
@@ -479,6 +479,9 @@
 				]
 			}
 		],
+		"folder": {
+			"name": "DEV"
+		},
 		"annotations": [],
 		"lastPublishTime": "2021-07-27T12:56:44Z"
 	},
