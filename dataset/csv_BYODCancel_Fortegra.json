@@ -1,9 +1,12 @@
 {
-	"name": "BYODCancel_Fortegra",
+	"name": "csv_BYODCancel_Fortegra",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "csv_files"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
