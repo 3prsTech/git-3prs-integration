@@ -5,6 +5,9 @@
 			"referenceName": "3prsProdODS",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "sql_tables"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [

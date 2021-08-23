@@ -1,9 +1,12 @@
 {
-	"name": "PolicyRegisterCSV_SandCreekOutfitters",
+	"name": "csv_PolicyRegister_SandCreekOutfitters",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "csv_files"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
