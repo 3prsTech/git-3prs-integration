@@ -146,7 +146,7 @@
 		],
 		"typeProperties": {
 			"schema": "stage",
-			"table": "BYODCancellations"
+			"table": "InForceRegister"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
