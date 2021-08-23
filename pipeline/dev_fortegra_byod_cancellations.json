@@ -134,18 +134,6 @@
 							},
 							{
 								"source": {
-									"name": "Prop_6",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "column7",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
 									"name": "City",
 									"type": "String",
 									"physicalType": "String"
