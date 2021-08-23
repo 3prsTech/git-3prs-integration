@@ -453,6 +453,9 @@
 				]
 			}
 		],
+		"folder": {
+			"name": "DEV"
+		},
 		"annotations": []
 	}
 }
