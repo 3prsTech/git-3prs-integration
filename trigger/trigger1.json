@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "CSV_Extract",
+					"referenceName": "dev_register_policy",
 					"type": "PipelineReference"
 				}
 			}
