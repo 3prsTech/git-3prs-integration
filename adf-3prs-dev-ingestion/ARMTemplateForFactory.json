@@ -3215,7 +3215,7 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/policy_register/sandcreekoutfitters",
+					"blobPathBeginsWith": "/csvfiles/blobs/policy_register/sandcreekoutfitters/",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('trigger1_properties_typeProperties_scope')]",
 					"events": [
