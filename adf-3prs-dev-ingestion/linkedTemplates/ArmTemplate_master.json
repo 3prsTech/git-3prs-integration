@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of '3prsDevODS'"
 		},
+		"3prsProdODS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of '3prsProdODS'"
+		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
@@ -18,10 +22,6 @@
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
-		},
-		"3prsProdODS_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of '3prsProdODS'"
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
@@ -61,14 +61,14 @@
 					"3prsDevODS_connectionString": {
 						"value": "[parameters('3prsDevODS_connectionString')]"
 					},
+					"3prsProdODS_connectionString": {
+						"value": "[parameters('3prsProdODS_connectionString')]"
+					},
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
-					},
-					"3prsProdODS_connectionString": {
-						"value": "[parameters('3prsProdODS_connectionString')]"
 					},
 					"trigger1_properties_typeProperties_scope": {
 						"value": "[parameters('trigger1_properties_typeProperties_scope')]"

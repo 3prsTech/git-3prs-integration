@@ -8,13 +8,13 @@
 		"3prsDevODS_connectionString": {
 			"value": ""
 		},
+		"3prsProdODS_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage1_connectionString": {
 			"value": ""
 		},
 		"AzureSqlDatabase1_connectionString": {
-			"value": ""
-		},
-		"3prsProdODS_connectionString": {
 			"value": ""
 		},
 		"trigger1_properties_typeProperties_scope": {

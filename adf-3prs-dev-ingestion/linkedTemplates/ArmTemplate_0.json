@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of '3prsDevODS'"
 		},
+		"3prsProdODS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of '3prsProdODS'"
+		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
@@ -18,10 +22,6 @@
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
-		},
-		"3prsProdODS_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of '3prsProdODS'"
 		},
 		"trigger1_properties_typeProperties_scope": {
 			"type": "string",
@@ -46,6 +46,20 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('3prsDevODS_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/3prsProdODS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "sql-3prs-prod-ods-110",
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('3prsProdODS_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -77,18 +91,105 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/3prsProdODS')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/csv_BYODCancel_Fortegra')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"description": "sql-3prs-prod-ods-110",
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "csv_files"
+				},
 				"annotations": [],
-				"type": "AzureSqlDatabase",
+				"type": "DelimitedText",
 				"typeProperties": {
-					"connectionString": "[parameters('3prsProdODS_connectionString')]"
-				}
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "BYOD - Cancellations Report.csv",
+						"folderPath": "fortegra_byod_cancellations/01-upload",
+						"container": "csvfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Plan Number",
+						"type": "String"
+					},
+					{
+						"name": "Plan Name",
+						"type": "String"
+					},
+					{
+						"name": "Customer Name",
+						"type": "String"
+					},
+					{
+						"name": "Reference Number",
+						"type": "String"
+					},
+					{
+						"name": "Customer Address Line 1",
+						"type": "String"
+					},
+					{
+						"name": "Customer Address Line 2",
+						"type": "String"
+					},
+					{
+						"name": "Prop_6",
+						"type": "String"
+					},
+					{
+						"name": "City",
+						"type": "String"
+					},
+					{
+						"name": "State",
+						"type": "String"
+					},
+					{
+						"name": "PhoneNumber",
+						"type": "String"
+					},
+					{
+						"name": "Device  Model",
+						"type": "String"
+					},
+					{
+						"name": "Device Make",
+						"type": "String"
+					},
+					{
+						"name": "Device Serial Number",
+						"type": "String"
+					},
+					{
+						"name": "Purchase Price",
+						"type": "String"
+					},
+					{
+						"name": "Plan Start Date",
+						"type": "String"
+					},
+					{
+						"name": "Deactivation Date",
+						"type": "String"
+					},
+					{
+						"name": "Ran Diagnostic Test?",
+						"type": "String"
+					}
+				]
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/csv_PolicyRegister_SandCreekOutfitters')]",
@@ -256,6 +357,163 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/dev_stage_BYODCancellations')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "3prsDevODS",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "sql_tables"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ReportDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MasterAgreementID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProgramID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CertificateNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProductSKU",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberFirst",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberLast",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberMiddle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberPrefix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberSuffix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberEmail",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingAddress1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingAddress2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingCity",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingStateCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingPostalCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CoveredDevicePhoneNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EnrollmentDate",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "stage",
+					"table": "BYODCancellations"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/3prsDevODS')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/dev_stage_InForceRegister')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -410,6 +668,320 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/3prsDevODS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prod_stage_BYODCancellations')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "3prsProdODS",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "sql_tables"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ReportDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MasterAgreementID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProgramID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CertificateNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProductSKU",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberFirst",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberLast",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberMiddle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberPrefix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberSuffix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberEmail",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingAddress1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingAddress2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingCity",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingStateCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingPostalCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CoveredDevicePhoneNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EnrollmentDate",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "stage",
+					"table": "BYODCancellations"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/3prsProdODS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prod_stage_InForceRegister')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "3prsProdODS",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "sql_tables"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ReportDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MasterAgreementID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProgramID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CertificateNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProductSKU",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberFirst",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberLast",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberMiddle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberPrefix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberSuffix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberEmail",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingAddress1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingAddress2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingCity",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingStateCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingPostalCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CoveredDevicePhoneNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EnrollmentDate",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "stage",
+					"table": "InForceRegister"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/3prsProdODS')]"
 			]
 		},
 		{
@@ -577,575 +1149,296 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/csv_BYODCancel_Fortegra')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/dev_fortegra_byod_cancellations')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
-					"type": "LinkedServiceReference"
-				},
+				"activities": [
+					{
+						"name": "ingest_Fortegra_BYOD_Cancellations",
+						"description": "data ingestion for Fortegra BYOD Cancellations report",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "csvfiles/policy_register/sandcreekoutfitters/EPP_InForceRegister_2022-03-01.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "stage.EPP_InForceRegister"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"disableMetricsCollection": false,
+								"writeBehavior": "insert"
+							},
+							"enableStaging": false,
+							"validateDataConsistency": true,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorage1",
+										"type": "LinkedServiceReference"
+									},
+									"path": "csvfiles/fortegra_byod_cancellations/00-logging"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Plan Number",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Plan_Number",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Plan Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Plan_Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer_Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Reference Number",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Reference_Number",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Address Line 1",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer_Address_Line_1",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Address Line 2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer_Address_Line_2",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "City",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "City",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "State",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "State",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "PhoneNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PhoneNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Device  Model",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Device_Model",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Device Make",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Device_Make",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Device Serial Number",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Device_Serial_Number",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Purchase Price",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Purchase_Price",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Plan Start Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Plan_Start_Date",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										}
+									},
+									{
+										"source": {
+											"name": "Deactivation Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Deactivation_Date",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										}
+									},
+									{
+										"source": {
+											"name": "Ran Diagnostic Test?",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Ran_Diagnostic_Test",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false,
+									"dateTimeFormat": "\"yyyy-MM-dd HH:mm:ss.fff\""
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "csv_BYODCancel_Fortegra",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dev_stage_BYODCancellations",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
 				"folder": {
-					"name": "csv_files"
+					"name": "DEV"
 				},
 				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "BYOD - Cancellations Report.csv",
-						"folderPath": "fortegra_byod_cancellations/01-upload",
-						"container": "csvfiles"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Plan Number",
-						"type": "String"
-					},
-					{
-						"name": "Plan Name",
-						"type": "String"
-					},
-					{
-						"name": "Customer Name",
-						"type": "String"
-					},
-					{
-						"name": "Reference Number",
-						"type": "String"
-					},
-					{
-						"name": "Customer Address Line 1",
-						"type": "String"
-					},
-					{
-						"name": "Customer Address Line 2",
-						"type": "String"
-					},
-					{
-						"name": "Prop_6",
-						"type": "String"
-					},
-					{
-						"name": "City",
-						"type": "String"
-					},
-					{
-						"name": "State",
-						"type": "String"
-					},
-					{
-						"name": "PhoneNumber",
-						"type": "String"
-					},
-					{
-						"name": "Device  Model",
-						"type": "String"
-					},
-					{
-						"name": "Device Make",
-						"type": "String"
-					},
-					{
-						"name": "Device Serial Number",
-						"type": "String"
-					},
-					{
-						"name": "Purchase Price",
-						"type": "String"
-					},
-					{
-						"name": "Plan Start Date",
-						"type": "String"
-					},
-					{
-						"name": "Deactivation Date",
-						"type": "String"
-					},
-					{
-						"name": "Ran Diagnostic Test?",
-						"type": "String"
-					}
-				]
+				"lastPublishTime": "2021-07-27T12:56:44Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/csv_BYODCancel_Fortegra')]",
+				"[concat(variables('factoryId'), '/datasets/dev_stage_BYODCancellations')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod_stage_InForceRegister')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "3prsProdODS",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "sql_tables"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ReportDate",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MasterAgreementID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProgramID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CertificateNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProductSKU",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberFirst",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberLast",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberMiddle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberPrefix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberSuffix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberEmail",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingCity",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingStateCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingPostalCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CoveredDevicePhoneNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "EnrollmentDate",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "stage",
-					"table": "InForceRegister"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/3prsProdODS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dev_stage_BYODCancellations')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "3prsDevODS",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "sql_tables"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ReportDate",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MasterAgreementID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProgramID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CertificateNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProductSKU",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberFirst",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberLast",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberMiddle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberPrefix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberSuffix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberEmail",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingCity",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingStateCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingPostalCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CoveredDevicePhoneNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "EnrollmentDate",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "stage",
-					"table": "BYODCancellations"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/3prsDevODS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod_stage_BYODCancellations')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "3prsProdODS",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "sql_tables"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ReportDate",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MasterAgreementID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProgramID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CertificateNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProductSKU",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberFirst",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberLast",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberMiddle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberPrefix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberSuffix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberEmail",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingCity",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingStateCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingPostalCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CoveredDevicePhoneNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "EnrollmentDate",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "stage",
-					"table": "BYODCancellations"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/3prsProdODS')]"
 			]
 		},
 		{
@@ -1155,7 +1448,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "ingest_SandCreekOutfitters",
+						"name": "ingest_SandCreekOutfitters_test",
 						"description": "data ingestion for Sand Creek Outfitters",
 						"type": "Copy",
 						"dependsOn": [],
@@ -1646,476 +1939,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/test_ingestion')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "test_csv_ingestion",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"writeBehavior": "insert"
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "ReportDate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ReportDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MasterAgreementID",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MasterAgreementID",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ProgramID",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ProgramID",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "CertificateNumber",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "CertificateNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ProductSKU",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ProductSKU",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberFirst",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberFirst",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberLast",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberLast",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberMiddle",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberMiddle",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberPrefix",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberPrefix",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberSuffix",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberSuffix",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberEmail",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberEmail",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingAddress1",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingAddress1",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingAddress2",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingAddress2",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingCity",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingCity",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingStateCode",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingStateCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingPostalCode",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingPostalCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "CoveredDevicePhoneNumber",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "CoveredDevicePhoneNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "EnrollmentDate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "EnrollmentDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "test_csv_file_1",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "dev_stage_InForceRegister",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"folder": {
-					"name": "DEV"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/test_csv_file_1')]",
-				"[concat(variables('factoryId'), '/datasets/dev_stage_InForceRegister')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dev_fortegra_byod_cancellations')]",
+			"name": "[concat(parameters('factoryName'), '/prod_fortegra_byod_cancellations')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -2388,7 +2212,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_stage_BYODCancellations",
+								"referenceName": "prod_stage_BYODCancellations",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -2396,14 +2220,14 @@
 					}
 				],
 				"folder": {
-					"name": "DEV"
+					"name": "PROD"
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-07-27T12:56:44Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/csv_BYODCancel_Fortegra')]",
-				"[concat(variables('factoryId'), '/datasets/dev_stage_BYODCancellations')]",
+				"[concat(variables('factoryId'), '/datasets/prod_stage_BYODCancellations')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
@@ -2905,14 +2729,13 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/prod_fortegra_byod_cancellations')]",
+			"name": "[concat(parameters('factoryName'), '/test_ingestion')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "ingest_Fortegra_BYOD_Cancellations",
-						"description": "data ingestion for Fortegra BYOD Cancellations report",
+						"name": "test_csv_ingestion",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -2922,16 +2745,7 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "csvfiles/policy_register/sandcreekoutfitters/EPP_InForceRegister_2022-03-01.csv"
-							},
-							{
-								"name": "Destination",
-								"value": "stage.EPP_InForceRegister"
-							}
-						],
+						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "DelimitedTextSource",
@@ -2946,216 +2760,405 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"disableMetricsCollection": false,
 								"writeBehavior": "insert"
 							},
 							"enableStaging": false,
-							"validateDataConsistency": true,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Warning",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "AzureBlobStorage1",
-										"type": "LinkedServiceReference"
-									},
-									"path": "csvfiles/fortegra_byod_cancellations/00-logging"
-								}
-							},
+							"validateDataConsistency": false,
 							"translator": {
 								"type": "TabularTranslator",
 								"mappings": [
 									{
 										"source": {
-											"name": "Plan Number",
+											"name": "ReportDate",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Plan_Number",
+											"name": "ReportDate",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Plan Name",
+											"name": "MasterAgreementID",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Plan_Name",
+											"name": "MasterAgreementID",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Customer Name",
+											"name": "ProgramID",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Customer_Name",
+											"name": "ProgramID",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Reference Number",
+											"name": "CertificateNumber",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Reference_Number",
+											"name": "CertificateNumber",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Customer Address Line 1",
+											"name": "ProductSKU",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Customer_Address_Line_1",
+											"name": "ProductSKU",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Customer Address Line 2",
+											"name": "SubscriberFirst",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Customer_Address_Line_2",
+											"name": "SubscriberFirst",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "City",
+											"name": "SubscriberLast",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "City",
+											"name": "SubscriberLast",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "State",
+											"name": "SubscriberMiddle",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "State",
+											"name": "SubscriberMiddle",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "PhoneNumber",
+											"name": "SubscriberPrefix",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "PhoneNumber",
+											"name": "SubscriberPrefix",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Device  Model",
+											"name": "SubscriberSuffix",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Device_Model",
+											"name": "SubscriberSuffix",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Device Make",
+											"name": "SubscriberEmail",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Device_Make",
+											"name": "SubscriberEmail",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Device Serial Number",
+											"name": "MailingAddress1",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Device_Serial_Number",
+											"name": "MailingAddress1",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Purchase Price",
+											"name": "MailingAddress2",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Purchase_Price",
+											"name": "MailingAddress2",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Plan Start Date",
+											"name": "MailingCity",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Plan_Start_Date",
-											"type": "DateTime",
-											"physicalType": "datetime2"
+											"name": "MailingCity",
+											"type": "String",
+											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Deactivation Date",
+											"name": "MailingStateCode",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Deactivation_Date",
-											"type": "DateTime",
-											"physicalType": "datetime2"
+											"name": "MailingStateCode",
+											"type": "String",
+											"physicalType": "nvarchar"
 										}
 									},
 									{
 										"source": {
-											"name": "Ran Diagnostic Test?",
+											"name": "MailingPostalCode",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Ran_Diagnostic_Test",
+											"name": "MailingPostalCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CoveredDevicePhoneNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CoveredDevicePhoneNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "EnrollmentDate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EnrollmentDate",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
@@ -3164,21 +3167,20 @@
 								"typeConversion": true,
 								"typeConversionSettings": {
 									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false,
-									"dateTimeFormat": "\"yyyy-MM-dd HH:mm:ss.fff\""
+									"treatBooleanAsNumber": false
 								}
 							}
 						},
 						"inputs": [
 							{
-								"referenceName": "csv_BYODCancel_Fortegra",
+								"referenceName": "test_csv_file_1",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "prod_stage_BYODCancellations",
+								"referenceName": "dev_stage_InForceRegister",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -3186,15 +3188,13 @@
 					}
 				],
 				"folder": {
-					"name": "PROD"
+					"name": "DEV"
 				},
-				"annotations": [],
-				"lastPublishTime": "2021-07-27T12:56:44Z"
+				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/csv_BYODCancel_Fortegra')]",
-				"[concat(variables('factoryId'), '/datasets/prod_stage_BYODCancellations')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+				"[concat(variables('factoryId'), '/datasets/test_csv_file_1')]",
+				"[concat(variables('factoryId'), '/datasets/dev_stage_InForceRegister')]"
 			]
 		},
 		{
@@ -3203,7 +3203,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
