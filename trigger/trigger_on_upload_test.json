@@ -1,8 +1,8 @@
 {
-	"name": "trigger_on_upload",
+	"name": "trigger_on_upload_test",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
