@@ -27,7 +27,7 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
-		"trigger_on_upload_properties_typeProperties_scope": {
+		"trigger_on_upload_test_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		}
@@ -317,6 +317,10 @@
 						]
 					}
 				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
 				"folder": {
 					"name": "DEV"
 				},
@@ -814,6 +818,10 @@
 						]
 					}
 				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
 				"folder": {
 					"name": "DEV"
 				},
@@ -1107,6 +1115,10 @@
 						]
 					}
 				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
 				"folder": {
 					"name": "PROD"
 				},
@@ -1604,6 +1616,10 @@
 						]
 					}
 				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
 				"folder": {
 					"name": "PROD"
 				},
@@ -2075,6 +2091,10 @@
 						]
 					}
 				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
 				"folder": {
 					"name": "DEV"
 				},
@@ -3228,12 +3248,12 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger_on_upload')]",
+			"name": "[concat(parameters('factoryName'), '/trigger_on_upload_test')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -3247,7 +3267,7 @@
 				"typeProperties": {
 					"blobPathBeginsWith": "/test/blobs/",
 					"ignoreEmptyBlobs": false,
-					"scope": "[parameters('trigger_on_upload_properties_typeProperties_scope')]",
+					"scope": "[parameters('trigger_on_upload_test_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
