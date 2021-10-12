@@ -13,7 +13,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "EPP_InForceRegister_2022-03-01.csv",
 				"container": "test"
 			},
 			"columnDelimiter": ",",
