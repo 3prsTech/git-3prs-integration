@@ -1434,14 +1434,7 @@
 					{
 						"name": "Call_la-3prs-dev-reissue-fortegra",
 						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "ingest_Fortegra_BYOD_Cancellations",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
