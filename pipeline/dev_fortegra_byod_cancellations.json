@@ -273,6 +273,30 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Call_la-3prs-dev-reissue-fortegra",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "ingest_Fortegra_BYOD_Cancellations",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-80.eastus.logic.azure.com:443/workflows/5c21c3afcc2448c5a638023694126a27/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JsDYoQkA5eY1Lzn0SuU8PyjCIfbN4w8VSsNZG31TUCs",
+					"method": "POST"
+				}
 			}
 		],
 		"folder": {
