@@ -31,6 +31,10 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
+		"trigger_fortegra_byod_cancellations_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -75,6 +79,9 @@
 					},
 					"trigger_on_upload_test_properties_typeProperties_scope": {
 						"value": "[parameters('trigger_on_upload_test_properties_typeProperties_scope')]"
+					},
+					"trigger_fortegra_byod_cancellations_properties_typeProperties_scope": {
+						"value": "[parameters('trigger_fortegra_byod_cancellations_properties_typeProperties_scope')]"
 					}
 				}
 			},
