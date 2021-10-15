@@ -19,7 +19,7 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
-		"trigger_register_policy_springboard_properties_typeProperties_scope": {
+		"trigger_dev_register_policy_springboard_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		}
@@ -113,7 +113,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger_register_policy_springboard')]",
+			"name": "[concat(parameters('factoryName'), '/trigger_dev_register_policy_springboard')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -130,9 +130,9 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/policy_register/prod/springboardbenefits/",
+					"blobPathBeginsWith": "/csvfiles/blobs/policy_register/dev/springboardbenefits/",
 					"ignoreEmptyBlobs": false,
-					"scope": "[parameters('trigger_register_policy_springboard_properties_typeProperties_scope')]",
+					"scope": "[parameters('trigger_dev_register_policy_springboard_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
