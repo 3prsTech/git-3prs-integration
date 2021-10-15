@@ -1,0 +1,309 @@
+{
+	"name": "prod_fortegra_byod_cancellations_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "ingest_prod_csv_BYODCancel_Fortegra",
+				"description": "data ingestion for Fortegra BYOD Cancellations report",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "csvfiles/policy_register/sandcreekoutfitters/EPP_InForceRegister_2022-03-01.csv"
+					},
+					{
+						"name": "Destination",
+						"value": "stage.EPP_InForceRegister"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"disableMetricsCollection": false,
+						"writeBehavior": "insert"
+					},
+					"enableStaging": false,
+					"validateDataConsistency": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							},
+							"path": "csvfiles/fortegra_byod_cancellations/00-logging"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Plan Number",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Plan_Number",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Plan Name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Plan_Name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customer Name",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Customer_Name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Reference Number",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Reference_Number",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customer Address Line 1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Customer_Address_Line_1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Customer Address Line 2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Customer_Address_Line_2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "City",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "City",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "State",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "State",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PhoneNumber",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PhoneNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Device  Model",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Device_Model",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Device Make",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Device_Make",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Device Serial Number",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Device_Serial_Number",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Purchase Price",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Purchase_Price",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Plan Start Date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Plan_Start_Date",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "Deactivation Date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Deactivation_Date",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "Ran Diagnostic Test?",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Ran_Diagnostic_Test",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false,
+							"dateTimeFormat": "\"yyyy-MM-dd HH:mm:ss.fff\""
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "prod_csv_BYODCancel_Fortegra",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "prod_stage_BYODCancellations",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Call_la-3prs-dev-reissue-fortegra",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "ingest_prod_csv_BYODCancel_Fortegra",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-80.eastus.logic.azure.com:443/workflows/5c21c3afcc2448c5a638023694126a27/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JsDYoQkA5eY1Lzn0SuU8PyjCIfbN4w8VSsNZG31TUCs",
+					"method": "POST"
+				}
+			}
+		],
+		"folder": {
+			"name": "DEV"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-07-27T12:56:44Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
