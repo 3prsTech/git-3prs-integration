@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "csv_files"
+			"name": "csv_files/prod"
 		},
 		"annotations": [],
 		"type": "DelimitedText",

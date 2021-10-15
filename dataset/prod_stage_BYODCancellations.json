@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "sql_tables"
+			"name": "sql_tables/prod"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",

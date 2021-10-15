@@ -480,7 +480,7 @@
 			}
 		],
 		"folder": {
-			"name": "PROD"
+			"name": "prod"
 		},
 		"annotations": []
 	}
