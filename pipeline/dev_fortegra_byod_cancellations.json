@@ -263,7 +263,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_BYODCancel_Fortegra",
+						"referenceName": "dev_csv_cancelpolicy_byodfortegra",
 						"type": "DatasetReference"
 					}
 				],

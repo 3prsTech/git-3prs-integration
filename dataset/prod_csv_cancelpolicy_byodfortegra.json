@@ -1,5 +1,5 @@
 {
-	"name": "prod_csv_BYODCancel_Fortegra",
+	"name": "prod_csv_cancelpolicy_byodfortegra",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
