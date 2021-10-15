@@ -1,5 +1,5 @@
 {
-	"name": "csv_PolicyRegister_SandCreekOutfitters",
+	"name": "dev_csv_registerpolicy_sandcreekoutfitters",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
@@ -13,8 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "EPP_InForceRegister_2022-03-01-group.csv",
-				"folderPath": "policy_register/sandcreekoutfitters",
+				"folderPath": "policy_register/dev/sandcreekoutfitters",
 				"container": "csvfiles"
 			},
 			"columnDelimiter": ",",
