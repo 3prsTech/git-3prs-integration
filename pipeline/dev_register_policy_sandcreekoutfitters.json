@@ -1,5 +1,5 @@
 {
-	"name": "dev_register_policy",
+	"name": "dev_register_policy_sandcreekoutfitters",
 	"properties": {
 		"activities": [
 			{
@@ -30,6 +30,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
+							"wildcardFileName": "SandCreek_InForceRegister*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -467,7 +468,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "csv_PolicyRegister_SandCreekOutfitters",
+						"referenceName": "dev_csv_registerpolicy_sandcreekoutfitters",
 						"type": "DatasetReference"
 					}
 				],
