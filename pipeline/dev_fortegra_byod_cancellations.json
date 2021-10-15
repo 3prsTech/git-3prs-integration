@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ingest_Fortegra_BYOD_Cancellations",
+				"name": "ingest_dev_csv_BYODCancel_Fortegra",
 				"description": "data ingestion for Fortegra BYOD Cancellations report",
 				"type": "Copy",
 				"dependsOn": [],
@@ -279,7 +279,7 @@
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "ingest_Fortegra_BYOD_Cancellations",
+						"activity": "ingest_dev_csv_BYODCancel_Fortegra",
 						"dependencyConditions": [
 							"Succeeded"
 						]
