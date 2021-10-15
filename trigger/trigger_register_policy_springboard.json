@@ -1,0 +1,24 @@
+{
+	"name": "trigger_register_policy_springboard",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "dev_register_policy_springboard",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/csvfiles/blobs/policy_register/prod/springboardbenefits/",
+			"ignoreEmptyBlobs": false,
+			"scope": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
