@@ -587,7 +587,7 @@
 						"referenceName": "dev_csv_cancelpolicy_byodfortegra",
 						"type": "DatasetReference"
 					},
-					"enableLogging": true,
+					"enableLogging": false,
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
 						"recursive": true,
