@@ -1723,7 +1723,7 @@
 										"referenceName": "AzureBlobStorage1",
 										"type": "LinkedServiceReference"
 									},
-									"path": "csvfiles/fortegra_byod_cancellations/00-logging"
+									"path": "csvfiles/fortegra_byod_cancellations/dev/00-logging"
 								}
 							},
 							"translator": {
@@ -2047,7 +2047,7 @@
 										"referenceName": "AzureBlobStorage1",
 										"type": "LinkedServiceReference"
 									},
-									"path": "csvfiles/policy_register/00logging"
+									"path": "csvfiles/policy_register/dev/00-logging"
 								}
 							},
 							"translator": {
@@ -2976,8 +2976,8 @@
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
+							"timeout": "0.00:30:00",
+							"retry": 4,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
 							"secureInput": false
@@ -3014,7 +3014,7 @@
 							"logSettings": {
 								"enableCopyActivityLog": true,
 								"copyActivityLogSettings": {
-									"logLevel": "Warning",
+									"logLevel": "Info",
 									"enableReliableLogging": false
 								},
 								"logLocationSettings": {
@@ -3022,7 +3022,7 @@
 										"referenceName": "AzureBlobStorage1",
 										"type": "LinkedServiceReference"
 									},
-									"path": "csvfiles/fortegra_byod_cancellations/00-logging"
+									"path": "csvfiles/fortegra_byod_cancellations/prod/00-logging"
 								}
 							},
 							"translator": {
@@ -3324,6 +3324,20 @@
 							},
 							"enableStaging": false,
 							"validateDataConsistency": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorage1",
+										"type": "LinkedServiceReference"
+									},
+									"path": "csvfiles/policy_register/dev/00-logging"
+								}
+							},
 							"translator": {
 								"type": "TabularTranslator",
 								"mappings": [
@@ -3784,7 +3798,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/dev_csv_registerpolicy_springboard')]",
-				"[concat(variables('factoryId'), '/datasets/dev_stage_InForceRegister')]"
+				"[concat(variables('factoryId'), '/datasets/dev_stage_InForceRegister')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		}
 	]
