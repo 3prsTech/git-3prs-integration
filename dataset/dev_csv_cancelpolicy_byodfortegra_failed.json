@@ -1,0 +1,95 @@
+{
+	"name": "dev_csv_cancelpolicy_byodfortegra_failed",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "csv_files/dev"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "fortegra_byod_cancellations/dev/03-failed/",
+				"container": "csvfiles"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Plan Number",
+				"type": "String"
+			},
+			{
+				"name": "Plan Name",
+				"type": "String"
+			},
+			{
+				"name": "Customer Name",
+				"type": "String"
+			},
+			{
+				"name": "Reference Number",
+				"type": "String"
+			},
+			{
+				"name": "Customer Address Line 1",
+				"type": "String"
+			},
+			{
+				"name": "Customer Address Line 2",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "State",
+				"type": "String"
+			},
+			{
+				"name": "PhoneNumber",
+				"type": "String"
+			},
+			{
+				"name": "Device  Model",
+				"type": "String"
+			},
+			{
+				"name": "Device Make",
+				"type": "String"
+			},
+			{
+				"name": "Device Serial Number",
+				"type": "String"
+			},
+			{
+				"name": "Purchase Price",
+				"type": "String"
+			},
+			{
+				"name": "Plan Start Date",
+				"type": "String"
+			},
+			{
+				"name": "Deactivation Date",
+				"type": "String"
+			},
+			{
+				"name": "Ran Diagnostic Test?",
+				"type": "String"
+			}
+		]
+	}
+}
