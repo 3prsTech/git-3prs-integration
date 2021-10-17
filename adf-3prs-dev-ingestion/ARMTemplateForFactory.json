@@ -51,7 +51,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "ingest_dev_csv_BYODCancel_Fortegra",
+						"name": "ingest_dev_csv_cancelpolicy_byodfortegra",
 						"description": "data ingestion for Fortegra BYOD Cancellations report",
 						"type": "Copy",
 						"dependsOn": [],
@@ -329,7 +329,7 @@
 						"type": "WebActivity",
 						"dependsOn": [
 							{
-								"activity": "ingest_dev_csv_BYODCancel_Fortegra",
+								"activity": "ingest_dev_csv_cancelpolicy_byodfortegra",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -374,7 +374,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "ingest_SandCreekOutfitters_test",
+						"name": "ingest_dev_csv_registerpolicy_sandcreekoutfitters",
 						"description": "data ingestion for Sand Creek Outfitters",
 						"type": "Copy",
 						"dependsOn": [],
@@ -2651,7 +2651,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "ingest_prod_csv_BYODCancel_Fortegra",
+						"name": "ingest_prod_csv_cancelpolicy_byodfortegra",
 						"description": "data ingestion for Fortegra BYOD Cancellations report",
 						"type": "Copy",
 						"dependsOn": [],
@@ -2929,7 +2929,7 @@
 						"type": "WebActivity",
 						"dependsOn": [
 							{
-								"activity": "ingest_prod_csv_BYODCancel_Fortegra",
+								"activity": "ingest_prod_csv_cancelpolicy_byodfortegra",
 								"dependencyConditions": [
 									"Succeeded"
 								]
