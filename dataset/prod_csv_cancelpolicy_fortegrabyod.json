@@ -14,7 +14,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "BYOD - Cancellations Report.csv",
-				"folderPath": "fortegra_byod_cancellations/prod/01-upload",
+				"folderPath": "cancel_policy/prod/fortegra-byod//prod/01-upload",
 				"container": "csvfiles"
 			},
 			"columnDelimiter": ",",
