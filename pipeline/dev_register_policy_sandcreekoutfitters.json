@@ -478,6 +478,81 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "copt_to_processed",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "ingest_dev_csv_registerpolicy_sandcreekoutfitters",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			},
+			{
+				"name": "copy_to_failed",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "ingest_dev_csv_registerpolicy_sandcreekoutfitters",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
+			},
+			{
+				"name": "delete_dev_csv_registerpolicy_sandcreekoutfitters",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "copt_to_processed",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "copy_to_failed",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableLogging": true
+				}
 			}
 		],
 		"folder": {
