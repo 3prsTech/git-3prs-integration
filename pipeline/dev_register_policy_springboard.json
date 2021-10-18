@@ -516,6 +516,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
+							"wildcardFileName": "Springboard_InForceRegister*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -581,6 +582,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
+							"wildcardFileName": "Springboard_InForceRegister*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
