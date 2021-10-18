@@ -1,5 +1,5 @@
 {
-	"name": "prod_register_policy_springboard_copy1",
+	"name": "prod_register_policy_springboard",
 	"properties": {
 		"activities": [
 			{
@@ -662,7 +662,7 @@
 			}
 		],
 		"folder": {
-			"name": "dev"
+			"name": "prod"
 		},
 		"annotations": []
 	}
