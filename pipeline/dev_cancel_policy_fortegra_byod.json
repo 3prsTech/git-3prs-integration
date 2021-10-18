@@ -299,7 +299,7 @@
 				}
 			},
 			{
-				"name": "move_to_processed",
+				"name": "copy_to_processed",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -552,7 +552,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_cancelpolicy_fortegrabyod_processed",
+						"referenceName": "dev_csv_cancelpolicy_processed",
 						"type": "DatasetReference"
 					}
 				]
@@ -562,13 +562,13 @@
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "move_to_processed",
+						"activity": "copy_to_processed",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "move_to_failed",
+						"activity": "copy_to_failed",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -596,7 +596,7 @@
 				}
 			},
 			{
-				"name": "move_to_failed",
+				"name": "copy_to_failed",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -849,7 +849,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_cancelpolicy_fortegrabyod_failed",
+						"referenceName": "dev_csv_cancelpolicy_failed",
 						"type": "DatasetReference"
 					}
 				]

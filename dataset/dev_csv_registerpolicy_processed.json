@@ -1,5 +1,5 @@
 {
-	"name": "dev_csv_cancelpolicy_processed",
+	"name": "dev_csv_registerpolicy_processed",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
@@ -13,11 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": {
-					"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
-					"type": "Expression"
-				},
-				"folderPath": "cancel_policy/dev/02-processed/",
+				"folderPath": "register_policy/dev/02-processed",
 				"container": "csvfiles"
 			},
 			"columnDelimiter": ",",
@@ -27,67 +23,102 @@
 		},
 		"schema": [
 			{
-				"name": "Plan Number",
 				"type": "String"
 			},
 			{
-				"name": "Plan Name",
 				"type": "String"
 			},
 			{
-				"name": "Customer Name",
 				"type": "String"
 			},
 			{
-				"name": "Reference Number",
 				"type": "String"
 			},
 			{
-				"name": "Customer Address Line 1",
 				"type": "String"
 			},
 			{
-				"name": "Customer Address Line 2",
 				"type": "String"
 			},
 			{
-				"name": "City",
 				"type": "String"
 			},
 			{
-				"name": "State",
 				"type": "String"
 			},
 			{
-				"name": "PhoneNumber",
 				"type": "String"
 			},
 			{
-				"name": "Device  Model",
 				"type": "String"
 			},
 			{
-				"name": "Device Make",
 				"type": "String"
 			},
 			{
-				"name": "Device Serial Number",
 				"type": "String"
 			},
 			{
-				"name": "Purchase Price",
 				"type": "String"
 			},
 			{
-				"name": "Plan Start Date",
 				"type": "String"
 			},
 			{
-				"name": "Deactivation Date",
 				"type": "String"
 			},
 			{
-				"name": "Ran Diagnostic Test?",
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
 				"type": "String"
 			}
 		]

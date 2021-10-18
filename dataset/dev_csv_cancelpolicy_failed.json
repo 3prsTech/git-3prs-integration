@@ -1,5 +1,5 @@
 {
-	"name": "dev_csv_cancelpolicy_fortegrabyod_failed",
+	"name": "dev_csv_cancelpolicy_failed",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
