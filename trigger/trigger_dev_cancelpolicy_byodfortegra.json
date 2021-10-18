@@ -1,5 +1,5 @@
 {
-	"name": "trigger_dev_fortegra_byod_cancellations",
+	"name": "trigger_dev_cancelpolicy_byodfortegra",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
