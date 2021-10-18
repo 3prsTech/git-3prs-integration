@@ -1,5 +1,5 @@
 {
-	"name": "dev_fortegra_byod_cancellations",
+	"name": "dev_cancel_policy_fortegra_byod",
 	"properties": {
 		"activities": [
 			{
@@ -263,7 +263,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_cancelpolicy_byodfortegra",
+						"referenceName": "dev_csv_cancelpolicy_fortegrabyod",
 						"type": "DatasetReference"
 					}
 				],
@@ -546,13 +546,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_cancelpolicy_byodfortegra",
+						"referenceName": "dev_csv_cancelpolicy_fortegrabyod",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_cancelpolicy_byodfortegra_processed",
+						"referenceName": "dev_csv_cancelpolicy_fortegrabyod_processed",
 						"type": "DatasetReference"
 					}
 				]
@@ -584,7 +584,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "dev_csv_cancelpolicy_byodfortegra",
+						"referenceName": "dev_csv_cancelpolicy_fortegrabyod",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
@@ -843,13 +843,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_cancelpolicy_byodfortegra",
+						"referenceName": "dev_csv_cancelpolicy_fortegrabyod",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_cancelpolicy_byodfortegra_failed",
+						"referenceName": "dev_csv_cancelpolicy_fortegrabyod_failed",
 						"type": "DatasetReference"
 					}
 				]

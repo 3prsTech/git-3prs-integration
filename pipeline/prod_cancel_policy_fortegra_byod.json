@@ -1,5 +1,5 @@
 {
-	"name": "prod_fortegra_byod_cancellations",
+	"name": "prod_cancel_policy_fortegra_byod",
 	"properties": {
 		"activities": [
 			{
@@ -263,7 +263,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "prod_csv_cancelpolicy_byodfortegra",
+						"referenceName": "prod_csv_cancelpolicy_fortegrabyod",
 						"type": "DatasetReference"
 					}
 				],

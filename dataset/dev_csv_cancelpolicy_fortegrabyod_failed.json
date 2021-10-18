@@ -1,5 +1,5 @@
 {
-	"name": "dev_csv_cancelpolicy_byodfortegra_failed",
+	"name": "dev_csv_cancelpolicy_fortegrabyod_failed",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
@@ -17,7 +17,7 @@
 					"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
 					"type": "Expression"
 				},
-				"folderPath": "fortegra_byod_cancellations/dev/03-failed/",
+				"folderPath": "cancel_policy/dev/03-failed/",
 				"container": "csvfiles"
 			},
 			"columnDelimiter": ",",
