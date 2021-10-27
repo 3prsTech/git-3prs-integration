@@ -546,7 +546,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_cancelpolicy_fortegrabyod",
+						"referenceName": "prod_csv_cancelpolicy_fortegrabyod",
 						"type": "DatasetReference"
 					}
 				],
