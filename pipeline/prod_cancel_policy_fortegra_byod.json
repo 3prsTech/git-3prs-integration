@@ -275,7 +275,7 @@
 				]
 			},
 			{
-				"name": "Call_la-3prs-dev-reissue-fortegra",
+				"name": "Call_la-3prs-prod-reissue-fortegra",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
@@ -552,13 +552,13 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_cancelpolicy_processed",
+						"referenceName": "prod_csv_cancelpolicy_processed",
 						"type": "DatasetReference"
 					}
 				]
 			},
 			{
-				"name": "delete_dev_csv_cancelpolicy_byodfortegra",
+				"name": "delete_prod_csv_cancelpolicy_byodfortegra",
 				"type": "Delete",
 				"dependsOn": [
 					{
@@ -584,7 +584,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "dev_csv_cancelpolicy_fortegrabyod",
+						"referenceName": "prod_csv_cancelpolicy_fortegrabyod",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
@@ -843,13 +843,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_cancelpolicy_fortegrabyod",
+						"referenceName": "prod_csv_cancelpolicy_fortegrabyod",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_cancelpolicy_failed",
+						"referenceName": "prod_csv_cancelpolicy_failed",
 						"type": "DatasetReference"
 					}
 				]
