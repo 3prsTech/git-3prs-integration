@@ -29,6 +29,161 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/prod_stage_InForceRegister')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "3prsProdODS",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "sql_tables/prod"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ReportDate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MasterAgreementID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProgramID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CertificateNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProductSKU",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberFirst",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberLast",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberMiddle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberPrefix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberSuffix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SubscriberEmail",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingAddress1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingAddress2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingCity",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingStateCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MailingPostalCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CoveredDevicePhoneNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet1Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet2Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Gender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Breed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pet3Age",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EnrollmentDate",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "stage",
+					"table": "InForceRegister"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/test_csv_file_1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -3309,7 +3464,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/prod_stage_InForceRegister')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/test_ingestion')]",

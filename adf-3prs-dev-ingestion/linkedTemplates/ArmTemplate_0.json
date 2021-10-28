@@ -22,6 +22,10 @@
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"3prsfortegra_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of '3prsfortegra'"
 		}
 	},
 	"variables": {
@@ -78,6 +82,19 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/3prsfortegra')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('3prsfortegra_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -188,7 +205,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
+					"referenceName": "3prsfortegra",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
@@ -200,7 +217,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": "BYOD - Cancellations Report.csv",
-						"folderPath": "cancel_policy/dev/fortegra-byod/",
+						"folderPath": "dev/cancel-policy/01-upload/",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -231,10 +248,6 @@
 					},
 					{
 						"name": "Customer Address Line 2",
-						"type": "String"
-					},
-					{
-						"name": "Prop_6",
 						"type": "String"
 					},
 					{
@@ -280,7 +293,7 @@
 				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+				"[concat(variables('factoryId'), '/linkedServices/3prsfortegra')]"
 			]
 		},
 		{
@@ -1260,7 +1273,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
+					"referenceName": "3prsfortegra",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
@@ -1272,7 +1285,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": "BYOD - Cancellations Report.csv",
-						"folderPath": "cancel_policy/prod/fortegra-byod//prod/01-upload",
+						"folderPath": "prod/cancel-policy/01-upload",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -1352,7 +1365,7 @@
 				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+				"[concat(variables('factoryId'), '/linkedServices/3prsfortegra')]"
 			]
 		},
 		{
@@ -2063,163 +2076,6 @@
 				"typeProperties": {
 					"schema": "stage",
 					"table": "BYODCancellations"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/3prsProdODS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod_stage_InForceRegister')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "3prsProdODS",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "sql_tables/prod"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ReportDate",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MasterAgreementID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProgramID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CertificateNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProductSKU",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberFirst",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberLast",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberMiddle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberPrefix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberSuffix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberEmail",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingCity",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingStateCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingPostalCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CoveredDevicePhoneNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "EnrollmentDate",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "stage",
-					"table": "InForceRegister"
 				}
 			},
 			"dependsOn": [
