@@ -552,7 +552,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "prod_csv_cancelpolicy_processed",
+						"referenceName": "prod_csv_cancelpolicy_fortegra_processed",
 						"type": "DatasetReference"
 					}
 				]
@@ -849,7 +849,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "prod_csv_cancelpolicy_failed",
+						"referenceName": "prod_csv_cancelpolicy_fortegra_failed",
 						"type": "DatasetReference"
 					}
 				]
