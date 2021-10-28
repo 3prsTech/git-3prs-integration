@@ -17,7 +17,7 @@
 					"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
 					"type": "Expression"
 				},
-				"folderPath": "cancel_policy/prod/03-failed/",
+				"folderPath": "prod/cancel-policy/03-failed/",
 				"container": "csvfiles"
 			},
 			"columnDelimiter": ",",
