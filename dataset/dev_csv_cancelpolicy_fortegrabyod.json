@@ -2,7 +2,7 @@
 	"name": "dev_csv_cancelpolicy_fortegrabyod",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
+			"referenceName": "3prsfortegra",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -14,7 +14,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "BYOD - Cancellations Report.csv",
-				"folderPath": "cancel_policy/dev/fortegra-byod/",
+				"folderPath": "dev/cancel-policy/01-upload/",
 				"container": "csvfiles"
 			},
 			"columnDelimiter": ",",
@@ -45,10 +45,6 @@
 			},
 			{
 				"name": "Customer Address Line 2",
-				"type": "String"
-			},
-			{
-				"name": "Prop_6",
 				"type": "String"
 			},
 			{
