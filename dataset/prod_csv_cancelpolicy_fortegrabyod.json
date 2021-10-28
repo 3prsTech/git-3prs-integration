@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "csv_files/prod"
+			"name": "csv_files/prod/fortegra"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
