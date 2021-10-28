@@ -2,7 +2,7 @@
 	"name": "dev_csv_cancelpolicy_failed",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
+			"referenceName": "3prsfortegra",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -17,7 +17,7 @@
 					"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
 					"type": "Expression"
 				},
-				"folderPath": "cancel_policy/dev/03-failed/",
+				"folderPath": "dev/cancel-policy/03-failed/",
 				"container": "csvfiles"
 			},
 			"columnDelimiter": ",",
