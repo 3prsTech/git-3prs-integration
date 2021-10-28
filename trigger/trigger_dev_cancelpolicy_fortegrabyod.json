@@ -13,9 +13,9 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/csvfiles/blobs/cancel_policy/dev/fortegra-byod/",
+			"blobPathBeginsWith": "/csvfiles/blobs/dev/cancel-policy/01-upload/",
 			"ignoreEmptyBlobs": true,
-			"scope": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload",
+			"scope": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra",
 			"events": [
 				"Microsoft.Storage.BlobCreated"
 			]
