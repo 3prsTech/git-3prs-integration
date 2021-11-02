@@ -1,5 +1,5 @@
 {
-	"name": "dev_csv_registerpolicy_springboard",
+	"name": "dev_csv_registerpolicy_springboard_regionalonehealth",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "dev/policy-register/springboardbenefits",
+				"folderPath": "dev/policy-register/springboardbenefits/RegionalOneHealth",
 				"container": "csvfiles"
 			},
 			"columnDelimiter": ",",
