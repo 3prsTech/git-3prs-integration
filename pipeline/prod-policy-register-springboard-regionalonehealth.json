@@ -20,7 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFileName": "RegionalOneHealth_InForceRegister*.csv",
+							"wildcardFileName": "*InForceRegister*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
