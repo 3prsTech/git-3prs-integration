@@ -1,5 +1,5 @@
 {
-	"name": "dev_register_policy_springboard",
+	"name": "dev-policy-register-springboard",
 	"properties": {
 		"activities": [
 			{
@@ -456,7 +456,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_registerpolicy_springboard_regionalonehealth",
+						"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
 						"type": "DatasetReference"
 					}
 				],
@@ -546,13 +546,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_registerpolicy_springboard_regionalonehealth",
+						"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_registerpolicy_processed",
+						"referenceName": "dev_csv_policy_register_processed",
 						"type": "DatasetReference"
 					}
 				]
@@ -612,13 +612,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_registerpolicy_springboard_regionalonehealth",
+						"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_registerpolicy_failed",
+						"referenceName": "dev_csv_policy_register_failed",
 						"type": "DatasetReference"
 					}
 				]
@@ -650,7 +650,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "dev_csv_registerpolicy_springboard_regionalonehealth",
+						"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,

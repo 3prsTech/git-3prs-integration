@@ -1,5 +1,5 @@
 {
-	"name": "dev_register_policy_sandcreekoutfitters",
+	"name": "dev-policy-register-sandcreekoutfitters",
 	"properties": {
 		"activities": [
 			{
@@ -468,7 +468,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_registerpolicy_sandcreekoutfitters",
+						"referenceName": "dev_csv_policy_register_sandcreekoutfitters",
 						"type": "DatasetReference"
 					}
 				],
@@ -534,13 +534,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_registerpolicy_sandcreekoutfitters",
+						"referenceName": "dev_csv_policy_register_sandcreekoutfitters",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_registerpolicy_processed",
+						"referenceName": "dev_csv_policy_register_processed",
 						"type": "DatasetReference"
 					}
 				]
@@ -600,13 +600,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_registerpolicy_sandcreekoutfitters",
+						"referenceName": "dev_csv_policy_register_sandcreekoutfitters",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_registerpolicy_failed",
+						"referenceName": "dev_csv_policy_register_failed",
 						"type": "DatasetReference"
 					}
 				]
@@ -638,7 +638,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "dev_csv_registerpolicy_sandcreekoutfitters",
+						"referenceName": "dev_csv_policy_register_sandcreekoutfitters",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,

@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "dev_register_policy_springboard",
+					"referenceName": "dev-policy-register-springboard",
 					"type": "PipelineReference"
 				}
 			}

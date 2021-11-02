@@ -1,8 +1,8 @@
 {
-	"name": "prod_csv_cancelpolicy_fortegra_failed",
+	"name": "prod_csv_policy_cancel_fortegra_failed",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
+			"referenceName": "3prsfortegra",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {

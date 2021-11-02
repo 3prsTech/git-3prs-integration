@@ -1,5 +1,5 @@
 {
-	"name": "prod_csv_registerpolicy_springboard_regionalonehealth",
+	"name": "prod_csv_policy_register_springboard_regionalonehealth",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",

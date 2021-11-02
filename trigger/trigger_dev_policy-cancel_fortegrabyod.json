@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "dev_cancel_policy_fortegra_byod",
+					"referenceName": "dev-policy-cancel-fortegra_byod",
 					"type": "PipelineReference"
 				}
 			}

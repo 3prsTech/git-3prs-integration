@@ -1,5 +1,5 @@
 {
-	"name": "prod_csv_registerpolicy_processed",
+	"name": "prod_csv_policy_register_processed",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",

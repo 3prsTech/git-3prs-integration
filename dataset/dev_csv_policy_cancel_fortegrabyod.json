@@ -1,5 +1,5 @@
 {
-	"name": "dev_csv_cancelpolicy_fortegrabyod",
+	"name": "dev_csv_policy_cancel_fortegrabyod",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "3prsfortegra",
