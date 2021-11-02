@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "dev-policy-register-springboard",
+					"referenceName": "dev-policy-register-springboard-regionalonehealth",
 					"type": "PipelineReference"
 				}
 			}

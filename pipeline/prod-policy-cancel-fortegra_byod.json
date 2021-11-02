@@ -856,7 +856,7 @@
 			}
 		],
 		"folder": {
-			"name": "prod"
+			"name": "prod/fortegra"
 		},
 		"annotations": [],
 		"lastPublishTime": "2021-07-27T12:56:44Z"

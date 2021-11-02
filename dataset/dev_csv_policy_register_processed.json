@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "csv_files/dev"
+			"name": "csv_files/dev/auditing"
 		},
 		"annotations": [],
 		"type": "DelimitedText",

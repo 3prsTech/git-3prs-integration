@@ -1,5 +1,5 @@
 {
-	"name": "dev-policy-register-springboard",
+	"name": "dev-policy-register-springboard-regionalonehealth",
 	"properties": {
 		"activities": [
 			{
@@ -663,7 +663,7 @@
 			}
 		],
 		"folder": {
-			"name": "dev"
+			"name": "dev/springboardbenefits"
 		},
 		"annotations": []
 	}
