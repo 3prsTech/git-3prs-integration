@@ -30,7 +30,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFileName": "SandCreek_InForceRegister*.csv",
+							"wildcardFileName": "*InForceRegister*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
