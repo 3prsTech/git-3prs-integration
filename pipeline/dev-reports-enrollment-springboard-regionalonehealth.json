@@ -20,7 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFileName": "RegionalOneHealth_Enrollment*.csv",
+							"wildcardFileName": "*Enrollment*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -51,11 +51,6 @@
 						"type": "TabularTranslator",
 						"mappings": [
 							{
-								"source": {
-									"name": "ReportDate",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "ReportDate",
 									"type": "String",
@@ -63,11 +58,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "MasterAgreementID",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "MasterAgreementID",
 									"type": "String",
@@ -75,11 +65,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "ProgramID",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "ProgramID",
 									"type": "String",
@@ -87,11 +72,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "CertificateNumber",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "CertificateNumber",
 									"type": "String",
@@ -99,11 +79,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "ProductSKU",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "ProductSKU",
 									"type": "String",
@@ -111,11 +86,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "SubscriberFirst",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "SubscriberFirst",
 									"type": "String",
@@ -123,11 +93,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "SubscriberLast",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "SubscriberLast",
 									"type": "String",
@@ -135,11 +100,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "SubscriberMiddle",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "SubscriberMiddle",
 									"type": "String",
@@ -147,11 +107,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "SubscriberPrefix",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "SubscriberPrefix",
 									"type": "String",
@@ -159,11 +114,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "SubscriberSuffix",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "SubscriberSuffix",
 									"type": "String",
@@ -171,11 +121,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "SubscriberEmail",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "SubscriberEmail",
 									"type": "String",
@@ -183,11 +128,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "MailingAddress1",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "MailingAddress1",
 									"type": "String",
@@ -195,11 +135,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "MailingAddress2",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "MailingAddress2",
 									"type": "String",
@@ -207,11 +142,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "MailingCity",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "MailingCity",
 									"type": "String",
@@ -219,11 +149,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "MailingStateCode",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "MailingStateCode",
 									"type": "String",
@@ -231,11 +156,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "MailingPostalCode",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "MailingPostalCode",
 									"type": "String",
@@ -243,11 +163,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "CoveredDevicePhoneNumber",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "CoveredDevicePhoneNumber",
 									"type": "String",
@@ -255,11 +170,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet1Name",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet1Name",
 									"type": "String",
@@ -267,11 +177,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet1Gender",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet1Gender",
 									"type": "String",
@@ -279,11 +184,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet1Type",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet1Type",
 									"type": "String",
@@ -291,11 +191,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet1Breed",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet1Breed",
 									"type": "String",
@@ -303,11 +198,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet1Age",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet1Age",
 									"type": "String",
@@ -315,11 +205,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet2Name",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet2Name",
 									"type": "String",
@@ -327,11 +212,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet2Gender",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet2Gender",
 									"type": "String",
@@ -339,11 +219,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet2Type",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet2Type",
 									"type": "String",
@@ -351,11 +226,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet2Breed",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet2Breed",
 									"type": "String",
@@ -363,11 +233,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet2Age",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet2Age",
 									"type": "String",
@@ -375,11 +240,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet3Name",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet3Name",
 									"type": "String",
@@ -387,11 +247,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet3Gender",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet3Gender",
 									"type": "String",
@@ -399,11 +254,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet3Type",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet3Type",
 									"type": "String",
@@ -411,11 +261,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet3Breed",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet3Breed",
 									"type": "String",
@@ -423,11 +268,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Pet3Age",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Pet3Age",
 									"type": "String",
@@ -435,11 +275,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "EnrollmentDate",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "EnrollmentDate",
 									"type": "String",
@@ -462,7 +297,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_stage_InForceRegister",
+						"referenceName": "dev_stage_Enrollments",
 						"type": "DatasetReference"
 					}
 				]
