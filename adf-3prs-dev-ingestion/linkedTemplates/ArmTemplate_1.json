@@ -2772,7 +2772,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
-									"wildcardFileName": "SandCreek_InForceRegister*.csv",
+									"wildcardFileName": "*InForceRegister*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -3435,7 +3435,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
-									"wildcardFileName": "RegionalOneHealth_InForceRegister*.csv",
+									"wildcardFileName": "*InForceRegister*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -4052,12 +4052,6 @@
 						"dependsOn": [
 							{
 								"activity": "copy-to-processed",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "copy-to-failed",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -5003,7 +4997,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
-									"wildcardFileName": "RegionalOneHealth_InForceRegister*.csv",
+									"wildcardFileName": "*InForceRegister*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
