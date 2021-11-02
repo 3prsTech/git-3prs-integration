@@ -1,12 +1,12 @@
 {
-	"name": "dev_stage_Enrollments",
+	"name": "prod_stage_Enrollments",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "3prsDevODS",
+			"referenceName": "3prsProdODS",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "sql_tables/dev"
+			"name": "sql_tables/prod"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
