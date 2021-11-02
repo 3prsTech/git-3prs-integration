@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of '3prsProdODS'"
 		},
+		"3prsfortegra_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of '3prsfortegra'"
+		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
@@ -23,13 +27,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
-		"3prsfortegra_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of '3prsfortegra'"
-		},
 		"trigger_dev_cancelpolicy_fortegrabyod_properties_typeProperties_scope": {
 			"type": "string",
-			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
 		"trigger_dev_register_policy_sandcreekoutfitters_properties_typeProperties_scope": {
 			"type": "string",
@@ -38,6 +38,10 @@
 		"trigger_dev_register_policy_springboard_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger_prod_cancel_policy_fortegrabyod_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
 		"trigger_test_upload_properties_typeProperties_scope": {
 			"type": "string",
@@ -76,14 +80,17 @@
 					"3prsProdODS_connectionString": {
 						"value": "[parameters('3prsProdODS_connectionString')]"
 					},
+					"3prsfortegra_connectionString": {
+						"value": "[parameters('3prsfortegra_connectionString')]"
+					},
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
-					"3prsfortegra_connectionString": {
-						"value": "[parameters('3prsfortegra_connectionString')]"
+					"trigger_prod_cancel_policy_fortegrabyod_properties_typeProperties_scope": {
+						"value": "[parameters('trigger_prod_cancel_policy_fortegrabyod_properties_typeProperties_scope')]"
 					}
 				}
 			},

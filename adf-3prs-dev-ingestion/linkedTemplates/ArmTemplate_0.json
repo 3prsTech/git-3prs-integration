@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of '3prsProdODS'"
 		},
+		"3prsfortegra_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of '3prsfortegra'"
+		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
@@ -23,9 +27,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
-		"3prsfortegra_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of '3prsfortegra'"
+		"trigger_prod_cancel_policy_fortegrabyod_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		}
 	},
 	"variables": {
@@ -61,6 +65,19 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/3prsfortegra')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('3prsfortegra_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -87,29 +104,36 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/3prsfortegra')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/trigger_prod_cancel_policy_fortegrabyod')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "AzureBlobStorage",
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"connectionString": "[parameters('3prsfortegra_connectionString')]"
+					"blobPathBeginsWith": "/csvfiles/blobs/prod/cancel-policy/01-upload/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger_prod_cancel_policy_fortegrabyod_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_csv_cancelpolicy_failed')]",
+			"name": "[concat(parameters('factoryName'), '/dev_csv_cancelpolicy_fortegra_failed')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
+					"referenceName": "3prsfortegra",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "csv_files/dev"
+					"name": "csv_files/dev/fortegra"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -120,7 +144,7 @@
 							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
 							"type": "Expression"
 						},
-						"folderPath": "cancel_policy/dev/03-failed/",
+						"folderPath": "dev/cancel-policy/03-failed/",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -196,7 +220,107 @@
 				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+				"[concat(variables('factoryId'), '/linkedServices/3prsfortegra')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dev_csv_cancelpolicy_fortegra_processed')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "3prsfortegra",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "csv_files/dev/fortegra"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
+							"type": "Expression"
+						},
+						"folderPath": "dev/cancel-policy/02-processed/",
+						"container": "csvfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Plan Number",
+						"type": "String"
+					},
+					{
+						"name": "Plan Name",
+						"type": "String"
+					},
+					{
+						"name": "Customer Name",
+						"type": "String"
+					},
+					{
+						"name": "Reference Number",
+						"type": "String"
+					},
+					{
+						"name": "Customer Address Line 1",
+						"type": "String"
+					},
+					{
+						"name": "Customer Address Line 2",
+						"type": "String"
+					},
+					{
+						"name": "City",
+						"type": "String"
+					},
+					{
+						"name": "State",
+						"type": "String"
+					},
+					{
+						"name": "PhoneNumber",
+						"type": "String"
+					},
+					{
+						"name": "Device  Model",
+						"type": "String"
+					},
+					{
+						"name": "Device Make",
+						"type": "String"
+					},
+					{
+						"name": "Device Serial Number",
+						"type": "String"
+					},
+					{
+						"name": "Purchase Price",
+						"type": "String"
+					},
+					{
+						"name": "Plan Start Date",
+						"type": "String"
+					},
+					{
+						"name": "Deactivation Date",
+						"type": "String"
+					},
+					{
+						"name": "Ran Diagnostic Test?",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/3prsfortegra')]"
 			]
 		},
 		{
@@ -209,7 +333,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "csv_files/dev"
+					"name": "csv_files/dev/fortegra"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -297,106 +421,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_csv_cancelpolicy_processed')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "csv_files/dev"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
-							"type": "Expression"
-						},
-						"folderPath": "cancel_policy/dev/02-processed/",
-						"container": "csvfiles"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Plan Number",
-						"type": "String"
-					},
-					{
-						"name": "Plan Name",
-						"type": "String"
-					},
-					{
-						"name": "Customer Name",
-						"type": "String"
-					},
-					{
-						"name": "Reference Number",
-						"type": "String"
-					},
-					{
-						"name": "Customer Address Line 1",
-						"type": "String"
-					},
-					{
-						"name": "Customer Address Line 2",
-						"type": "String"
-					},
-					{
-						"name": "City",
-						"type": "String"
-					},
-					{
-						"name": "State",
-						"type": "String"
-					},
-					{
-						"name": "PhoneNumber",
-						"type": "String"
-					},
-					{
-						"name": "Device  Model",
-						"type": "String"
-					},
-					{
-						"name": "Device Make",
-						"type": "String"
-					},
-					{
-						"name": "Device Serial Number",
-						"type": "String"
-					},
-					{
-						"name": "Purchase Price",
-						"type": "String"
-					},
-					{
-						"name": "Plan Start Date",
-						"type": "String"
-					},
-					{
-						"name": "Deactivation Date",
-						"type": "String"
-					},
-					{
-						"name": "Ran Diagnostic Test?",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/dev_csv_registerpolicy_failed')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -413,7 +437,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "register_policy/dev/03-failed",
+						"folderPath": "dev/register_policy/03-failed",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -544,7 +568,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "register_policy/dev/02-processed",
+						"folderPath": "dev/register_policy/02-processed",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -675,7 +699,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "register_policy/dev/sandcreekoutfitters",
+						"folderPath": "dev/register_policy/sandcreekoutfitters",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -832,14 +856,14 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "csv_files/dev"
+					"name": "csv_files/dev/springboardbenefits"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "register_policy/dev/springboardbenefits",
+						"folderPath": "dev/register_policy/springboardbenefits",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -1268,6 +1292,206 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/prod_csv_cancelpolicy_fortegra_failed')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "csv_files/prod/fortegra"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
+							"type": "Expression"
+						},
+						"folderPath": "prod/cancel-policy/03-failed/",
+						"container": "csvfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Plan Number",
+						"type": "String"
+					},
+					{
+						"name": "Plan Name",
+						"type": "String"
+					},
+					{
+						"name": "Customer Name",
+						"type": "String"
+					},
+					{
+						"name": "Reference Number",
+						"type": "String"
+					},
+					{
+						"name": "Customer Address Line 1",
+						"type": "String"
+					},
+					{
+						"name": "Customer Address Line 2",
+						"type": "String"
+					},
+					{
+						"name": "City",
+						"type": "String"
+					},
+					{
+						"name": "State",
+						"type": "String"
+					},
+					{
+						"name": "PhoneNumber",
+						"type": "String"
+					},
+					{
+						"name": "Device  Model",
+						"type": "String"
+					},
+					{
+						"name": "Device Make",
+						"type": "String"
+					},
+					{
+						"name": "Device Serial Number",
+						"type": "String"
+					},
+					{
+						"name": "Purchase Price",
+						"type": "String"
+					},
+					{
+						"name": "Plan Start Date",
+						"type": "String"
+					},
+					{
+						"name": "Deactivation Date",
+						"type": "String"
+					},
+					{
+						"name": "Ran Diagnostic Test?",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prod_csv_cancelpolicy_fortegra_processed')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "csv_files/prod/fortegra"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
+							"type": "Expression"
+						},
+						"folderPath": "prod/cancel-policy/02-processed/",
+						"container": "csvfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Plan Number",
+						"type": "String"
+					},
+					{
+						"name": "Plan Name",
+						"type": "String"
+					},
+					{
+						"name": "Customer Name",
+						"type": "String"
+					},
+					{
+						"name": "Reference Number",
+						"type": "String"
+					},
+					{
+						"name": "Customer Address Line 1",
+						"type": "String"
+					},
+					{
+						"name": "Customer Address Line 2",
+						"type": "String"
+					},
+					{
+						"name": "City",
+						"type": "String"
+					},
+					{
+						"name": "State",
+						"type": "String"
+					},
+					{
+						"name": "PhoneNumber",
+						"type": "String"
+					},
+					{
+						"name": "Device  Model",
+						"type": "String"
+					},
+					{
+						"name": "Device Make",
+						"type": "String"
+					},
+					{
+						"name": "Device Serial Number",
+						"type": "String"
+					},
+					{
+						"name": "Purchase Price",
+						"type": "String"
+					},
+					{
+						"name": "Plan Start Date",
+						"type": "String"
+					},
+					{
+						"name": "Deactivation Date",
+						"type": "String"
+					},
+					{
+						"name": "Ran Diagnostic Test?",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/prod_csv_cancelpolicy_fortegrabyod')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1277,7 +1501,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "csv_files/prod"
+					"name": "csv_files/prod/fortegra"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -1628,458 +1852,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod_csv_registerpolicy_sandcreekoutfitters')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "csv_files/prod"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "register_policy/prod/sandcreekoutfitters",
-						"container": "csvfiles"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "ReportDate",
-						"type": "String"
-					},
-					{
-						"name": "MasterAgreementID",
-						"type": "String"
-					},
-					{
-						"name": "ProgramID",
-						"type": "String"
-					},
-					{
-						"name": "CertificateNumber",
-						"type": "String"
-					},
-					{
-						"name": "ProductSKU",
-						"type": "String"
-					},
-					{
-						"name": "SubscriberFirst",
-						"type": "String"
-					},
-					{
-						"name": "SubscriberLast",
-						"type": "String"
-					},
-					{
-						"name": "SubscriberMiddle",
-						"type": "String"
-					},
-					{
-						"name": "SubscriberPrefix",
-						"type": "String"
-					},
-					{
-						"name": "SubscriberSuffix",
-						"type": "String"
-					},
-					{
-						"name": "SubscriberEmail",
-						"type": "String"
-					},
-					{
-						"name": "MailingAddress1",
-						"type": "String"
-					},
-					{
-						"name": "MailingAddress2",
-						"type": "String"
-					},
-					{
-						"name": "MailingCity",
-						"type": "String"
-					},
-					{
-						"name": "MailingStateCode",
-						"type": "String"
-					},
-					{
-						"name": "MailingPostalCode",
-						"type": "String"
-					},
-					{
-						"name": "CoveredDevicePhoneNumber",
-						"type": "String"
-					},
-					{
-						"name": "Pet1Name",
-						"type": "String"
-					},
-					{
-						"name": "Pet1Gender",
-						"type": "String"
-					},
-					{
-						"name": "Pet1Type",
-						"type": "String"
-					},
-					{
-						"name": "Pet1Breed",
-						"type": "String"
-					},
-					{
-						"name": "Pet1Age",
-						"type": "String"
-					},
-					{
-						"name": "Pet2Name",
-						"type": "String"
-					},
-					{
-						"name": "Pet2Gender",
-						"type": "String"
-					},
-					{
-						"name": "Pet2Type",
-						"type": "String"
-					},
-					{
-						"name": "Pet2Breed",
-						"type": "String"
-					},
-					{
-						"name": "Pet2Age",
-						"type": "String"
-					},
-					{
-						"name": "Pet3Name",
-						"type": "String"
-					},
-					{
-						"name": "Pet3Gender",
-						"type": "String"
-					},
-					{
-						"name": "Pet3Type",
-						"type": "String"
-					},
-					{
-						"name": "Pet3Breed",
-						"type": "String"
-					},
-					{
-						"name": "Pet3Age",
-						"type": "String"
-					},
-					{
-						"name": "EnrollmentDate",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod_csv_registerpolicy_springboard')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "csv_files/prod"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "register_policy/prod/springboardbenefits",
-						"container": "csvfiles"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod_stage_BYODCancellations')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "3prsProdODS",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "sql_tables/prod"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ReportDate",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MasterAgreementID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProgramID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CertificateNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProductSKU",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberFirst",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberLast",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberMiddle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberPrefix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberSuffix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberEmail",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingCity",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingStateCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingPostalCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CoveredDevicePhoneNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "EnrollmentDate",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "stage",
-					"table": "BYODCancellations"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/3prsProdODS')]"
 			]
 		}
 	]

@@ -11,23 +11,26 @@
 		"3prsProdODS_connectionString": {
 			"value": ""
 		},
+		"3prsfortegra_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorage1_connectionString": {
 			"value": ""
 		},
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
-		"3prsfortegra_connectionString": {
-			"value": ""
-		},
 		"trigger_dev_cancelpolicy_fortegrabyod_properties_typeProperties_scope": {
-			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
 		"trigger_dev_register_policy_sandcreekoutfitters_properties_typeProperties_scope": {
 			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
 		"trigger_dev_register_policy_springboard_properties_typeProperties_scope": {
 			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger_prod_cancel_policy_fortegrabyod_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
 		"trigger_test_upload_properties_typeProperties_scope": {
 			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
