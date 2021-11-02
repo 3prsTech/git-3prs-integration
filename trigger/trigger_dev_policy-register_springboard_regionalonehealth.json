@@ -1,5 +1,5 @@
 {
-	"name": "trigger_dev_register_policy_springboard",
+	"name": "trigger_dev_policy-register_springboard_regionalonehealth",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
@@ -13,7 +13,7 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/csvfiles/blobs/register_policy/dev/springboardbenefits/",
+			"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/springboardbenefits/RegionalOneHealth/",
 			"ignoreEmptyBlobs": false,
 			"scope": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload",
 			"events": [
