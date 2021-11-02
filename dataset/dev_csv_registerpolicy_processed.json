@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "dev/register_policy/02-processed",
+				"folderPath": "dev/policy-register/02-processed",
 				"container": "csvfiles"
 			},
 			"columnDelimiter": ",",
