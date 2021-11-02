@@ -18,6 +18,10 @@
 		"trigger-dev-policy-register-springboard-regionalonehealth_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		}
 	},
 	"variables": {
@@ -101,6 +105,34 @@
 					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/springboardbenefits/RegionalOneHealth/",
 					"ignoreEmptyBlobs": false,
 					"scope": "[parameters('trigger-dev-policy-register-springboard-regionalonehealth_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-reports-enrollment-springboard-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dev-reports-enrollment-springboard-regionalonehealth",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/reports-enrollment/springboardbenefits/RegionalOneHealth/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger-dev-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
