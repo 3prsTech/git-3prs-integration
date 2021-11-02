@@ -20,7 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFileName": "Springboard_InForceRegister*.csv",
+							"wildcardFileName": "RegionalOneHealth_Enrollment*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -456,7 +456,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
+						"referenceName": "dev_csv_reports_enrollment_springboard_regionalonehealth",
 						"type": "DatasetReference"
 					}
 				],
@@ -492,7 +492,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFileName": "Springboard_InForceRegister*.csv",
+							"wildcardFileName": "RegionalOneHealth_InForceRegister*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -522,13 +522,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
+						"referenceName": "dev_csv_reports_enrollment_springboard_regionalonehealth",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_policy_register_processed",
+						"referenceName": "dev_csv_reports_enrollment_processed",
 						"type": "DatasetReference"
 					}
 				]
