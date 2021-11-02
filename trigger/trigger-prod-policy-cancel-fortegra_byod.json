@@ -1,5 +1,5 @@
 {
-	"name": "trigger_prod_policy-cancel_fortegrabyod",
+	"name": "trigger-prod-policy-cancel-fortegra_byod",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Stopped",
