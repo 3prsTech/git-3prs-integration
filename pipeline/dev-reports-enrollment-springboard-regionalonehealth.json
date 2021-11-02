@@ -492,7 +492,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFileName": "InForceRegister*.csv",
+							"wildcardFileName": "*InForceRegister*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -626,7 +626,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
+						"referenceName": "dev_csv_reports_enrollment_springboard_regionalonehealth",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,

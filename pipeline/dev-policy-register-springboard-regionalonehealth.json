@@ -516,7 +516,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFileName": "InForceRegister*.csv",
+							"wildcardFileName": "*InForceRegister*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -582,7 +582,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFileName": "InForceRegister*.csv",
+							"wildcardFileName": "*InForceRegister*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
