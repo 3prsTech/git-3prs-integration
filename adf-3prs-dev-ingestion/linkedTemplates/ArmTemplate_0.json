@@ -430,7 +430,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "csv_files/dev"
+					"name": "csv_files/dev/auditing"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -561,7 +561,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "csv_files/dev"
+					"name": "csv_files/dev/auditing"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -1602,7 +1602,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "csv_files/prod"
+					"name": "csv_files/prod/auditing"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -1733,7 +1733,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "csv_files/prod"
+					"name": "csv_files/prod/auditing"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
