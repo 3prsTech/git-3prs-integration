@@ -54,7 +54,7 @@
 								"referenceName": "AzureBlobStorage1",
 								"type": "LinkedServiceReference"
 							},
-							"path": "csvfiles/fortegra_byod_cancellations/dev/00-logging"
+							"path": "csvfiles/dev/policy-cancel/00-logging"
 						}
 					},
 					"translator": {

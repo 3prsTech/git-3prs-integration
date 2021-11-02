@@ -44,7 +44,7 @@
 								"referenceName": "AzureBlobStorage1",
 								"type": "LinkedServiceReference"
 							},
-							"path": "csvfiles/register_policy/dev/00-logging"
+							"path": "csvfiles/dev/policy-register/00-logging"
 						}
 					},
 					"translator": {
