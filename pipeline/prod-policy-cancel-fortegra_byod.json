@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ingest_prod_csv_cancelpolicy_byodfortegra",
+				"name": "ingest-to-database",
 				"description": "data ingestion for Fortegra BYOD Cancellations report",
 				"type": "Copy",
 				"dependsOn": [],
@@ -275,11 +275,11 @@
 				]
 			},
 			{
-				"name": "Call_la-3prs-prod-reissue-fortegra",
+				"name": "call-logic-app-trigger",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "ingest_prod_csv_cancelpolicy_byodfortegra",
+						"activity": "ingest-to-database",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -299,11 +299,11 @@
 				}
 			},
 			{
-				"name": "copy_to_processed",
+				"name": "copy-to-processed",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "ingest_prod_csv_cancelpolicy_byodfortegra",
+						"activity": "ingest-to-database",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -558,17 +558,17 @@
 				]
 			},
 			{
-				"name": "delete_prod_csv_cancelpolicy_byodfortegra",
+				"name": "delete-original-file",
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "copy_to_processed",
+						"activity": "copy-to-processed",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "copy_to_failed",
+						"activity": "copy-to-failed",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -596,11 +596,11 @@
 				}
 			},
 			{
-				"name": "copy_to_failed",
+				"name": "copy-to-failed",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "ingest_prod_csv_cancelpolicy_byodfortegra",
+						"activity": "ingest-to-database",
 						"dependencyConditions": [
 							"Failed"
 						]

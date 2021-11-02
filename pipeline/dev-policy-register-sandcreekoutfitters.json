@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ingest_dev_csv_registerpolicy_sandcreekoutfitters",
+				"name": "ingest-to-database",
 				"description": "data ingestion for Sand Creek Outfitters",
 				"type": "Copy",
 				"dependsOn": [],
@@ -480,11 +480,11 @@
 				]
 			},
 			{
-				"name": "copy_to_processed",
+				"name": "copy-to-processed",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "ingest_dev_csv_registerpolicy_sandcreekoutfitters",
+						"activity": "ingest-to-database",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -546,11 +546,11 @@
 				]
 			},
 			{
-				"name": "copy_to_failed",
+				"name": "copy-to-failed",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "ingest_dev_csv_registerpolicy_sandcreekoutfitters",
+						"activity": "ingest-to-database",
 						"dependencyConditions": [
 							"Failed"
 						]
@@ -612,17 +612,17 @@
 				]
 			},
 			{
-				"name": "delete_dev_csv_registerpolicy_sandcreekoutfitters",
+				"name": "delete-original-file",
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "copy_to_processed",
+						"activity": "copy-to-processed",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "copy_to_failed",
+						"activity": "copy-to-failed",
 						"dependencyConditions": [
 							"Succeeded"
 						]

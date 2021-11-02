@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ingest_dev_csv_registerpolicy_springboard",
+				"name": "ingest-to-database",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -468,11 +468,11 @@
 				]
 			},
 			{
-				"name": "Call_la-3prs-dev-bdx-trigger-group",
+				"name": "call-logic-app-trigger",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "ingest_dev_csv_registerpolicy_springboard",
+						"activity": "ingest-to-database",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -492,11 +492,11 @@
 				}
 			},
 			{
-				"name": "copy_to_processed",
+				"name": "copy-to-processed",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "ingest_dev_csv_registerpolicy_springboard",
+						"activity": "ingest-to-database",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -558,11 +558,11 @@
 				]
 			},
 			{
-				"name": "copy_to_failed",
+				"name": "copy-to-failed",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "ingest_dev_csv_registerpolicy_springboard",
+						"activity": "ingest-to-database",
 						"dependencyConditions": [
 							"Failed"
 						]
@@ -624,17 +624,17 @@
 				]
 			},
 			{
-				"name": "delete_dev_csv_registerpolicy_springboard",
+				"name": "delete-original-file",
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "copy_to_processed",
+						"activity": "copy-to-processed",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "copy_to_failed",
+						"activity": "copy-to-failed",
 						"dependencyConditions": [
 							"Succeeded"
 						]
