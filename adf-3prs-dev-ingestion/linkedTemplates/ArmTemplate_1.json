@@ -7,19 +7,15 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-3prs-dev-ingestion"
 		},
-		"trigger_dev_cancelpolicy_fortegrabyod_properties_typeProperties_scope": {
+		"trigger-dev-policy-cancel-fortegra_byod_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
-		"trigger_dev_register_policy_sandcreekoutfitters_properties_typeProperties_scope": {
+		"trigger-dev-policy-register-sandcreekoutfitters_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
-		"trigger_dev_register_policy_springboard_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
-		},
-		"trigger_test_upload_properties_typeProperties_scope": {
+		"trigger-dev-policy-register-springboard-regionalonehealth_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		}
@@ -29,7 +25,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/prod_csv_registerpolicy_sandcreekoutfitters')]",
+			"name": "[concat(parameters('factoryName'), '/prod_csv_policy_register_sandcreekoutfitters')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -38,14 +34,14 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "csv_files/prod"
+					"name": "csv_files/prod/outfitters"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "register_policy/prod/sandcreekoutfitters",
+						"folderPath": "prod/policy-register/sandcreekoutfitters",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -191,7 +187,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/prod_csv_registerpolicy_springboard')]",
+			"name": "[concat(parameters('factoryName'), '/prod_csv_policy_register_springboard_regionalonehealth')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -207,7 +203,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "register_policy/prod/springboardbenefits",
+						"folderPath": "prod/policy-register/springboardbenefits/RegionalOneHealth",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -791,13 +787,13 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_cancel_policy_fortegra_byod')]",
+			"name": "[concat(parameters('factoryName'), '/dev-policy-cancel-fortegra_byod')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "ingest_dev_csv_cancelpolicy_byodfortegra",
+						"name": "ingest-to-database",
 						"description": "data ingestion for Fortegra BYOD Cancellations report",
 						"type": "Copy",
 						"dependsOn": [],
@@ -1057,7 +1053,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_cancelpolicy_fortegrabyod",
+								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -1071,11 +1067,11 @@
 						]
 					},
 					{
-						"name": "Call_la-3prs-dev-reissue-fortegra",
+						"name": "call-logic-app-trigger",
 						"type": "WebActivity",
 						"dependsOn": [
 							{
-								"activity": "ingest_dev_csv_cancelpolicy_byodfortegra",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -1097,11 +1093,11 @@
 						}
 					},
 					{
-						"name": "copy_to_processed",
+						"name": "copy-to-processed",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "ingest_dev_csv_cancelpolicy_byodfortegra",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -1344,31 +1340,31 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_cancelpolicy_fortegrabyod",
+								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_csv_cancelpolicy_fortegra_processed",
+								"referenceName": "dev_csv_policy_cancel_fortegra_processed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "delete_dev_csv_cancelpolicy_byodfortegra",
+						"name": "delete-original-file",
 						"type": "Delete",
 						"dependsOn": [
 							{
-								"activity": "copy_to_processed",
+								"activity": "copy-to-processed",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "copy_to_failed",
+								"activity": "copy-to-failed",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -1384,7 +1380,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "dev_csv_cancelpolicy_fortegrabyod",
+								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -1397,11 +1393,11 @@
 						}
 					},
 					{
-						"name": "copy_to_failed",
+						"name": "copy-to-failed",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "ingest_dev_csv_cancelpolicy_byodfortegra",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Failed"
 								]
@@ -1644,14 +1640,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_cancelpolicy_fortegrabyod",
+								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_csv_cancelpolicy_fortegra_failed",
+								"referenceName": "dev_csv_policy_cancel_fortegra_failed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -1671,13 +1667,13 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_register_policy_sandcreekoutfitters')]",
+			"name": "[concat(parameters('factoryName'), '/dev-policy-register-sandcreekoutfitters')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "ingest_dev_csv_registerpolicy_sandcreekoutfitters",
+						"name": "ingest-to-database",
 						"description": "data ingestion for Sand Creek Outfitters",
 						"type": "Copy",
 						"dependsOn": [],
@@ -2142,7 +2138,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_registerpolicy_sandcreekoutfitters",
+								"referenceName": "dev_csv_policy_register_sandcreekoutfitters",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -2156,11 +2152,11 @@
 						]
 					},
 					{
-						"name": "copy_to_processed",
+						"name": "copy-to-processed",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "ingest_dev_csv_registerpolicy_sandcreekoutfitters",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -2210,25 +2206,25 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_registerpolicy_sandcreekoutfitters",
+								"referenceName": "dev_csv_policy_register_sandcreekoutfitters",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_csv_registerpolicy_processed",
+								"referenceName": "dev_csv_policy_register_processed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "copy_to_failed",
+						"name": "copy-to-failed",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "ingest_dev_csv_registerpolicy_sandcreekoutfitters",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Failed"
 								]
@@ -2278,31 +2274,31 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_registerpolicy_sandcreekoutfitters",
+								"referenceName": "dev_csv_policy_register_sandcreekoutfitters",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_csv_registerpolicy_failed",
+								"referenceName": "dev_csv_policy_register_failed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "delete_dev_csv_registerpolicy_sandcreekoutfitters",
+						"name": "delete-original-file",
 						"type": "Delete",
 						"dependsOn": [
 							{
-								"activity": "copy_to_processed",
+								"activity": "copy-to-processed",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "copy_to_failed",
+								"activity": "copy-to-failed",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -2318,7 +2314,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "dev_csv_registerpolicy_sandcreekoutfitters",
+								"referenceName": "dev_csv_policy_register_sandcreekoutfitters",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -2344,13 +2340,13 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_register_policy_springboard')]",
+			"name": "[concat(parameters('factoryName'), '/dev-policy-register-springboard')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "ingest_dev_csv_registerpolicy_springboard",
+						"name": "ingest-to-database",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -2803,7 +2799,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_registerpolicy_springboard",
+								"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -2817,11 +2813,11 @@
 						]
 					},
 					{
-						"name": "Call_la-3prs-dev-bdx-trigger-group",
+						"name": "call-logic-app-trigger",
 						"type": "WebActivity",
 						"dependsOn": [
 							{
-								"activity": "ingest_dev_csv_registerpolicy_springboard",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -2843,11 +2839,11 @@
 						}
 					},
 					{
-						"name": "copy_to_processed",
+						"name": "copy-to-processed",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "ingest_dev_csv_registerpolicy_springboard",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -2897,25 +2893,25 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_registerpolicy_springboard",
+								"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_csv_registerpolicy_processed",
+								"referenceName": "dev_csv_policy_register_processed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "copy_to_failed",
+						"name": "copy-to-failed",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "ingest_dev_csv_registerpolicy_springboard",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Failed"
 								]
@@ -2965,31 +2961,31 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_registerpolicy_springboard",
+								"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_csv_registerpolicy_failed",
+								"referenceName": "dev_csv_policy_register_failed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "delete_dev_csv_registerpolicy_springboard",
+						"name": "delete-original-file",
 						"type": "Delete",
 						"dependsOn": [
 							{
-								"activity": "copy_to_processed",
+								"activity": "copy-to-processed",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "copy_to_failed",
+								"activity": "copy-to-failed",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -3005,7 +3001,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "dev_csv_registerpolicy_springboard",
+								"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -3030,13 +3026,13 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/prod_cancel_policy_fortegra_byod')]",
+			"name": "[concat(parameters('factoryName'), '/prod-policy-cancel-fortegra_byod')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "ingest_prod_csv_cancelpolicy_byodfortegra",
+						"name": "ingest-to-database",
 						"description": "data ingestion for Fortegra BYOD Cancellations report",
 						"type": "Copy",
 						"dependsOn": [],
@@ -3296,7 +3292,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "prod_csv_cancelpolicy_fortegrabyod",
+								"referenceName": "prod_csv_policy_cancel_fortegrabyod",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -3310,11 +3306,11 @@
 						]
 					},
 					{
-						"name": "Call_la-3prs-prod-reissue-fortegra",
+						"name": "call-logic-app-trigger",
 						"type": "WebActivity",
 						"dependsOn": [
 							{
-								"activity": "ingest_prod_csv_cancelpolicy_byodfortegra",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -3336,11 +3332,11 @@
 						}
 					},
 					{
-						"name": "copy_to_processed",
+						"name": "copy-to-processed",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "ingest_prod_csv_cancelpolicy_byodfortegra",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -3583,31 +3579,31 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "prod_csv_cancelpolicy_fortegrabyod",
+								"referenceName": "prod_csv_policy_cancel_fortegrabyod",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "prod_csv_cancelpolicy_fortegra_processed",
+								"referenceName": "prod_csv_policy_cancel_fortegra_processed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "delete_prod_csv_cancelpolicy_byodfortegra",
+						"name": "delete-original-file",
 						"type": "Delete",
 						"dependsOn": [
 							{
-								"activity": "copy_to_processed",
+								"activity": "copy-to-processed",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "copy_to_failed",
+								"activity": "copy-to-failed",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -3623,7 +3619,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "prod_csv_cancelpolicy_fortegrabyod",
+								"referenceName": "prod_csv_policy_cancel_fortegrabyod",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -3636,11 +3632,11 @@
 						}
 					},
 					{
-						"name": "copy_to_failed",
+						"name": "copy-to-failed",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "ingest_prod_csv_cancelpolicy_byodfortegra",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Failed"
 								]
@@ -3883,14 +3879,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "prod_csv_cancelpolicy_fortegrabyod",
+								"referenceName": "prod_csv_policy_cancel_fortegrabyod",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "prod_csv_cancelpolicy_fortegra_failed",
+								"referenceName": "prod_csv_policy_cancel_fortegra_failed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -3912,13 +3908,13 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/prod_register_policy_springboard')]",
+			"name": "[concat(parameters('factoryName'), '/prod-policy-register-springboard')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "ingest_prod_csv_registerpolicy_springboard",
+						"name": "ingest-to-database",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -4372,7 +4368,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "prod_csv_registerpolicy_springboard",
+								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -4386,11 +4382,11 @@
 						]
 					},
 					{
-						"name": "Call_la-3prs-prod-bdx-trigger-group",
+						"name": "call-logic-app-trigger",
 						"type": "WebActivity",
 						"dependsOn": [
 							{
-								"activity": "ingest_prod_csv_registerpolicy_springboard",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -4412,11 +4408,11 @@
 						}
 					},
 					{
-						"name": "copy_to_processed",
+						"name": "copy-to-processed",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "ingest_prod_csv_registerpolicy_springboard",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -4466,25 +4462,25 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "prod_csv_registerpolicy_springboard",
+								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "prod_csv_registerpolicy_processed",
+								"referenceName": "prod_csv_policy_register_processed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "copy_to_failed",
+						"name": "copy-to-failed",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "ingest_prod_csv_registerpolicy_springboard",
+								"activity": "ingest-to-database",
 								"dependencyConditions": [
 									"Failed"
 								]
@@ -4534,31 +4530,31 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "prod_csv_registerpolicy_springboard",
+								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "prod_csv_registerpolicy_failed",
+								"referenceName": "prod_csv_policy_register_failed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					},
 					{
-						"name": "delete_prod_csv_registerpolicy_springboard",
+						"name": "delete-original-file",
 						"type": "Delete",
 						"dependsOn": [
 							{
-								"activity": "copy_to_processed",
+								"activity": "copy-to-processed",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "copy_to_failed",
+								"activity": "copy-to-failed",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -4574,7 +4570,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "prod_csv_registerpolicy_springboard",
+								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -4597,7 +4593,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/prod_csv_registerpolicy_springboard')]",
+				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_springboard_regionalonehealth')]",
 				"[concat(variables('factoryId'), '/datasets/prod_stage_InForceRegister')]"
 			]
 		},
@@ -5075,7 +5071,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger_dev_cancelpolicy_fortegrabyod')]",
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-cancel-fortegra_byod')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -5084,7 +5080,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "dev_cancel_policy_fortegra_byod",
+							"referenceName": "dev-policy-cancel-fortegra_byod",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -5092,20 +5088,20 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/dev/cancel-policy/01-upload/",
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-cancel/01-upload/",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger_dev_cancelpolicy_fortegrabyod_properties_typeProperties_scope')]",
+					"scope": "[parameters('trigger-dev-policy-cancel-fortegra_byod_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/dev_cancel_policy_fortegra_byod')]"
+				"[concat(variables('factoryId'), '/pipelines/dev-policy-cancel-fortegra_byod')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger_dev_register_policy_sandcreekoutfitters')]",
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-sandcreekoutfitters')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -5114,7 +5110,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "dev_register_policy_sandcreekoutfitters",
+							"referenceName": "dev-policy-register-sandcreekoutfitters",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -5122,20 +5118,20 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/register_policy/dev/sandcreekoutfitters/",
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/sandcreekoutfitters/",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger_dev_register_policy_sandcreekoutfitters_properties_typeProperties_scope')]",
+					"scope": "[parameters('trigger-dev-policy-register-sandcreekoutfitters_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/dev_register_policy_sandcreekoutfitters')]"
+				"[concat(variables('factoryId'), '/pipelines/dev-policy-register-sandcreekoutfitters')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger_dev_register_policy_springboard')]",
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-springboard-regionalonehealth')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -5144,7 +5140,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "dev_register_policy_springboard",
+							"referenceName": "dev-policy-register-springboard",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -5152,46 +5148,16 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/register_policy/dev/springboardbenefits/",
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/springboardbenefits/RegionalOneHealth/",
 					"ignoreEmptyBlobs": false,
-					"scope": "[parameters('trigger_dev_register_policy_springboard_properties_typeProperties_scope')]",
+					"scope": "[parameters('trigger-dev-policy-register-springboard-regionalonehealth_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/dev_register_policy_springboard')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger_test_upload')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "test_ingestion",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/test/blobs/",
-					"ignoreEmptyBlobs": false,
-					"scope": "[parameters('trigger_test_upload_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/test_ingestion')]"
+				"[concat(variables('factoryId'), '/pipelines/dev-policy-register-springboard')]"
 			]
 		}
 	]

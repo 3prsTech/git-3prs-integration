@@ -27,7 +27,7 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
-		"trigger_prod_cancel_policy_fortegrabyod_properties_typeProperties_scope": {
+		"trigger-prod-policy-cancel-fortegra_byod_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		}
@@ -104,7 +104,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger_prod_cancel_policy_fortegrabyod')]",
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-cancel-fortegra_byod')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -113,9 +113,9 @@
 				"pipelines": [],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/prod/cancel-policy/01-upload/",
+					"blobPathBeginsWith": "/csvfiles/blobs/prod/policy-cancel/01-upload/",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger_prod_cancel_policy_fortegrabyod_properties_typeProperties_scope')]",
+					"scope": "[parameters('trigger-prod-policy-cancel-fortegra_byod_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
@@ -124,7 +124,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_csv_cancelpolicy_fortegra_failed')]",
+			"name": "[concat(parameters('factoryName'), '/dev_csv_policy_cancel_fortegra_failed')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -144,7 +144,7 @@
 							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
 							"type": "Expression"
 						},
-						"folderPath": "dev/cancel-policy/03-failed/",
+						"folderPath": "dev/policy-cancel/03-failed/",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -224,7 +224,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_csv_cancelpolicy_fortegra_processed')]",
+			"name": "[concat(parameters('factoryName'), '/dev_csv_policy_cancel_fortegra_processed')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -244,7 +244,7 @@
 							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
 							"type": "Expression"
 						},
-						"folderPath": "dev/cancel-policy/02-processed/",
+						"folderPath": "dev/policy-cancel/02-processed/",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -324,7 +324,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_csv_cancelpolicy_fortegrabyod')]",
+			"name": "[concat(parameters('factoryName'), '/dev_csv_policy_cancel_fortegrabyod')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -341,7 +341,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": "BYOD - Cancellations Report.csv",
-						"folderPath": "dev/cancel-policy/01-upload/",
+						"folderPath": "dev/policy-cancel/01-upload/",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -421,7 +421,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_csv_registerpolicy_failed')]",
+			"name": "[concat(parameters('factoryName'), '/dev_csv_policy_register_failed')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -437,7 +437,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "dev/register_policy/03-failed",
+						"folderPath": "dev/policy-register/03-failed",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -552,7 +552,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_csv_registerpolicy_processed')]",
+			"name": "[concat(parameters('factoryName'), '/dev_csv_policy_register_processed')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -568,7 +568,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "dev/register_policy/02-processed",
+						"folderPath": "dev/policy-register/02-processed",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -683,7 +683,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_csv_registerpolicy_sandcreekoutfitters')]",
+			"name": "[concat(parameters('factoryName'), '/dev_csv_policy_register_sandcreekoutfitters')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -692,14 +692,14 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "csv_files/dev"
+					"name": "csv_files/dev/outfitters"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "dev/register_policy/sandcreekoutfitters",
+						"folderPath": "dev/policy-register/sandcreekoutfitters",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -847,7 +847,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_csv_registerpolicy_springboard')]",
+			"name": "[concat(parameters('factoryName'), '/dev_csv_policy_register_springboard_regionalonehealth')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -863,7 +863,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "dev/register_policy/springboardbenefits",
+						"folderPath": "dev/policy-register/springboardbenefits/RegionalOneHealth",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -1292,12 +1292,12 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/prod_csv_cancelpolicy_fortegra_failed')]",
+			"name": "[concat(parameters('factoryName'), '/prod_csv_policy_cancel_fortegra_failed')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
+					"referenceName": "3prsfortegra",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
@@ -1312,7 +1312,7 @@
 							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
 							"type": "Expression"
 						},
-						"folderPath": "prod/cancel-policy/03-failed/",
+						"folderPath": "prod/policy-cancel/03-failed/",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -1388,16 +1388,16 @@
 				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+				"[concat(variables('factoryId'), '/linkedServices/3prsfortegra')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/prod_csv_cancelpolicy_fortegra_processed')]",
+			"name": "[concat(parameters('factoryName'), '/prod_csv_policy_cancel_fortegra_processed')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
+					"referenceName": "3prsfortegra",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
@@ -1412,7 +1412,7 @@
 							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
 							"type": "Expression"
 						},
-						"folderPath": "prod/cancel-policy/02-processed/",
+						"folderPath": "prod/policy-cancel/02-processed/",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -1488,11 +1488,11 @@
 				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+				"[concat(variables('factoryId'), '/linkedServices/3prsfortegra')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/prod_csv_cancelpolicy_fortegrabyod')]",
+			"name": "[concat(parameters('factoryName'), '/prod_csv_policy_cancel_fortegrabyod')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1509,7 +1509,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": "BYOD - Cancellations Report.csv",
-						"folderPath": "prod/cancel-policy/01-upload",
+						"folderPath": "prod/policy-cancel/01-upload",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -1593,7 +1593,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/prod_csv_registerpolicy_failed')]",
+			"name": "[concat(parameters('factoryName'), '/prod_csv_policy_register_failed')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1609,7 +1609,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "register_policy/prod/03-failed",
+						"folderPath": "prod/policy-register/03-failed",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -1724,7 +1724,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/prod_csv_registerpolicy_processed')]",
+			"name": "[concat(parameters('factoryName'), '/prod_csv_policy_register_processed')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1740,7 +1740,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"folderPath": "register_policy/prod/02-processed",
+						"folderPath": "prod/policy-register/02-processed",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",

@@ -27,25 +27,21 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
-		"trigger_dev_cancelpolicy_fortegrabyod_properties_typeProperties_scope": {
+		"trigger-dev-policy-cancel-fortegra_byod_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
-		"trigger_dev_register_policy_sandcreekoutfitters_properties_typeProperties_scope": {
+		"trigger-dev-policy-register-sandcreekoutfitters_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
-		"trigger_dev_register_policy_springboard_properties_typeProperties_scope": {
+		"trigger-dev-policy-register-springboard-regionalonehealth_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
-		"trigger_prod_cancel_policy_fortegrabyod_properties_typeProperties_scope": {
+		"trigger-prod-policy-cancel-fortegra_byod_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
-		},
-		"trigger_test_upload_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
 		"containerUri": {
 			"type": "string",
@@ -89,8 +85,8 @@
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
-					"trigger_prod_cancel_policy_fortegrabyod_properties_typeProperties_scope": {
-						"value": "[parameters('trigger_prod_cancel_policy_fortegrabyod_properties_typeProperties_scope')]"
+					"trigger-prod-policy-cancel-fortegra_byod_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-prod-policy-cancel-fortegra_byod_properties_typeProperties_scope')]"
 					}
 				}
 			},
@@ -110,17 +106,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"trigger_dev_cancelpolicy_fortegrabyod_properties_typeProperties_scope": {
-						"value": "[parameters('trigger_dev_cancelpolicy_fortegrabyod_properties_typeProperties_scope')]"
+					"trigger-dev-policy-cancel-fortegra_byod_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-dev-policy-cancel-fortegra_byod_properties_typeProperties_scope')]"
 					},
-					"trigger_dev_register_policy_sandcreekoutfitters_properties_typeProperties_scope": {
-						"value": "[parameters('trigger_dev_register_policy_sandcreekoutfitters_properties_typeProperties_scope')]"
+					"trigger-dev-policy-register-sandcreekoutfitters_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-dev-policy-register-sandcreekoutfitters_properties_typeProperties_scope')]"
 					},
-					"trigger_dev_register_policy_springboard_properties_typeProperties_scope": {
-						"value": "[parameters('trigger_dev_register_policy_springboard_properties_typeProperties_scope')]"
-					},
-					"trigger_test_upload_properties_typeProperties_scope": {
-						"value": "[parameters('trigger_test_upload_properties_typeProperties_scope')]"
+					"trigger-dev-policy-register-springboard-regionalonehealth_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-dev-policy-register-springboard-regionalonehealth_properties_typeProperties_scope')]"
 					}
 				}
 			},
