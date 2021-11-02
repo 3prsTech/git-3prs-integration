@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "register_policy/dev/sandcreekoutfitters",
+				"folderPath": "dev/register_policy/sandcreekoutfitters",
 				"container": "csvfiles"
 			},
 			"columnDelimiter": ",",

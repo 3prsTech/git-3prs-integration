@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "register_policy/dev/springboardbenefits",
+				"folderPath": "dev/register_policy/springboardbenefits",
 				"container": "csvfiles"
 			},
 			"columnDelimiter": ",",
