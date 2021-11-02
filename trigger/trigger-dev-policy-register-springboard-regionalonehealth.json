@@ -1,5 +1,5 @@
 {
-	"name": "trigger_dev_policy-register_springboard_regionalonehealth",
+	"name": "trigger-dev-policy-register-springboard-regionalonehealth",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
