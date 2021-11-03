@@ -650,6 +650,7 @@
 				}
 			}
 		],
+		"concurrency": 1,
 		"folder": {
 			"name": "dev/outfitters"
 		},

@@ -855,6 +855,7 @@
 				]
 			}
 		],
+		"concurrency": 1,
 		"folder": {
 			"name": "prod/fortegra"
 		},
