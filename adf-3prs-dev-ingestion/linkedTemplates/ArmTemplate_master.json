@@ -43,7 +43,7 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
-		"trigger-dev-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
+		"trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
@@ -139,8 +139,8 @@
 					"trigger-dev-policy-register-springboard-regionalonehealth_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-dev-policy-register-springboard-regionalonehealth_properties_typeProperties_scope')]"
 					},
-					"trigger-dev-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
-						"value": "[parameters('trigger-dev-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope')]"
+					"trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope')]"
 					}
 				}
 			},
