@@ -667,7 +667,7 @@
 		],
 		"concurrency": 1,
 		"folder": {
-			"name": "dev/springboardbenefits"
+			"name": "prod/springboardbenefits"
 		},
 		"annotations": []
 	}
