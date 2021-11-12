@@ -493,7 +493,7 @@
 					}
 				],
 				"typeProperties": {
-					"url": "https://prod-50.eastus.logic.azure.com:443/workflows/28ce9be8309141edb521d26931dcc53b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ykZImrZcgc1If5NQEnn5ep0T7ZOxRe1bOkhLRC3Ta1E",
+					"url": "https://prod-67.eastus.logic.azure.com:443/workflows/bc215aa48b234c2db55d04b26f41f9bc/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=SLGsAgWisk_XftvTvMVfHMGB6xqxNyxYWhM-HTEd9CQ",
 					"method": "POST"
 				}
 			},
