@@ -279,7 +279,7 @@
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "ingest-to-database",
+						"activity": "delete-original-file-processed",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -292,7 +292,12 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "LogicAppName",
+						"value": "la-3prs-prod-cancelpolicy-fortegra"
+					}
+				],
 				"typeProperties": {
 					"url": "https://prod-79.eastus.logic.azure.com:443/workflows/3351cc0895c046748e009d46fda3ced8/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ReokLWalY0ARR4OQ06EZ7sOLTCeb2ME_9xByGkOFZ7g",
 					"method": "POST"
