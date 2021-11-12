@@ -1,5 +1,5 @@
 {
-	"name": "trigger-dev-reports-enrollment-springboard-regionalonehealth",
+	"name": "trigger-prod-reports-enrollment-springboard-regionalonehealth",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
@@ -9,11 +9,17 @@
 					"referenceName": "dev-reports-enrollment-springboard-regionalonehealth",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "prod-reports-enrollment-springboard-regionalonehealth",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/csvfiles/blobs/dev/reports-enrollment/springboardbenefits/RegionalOneHealth/",
+			"blobPathBeginsWith": "/csvfiles/blobs/prod/reports-enrollment/springboardbenefits/RegionalOneHealth/",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload",
 			"events": [
