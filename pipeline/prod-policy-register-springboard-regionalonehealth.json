@@ -473,7 +473,7 @@
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "ingest-to-database",
+						"activity": "delete-original-file-processed",
 						"dependencyConditions": [
 							"Succeeded"
 						]
