@@ -486,9 +486,14 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "LogicAppName",
+						"value": "la-3prs-prod-bdx-trigger-group"
+					}
+				],
 				"typeProperties": {
-					"url": "https://prod-38.eastus.logic.azure.com:443/workflows/505214a3a44341cea9c2874d7b693abc/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bRielwRA_HLXXbxmPIGyxrN4vDROTSFj0G4AktHxhgU",
+					"url": "https://prod-67.eastus.logic.azure.com:443/workflows/bc215aa48b234c2db55d04b26f41f9bc/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=SLGsAgWisk_XftvTvMVfHMGB6xqxNyxYWhM-HTEd9CQ",
 					"method": "POST"
 				}
 			},
