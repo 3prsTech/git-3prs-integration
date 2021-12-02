@@ -552,10 +552,7 @@
 				"inputs": [
 					{
 						"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
-						"type": "DatasetReference",
-						"parameters": {
-							"pTriggerFile": "@dataset().filename"
-						}
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
@@ -703,6 +700,11 @@
 			}
 		],
 		"concurrency": 1,
+		"parameters": {
+			"pTriggerFile": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "dev/springboardbenefits"
 		},
