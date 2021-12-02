@@ -558,13 +558,7 @@
 				"outputs": [
 					{
 						"referenceName": "dev_csv_policy_register_processed",
-						"type": "DatasetReference",
-						"parameters": {
-							"pTargetFile": {
-								"value": "@concat(replace(pipeline().parameters.pTriggerFile,'.csv',''), '_', formatDateTime(convertTimeZone(utcnow(),'UTC','Eastern Standard Time'),'yyyyMMddTHHmmss'), '.csv')",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				]
 			},
@@ -700,11 +694,6 @@
 			}
 		],
 		"concurrency": 1,
-		"parameters": {
-			"pTriggerFile": {
-				"type": "string"
-			}
-		},
 		"folder": {
 			"name": "dev/springboardbenefits"
 		},

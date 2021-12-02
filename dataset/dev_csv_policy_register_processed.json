@@ -5,11 +5,6 @@
 			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"pTargetFile": {
-				"type": "string"
-			}
-		},
 		"folder": {
 			"name": "csv_files/dev/auditing"
 		},
