@@ -552,7 +552,10 @@
 				"inputs": [
 					{
 						"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"pTriggerFile": "@dataset().filename"
+						}
 					}
 				],
 				"outputs": [
