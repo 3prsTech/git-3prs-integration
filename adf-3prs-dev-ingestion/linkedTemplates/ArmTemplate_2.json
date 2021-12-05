@@ -509,7 +509,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "dev-policy-cancel-fortegra_byod",
+							"referenceName": "dev-policy-reissue-fortegra_byod",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
