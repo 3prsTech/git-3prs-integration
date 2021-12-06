@@ -341,8 +341,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": "BYOD - Cancellations Report.csv",
-						"folderPath": "dev/policy-cancel/01-upload/",
-						"container": "csvfiles"
+						"container": "dev"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",

@@ -7,7 +7,7 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-3prs-dev-ingestion"
 		},
-		"trigger-dev-policy-cancel-fortegra_byod_properties_typeProperties_scope": {
+		"trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
@@ -22,6 +22,10 @@
 		"trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		}
 	},
 	"variables": {
@@ -500,7 +504,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-cancel-fortegra_byod')]",
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-reissue-fortegra_byod')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -517,9 +521,9 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-cancel/01-upload/",
+					"blobPathBeginsWith": "/dev/blobs/",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger-dev-policy-cancel-fortegra_byod_properties_typeProperties_scope')]",
+					"scope": "[parameters('trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
@@ -611,6 +615,34 @@
 					"blobPathBeginsWith": "/csvfiles/blobs/prod/reports-enrollment/springboardbenefits/RegionalOneHealth/",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-reissue-fortegra_byod')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "prod-policy-reissue-fortegra_byod",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/prod/blobs/",
+					"ignoreEmptyBlobs": false,
+					"scope": "[parameters('trigger-prod-policy-reissue-fortegra_byod_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]

@@ -27,7 +27,7 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
-		"trigger-dev-policy-cancel-fortegra_byod_properties_typeProperties_scope": {
+		"trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
@@ -46,6 +46,10 @@
 		"trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		}
 	},
 	"variables": {
@@ -3098,7 +3102,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/prod-policy-cancel-fortegra_byod')]",
+			"name": "[concat(parameters('factoryName'), '/prod-policy-reissue-fortegra_byod')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -3402,7 +3406,7 @@
 							}
 						],
 						"typeProperties": {
-							"url": "https://prod-51.eastus.logic.azure.com:443/workflows/47e6cd09ef62456e86728b770c00c2df/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ns9B9IqIclWAS4Bwkuc-yI-IqQUayewJpeA3H1aQ8qI",
+							"url": "https://prod-87.eastus.logic.azure.com:443/workflows/86f3fd29904640979f1cfa348069d7c4/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=k8kKG4gTdekZon2_yYPKFXt3Kb9ozixjRzAZsXweYJw",
 							"method": "POST",
 							"headers": {},
 							"body": {}
@@ -6129,8 +6133,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": "BYOD - Cancellations Report.csv",
-						"folderPath": "dev/policy-cancel/01-upload/",
-						"container": "csvfiles"
+						"container": "dev"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -7847,8 +7850,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": "BYOD - Cancellations Report.csv",
-						"folderPath": "prod/policy-cancel/01-upload",
-						"container": "csvfiles"
+						"container": "prod"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -9582,7 +9584,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-cancel-fortegra_byod')]",
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-reissue-fortegra_byod')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -9599,9 +9601,9 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-cancel/01-upload/",
+					"blobPathBeginsWith": "/dev/blobs/",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger-dev-policy-cancel-fortegra_byod_properties_typeProperties_scope')]",
+					"scope": "[parameters('trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
@@ -9727,6 +9729,36 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/dev-reports-enrollment-springboard-regionalonehealth')]",
 				"[concat(variables('factoryId'), '/pipelines/prod-reports-enrollment-springboard-regionalonehealth')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-reissue-fortegra_byod')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "prod-policy-reissue-fortegra_byod",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/prod/blobs/",
+					"ignoreEmptyBlobs": false,
+					"scope": "[parameters('trigger-prod-policy-reissue-fortegra_byod_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/prod-policy-reissue-fortegra_byod')]"
 			]
 		}
 	]
