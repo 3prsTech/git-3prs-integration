@@ -1,5 +1,5 @@
 {
-	"name": "trigger-dev-policy-cancel-fortegra_byod",
+	"name": "trigger-dev-policy-reissue-fortegra_byod",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
