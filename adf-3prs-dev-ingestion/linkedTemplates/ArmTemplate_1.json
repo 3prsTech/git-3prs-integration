@@ -1771,919 +1771,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev-policy-reissue-fortegra_byod')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ingest-to-database",
-						"description": "data ingestion for Fortegra BYOD Cancellations report",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "csvfiles/policy_register/sandcreekoutfitters/EPP_InForceRegister_2022-03-01.csv"
-							},
-							{
-								"name": "Destination",
-								"value": "stage.EPP_InForceRegister"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"disableMetricsCollection": false,
-								"writeBehavior": "insert"
-							},
-							"enableStaging": false,
-							"validateDataConsistency": true,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Warning",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "AzureBlobStorage1",
-										"type": "LinkedServiceReference"
-									},
-									"path": "csvfiles/dev/policy-cancel/00-logging"
-								}
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Plan Number",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Plan_Number",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Plan Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Plan_Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Customer Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Customer_Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Reference Number",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Reference_Number",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Customer Address Line 1",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Customer_Address_Line_1",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Customer Address Line 2",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Customer_Address_Line_2",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "City",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "City",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "State",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "State",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "PhoneNumber",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "PhoneNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Device  Model",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Device_Model",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Device Make",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Device_Make",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Device Serial Number",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Device_Serial_Number",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Purchase Price",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Purchase_Price",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Plan Start Date",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Plan_Start_Date",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										}
-									},
-									{
-										"source": {
-											"name": "Deactivation Date",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Deactivation_Date",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										}
-									},
-									{
-										"source": {
-											"name": "Ran Diagnostic Test?",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Ran_Diagnostic_Test",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false,
-									"dateTimeFormat": "\"yyyy-MM-dd HH:mm:ss.fff\""
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "dev_stage_BYODCancellations",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "call-logic-app-trigger",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "delete-original-file-processed",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "LogicAppName",
-								"value": "la-3prs-dev-cancelpolicy-fortegra"
-							}
-						],
-						"typeProperties": {
-							"url": "https://prod-80.eastus.logic.azure.com:443/workflows/5c21c3afcc2448c5a638023694126a27/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JsDYoQkA5eY1Lzn0SuU8PyjCIfbN4w8VSsNZG31TUCs",
-							"method": "POST",
-							"headers": {},
-							"body": {}
-						}
-					},
-					{
-						"name": "copy-to-processed",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "ingest-to-database",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Plan Number",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Plan Number",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Plan Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Plan Name",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Customer Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Customer Name",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Reference Number",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Reference Number",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Customer Address Line 1",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Customer Address Line 1",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Customer Address Line 2",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Customer Address Line 2",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "City",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "City",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "State",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "State",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "PhoneNumber",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "PhoneNumber",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Device  Model",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Device  Model",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Device Make",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Device Make",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Device Serial Number",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Device Serial Number",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Purchase Price",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Purchase Price",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Plan Start Date",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Plan Start Date",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Deactivation Date",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Deactivation Date",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Ran Diagnostic Test?",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Ran Diagnostic Test?",
-											"type": "String",
-											"physicalType": "String"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "dev_csv_policy_cancel_fortegra_processed",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "delete-original-file-processed",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "copy-to-processed",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"enableLogging": false,
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							}
-						}
-					},
-					{
-						"name": "copy-to-failed",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "ingest-to-database",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Plan Number",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Plan Number",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Plan Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Plan Name",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Customer Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Customer Name",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Reference Number",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Reference Number",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Customer Address Line 1",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Customer Address Line 1",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Customer Address Line 2",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Customer Address Line 2",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "City",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "City",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "State",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "State",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "PhoneNumber",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "PhoneNumber",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Device  Model",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Device  Model",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Device Make",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Device Make",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Device Serial Number",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Device Serial Number",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Purchase Price",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Purchase Price",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Plan Start Date",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Plan Start Date",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Deactivation Date",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Deactivation Date",
-											"type": "String",
-											"physicalType": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Ran Diagnostic Test?",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Ran Diagnostic Test?",
-											"type": "String",
-											"physicalType": "String"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "dev_csv_policy_cancel_fortegra_failed",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "delete-original-file-failed",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "copy-to-failed",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"enableLogging": false,
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							}
-						}
-					}
-				],
-				"concurrency": 1,
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "dev/fortegra"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-07-27T12:56:44Z"
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/dev-policy-register-sandcreekoutfitters')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -4104,6 +3191,920 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/dev-policy-reissue-fortegra_byod')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ingest-to-database",
+						"description": "data ingestion for Fortegra BYOD Cancellations report",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "csvfiles/policy_register/sandcreekoutfitters/EPP_InForceRegister_2022-03-01.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "stage.EPP_InForceRegister"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings",
+									"skipLineCount": 3
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"disableMetricsCollection": false,
+								"writeBehavior": "insert"
+							},
+							"enableStaging": false,
+							"validateDataConsistency": true,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorage1",
+										"type": "LinkedServiceReference"
+									},
+									"path": "csvfiles/dev/policy-cancel/00-logging"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Plan Number",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Plan_Number",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Plan Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Plan_Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer_Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Reference Number",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Reference_Number",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Address Line 1",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer_Address_Line_1",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Address Line 2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer_Address_Line_2",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "City",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "City",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "State",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "State",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "PhoneNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PhoneNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Device  Model",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Device_Model",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Device Make",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Device_Make",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Device Serial Number",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Device_Serial_Number",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Purchase Price",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Purchase_Price",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Plan Start Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Plan_Start_Date",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										}
+									},
+									{
+										"source": {
+											"name": "Deactivation Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Deactivation_Date",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										}
+									},
+									{
+										"source": {
+											"name": "Ran Diagnostic Test?",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Ran_Diagnostic_Test",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false,
+									"dateTimeFormat": "\"yyyy-MM-dd HH:mm:ss.fff\""
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dev_stage_BYODCancellations",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "call-logic-app-trigger",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "delete-original-file-processed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "LogicAppName",
+								"value": "la-3prs-dev-cancelpolicy-fortegra"
+							}
+						],
+						"typeProperties": {
+							"url": "https://prod-80.eastus.logic.azure.com:443/workflows/5c21c3afcc2448c5a638023694126a27/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JsDYoQkA5eY1Lzn0SuU8PyjCIfbN4w8VSsNZG31TUCs",
+							"method": "POST",
+							"headers": {},
+							"body": {}
+						}
+					},
+					{
+						"name": "copy-to-processed",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ingest-to-database",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Plan Number",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Plan Number",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Plan Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Plan Name",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer Name",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Reference Number",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Reference Number",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Address Line 1",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer Address Line 1",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Address Line 2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer Address Line 2",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "City",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "City",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "State",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "State",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PhoneNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PhoneNumber",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Device  Model",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Device  Model",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Device Make",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Device Make",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Device Serial Number",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Device Serial Number",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Purchase Price",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Purchase Price",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Plan Start Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Plan Start Date",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Deactivation Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Deactivation Date",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Ran Diagnostic Test?",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Ran Diagnostic Test?",
+											"type": "String",
+											"physicalType": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dev_csv_policy_cancel_fortegra_processed",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "delete-original-file-processed",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-to-processed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "copy-to-failed",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ingest-to-database",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Plan Number",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Plan Number",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Plan Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Plan Name",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer Name",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Reference Number",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Reference Number",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Address Line 1",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer Address Line 1",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Address Line 2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer Address Line 2",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "City",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "City",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "State",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "State",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PhoneNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PhoneNumber",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Device  Model",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Device  Model",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Device Make",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Device Make",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Device Serial Number",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Device Serial Number",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Purchase Price",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Purchase Price",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Plan Start Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Plan Start Date",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Deactivation Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Deactivation Date",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Ran Diagnostic Test?",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Ran Diagnostic Test?",
+											"type": "String",
+											"physicalType": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dev_csv_policy_cancel_fortegra_failed",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "delete-original-file-failed",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-to-failed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "dev_csv_policy_cancel_fortegrabyod",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"concurrency": 1,
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "dev/fortegra"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-27T12:56:44Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/dev-reports-enrollment-springboard-regionalonehealth')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -4790,6 +4791,731 @@
 				"annotations": []
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prod-policy-register-springboard-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ingest-to-database",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*InForceRegister*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"disableMetricsCollection": false,
+								"writeBehavior": "insert"
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorage1",
+										"type": "LinkedServiceReference"
+									},
+									"path": "csvfiles/prod/policy-register/00-logging"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ReportDate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ReportDate",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MasterAgreementID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MasterAgreementID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ProgramID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ProgramID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CertificateNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CertificateNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductSKU",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ProductSKU",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberFirst",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberFirst",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberLast",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberLast",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberMiddle",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberMiddle",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberPrefix",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberPrefix",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberSuffix",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberSuffix",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberEmail",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberEmail",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingAddress1",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingAddress1",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingAddress2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingAddress2",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingCity",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingCity",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingStateCode",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingStateCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingPostalCode",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingPostalCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CoveredDevicePhoneNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CoveredDevicePhoneNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "EnrollmentDate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EnrollmentDate",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "prod_stage_InForceRegister",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "call-logic-app-trigger",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "delete-original-file-processed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "LogicAppName",
+								"value": "la-3prs-prod-bdx-trigger-group"
+							}
+						],
+						"typeProperties": {
+							"url": "https://prod-67.eastus.logic.azure.com:443/workflows/bc215aa48b234c2db55d04b26f41f9bc/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=SLGsAgWisk_XftvTvMVfHMGB6xqxNyxYWhM-HTEd9CQ",
+							"method": "POST",
+							"headers": {},
+							"body": {}
+						}
+					},
+					{
+						"name": "copy-to-processed",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ingest-to-database",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*InForceRegister*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "prod_csv_policy_register_processed",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "copy-to-failed",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ingest-to-database",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*InForceRegister*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "prod_csv_policy_register_failed",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "delete-original-file-processed",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-to-processed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "delete-original-file-failed",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-to-failed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"concurrency": 1,
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "prod/springboardbenefits"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_springboard_regionalonehealth')]",
+				"[concat(variables('factoryId'), '/datasets/prod_stage_InForceRegister')]",
+				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_processed')]",
+				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_failed')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/prod-policy-reissue-fortegra_byod')]",
@@ -5706,731 +6432,6 @@
 				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_cancel_fortegrabyod')]",
 				"[concat(variables('factoryId'), '/datasets/prod_stage_BYODCancellations')]",
 				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_cancel_fortegra_processed')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod-policy-register-springboard-regionalonehealth')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ingest-to-database",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*InForceRegister*.csv",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"disableMetricsCollection": false,
-								"writeBehavior": "insert"
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Warning",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "AzureBlobStorage1",
-										"type": "LinkedServiceReference"
-									},
-									"path": "csvfiles/prod/policy-register/00-logging"
-								}
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "ReportDate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ReportDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MasterAgreementID",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MasterAgreementID",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ProgramID",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ProgramID",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "CertificateNumber",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "CertificateNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ProductSKU",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ProductSKU",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberFirst",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberFirst",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberLast",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberLast",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberMiddle",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberMiddle",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberPrefix",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberPrefix",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberSuffix",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberSuffix",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberEmail",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberEmail",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingAddress1",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingAddress1",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingAddress2",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingAddress2",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingCity",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingCity",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingStateCode",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingStateCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingPostalCode",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingPostalCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "CoveredDevicePhoneNumber",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "CoveredDevicePhoneNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "EnrollmentDate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "EnrollmentDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "prod_stage_InForceRegister",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "call-logic-app-trigger",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "delete-original-file-processed",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "LogicAppName",
-								"value": "la-3prs-prod-bdx-trigger-group"
-							}
-						],
-						"typeProperties": {
-							"url": "https://prod-67.eastus.logic.azure.com:443/workflows/bc215aa48b234c2db55d04b26f41f9bc/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=SLGsAgWisk_XftvTvMVfHMGB6xqxNyxYWhM-HTEd9CQ",
-							"method": "POST",
-							"headers": {},
-							"body": {}
-						}
-					},
-					{
-						"name": "copy-to-processed",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "ingest-to-database",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*InForceRegister*.csv",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "prod_csv_policy_register_processed",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "copy-to-failed",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "ingest-to-database",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*InForceRegister*.csv",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "prod_csv_policy_register_failed",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "delete-original-file-processed",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "copy-to-processed",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"enableLogging": false,
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							}
-						}
-					},
-					{
-						"name": "delete-original-file-failed",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "copy-to-failed",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"enableLogging": false,
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							}
-						}
-					}
-				],
-				"concurrency": 1,
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "prod/springboardbenefits"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_springboard_regionalonehealth')]",
-				"[concat(variables('factoryId'), '/datasets/prod_stage_InForceRegister')]",
-				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_processed')]",
-				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_failed')]"
 			]
 		},
 		{
