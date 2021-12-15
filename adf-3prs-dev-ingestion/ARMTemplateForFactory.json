@@ -1522,6 +1522,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
+									"wildcardFileName": "BYOD - Cancellations Report*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -1825,6 +1826,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
+									"wildcardFileName": "BYOD - Cancellations Report*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -2119,6 +2121,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
+									"wildcardFileName": "BYOD - Cancellations Report*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -6133,7 +6136,6 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "BYOD - Cancellations Report.csv",
 						"container": "dev"
 					},
 					"columnDelimiter": ",",
@@ -9650,7 +9652,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {

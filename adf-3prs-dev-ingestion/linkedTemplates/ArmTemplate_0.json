@@ -340,7 +340,6 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "BYOD - Cancellations Report.csv",
 						"container": "dev"
 					},
 					"columnDelimiter": ",",

@@ -3224,6 +3224,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
+									"wildcardFileName": "BYOD - Cancellations Report*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -3527,6 +3528,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
+									"wildcardFileName": "BYOD - Cancellations Report*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -3821,6 +3823,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
+									"wildcardFileName": "BYOD - Cancellations Report*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
