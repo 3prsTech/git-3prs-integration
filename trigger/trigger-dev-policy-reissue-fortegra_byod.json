@@ -2,7 +2,7 @@
 	"name": "trigger-dev-policy-reissue-fortegra_byod",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
