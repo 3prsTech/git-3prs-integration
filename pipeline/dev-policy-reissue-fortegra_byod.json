@@ -64,7 +64,7 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "Plan Number",
+									"name": "P5667196",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -76,7 +76,7 @@
 							},
 							{
 								"source": {
-									"name": "Plan Name",
+									"name": "ProtectCELL BYOD - All Tiers - Employee Benefits - Recurring - Monthly",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -88,7 +88,7 @@
 							},
 							{
 								"source": {
-									"name": "Customer Name",
+									"name": "Boba Fet",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -100,7 +100,7 @@
 							},
 							{
 								"source": {
-									"name": "Reference Number",
+									"name": "55016920211202160010",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -112,7 +112,7 @@
 							},
 							{
 								"source": {
-									"name": "Customer Address Line 1",
+									"name": "350 5th Ave",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -124,7 +124,7 @@
 							},
 							{
 								"source": {
-									"name": "Customer Address Line 2",
+									"name": "Prop_5",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -136,7 +136,7 @@
 							},
 							{
 								"source": {
-									"name": "City",
+									"name": "New York",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -148,7 +148,7 @@
 							},
 							{
 								"source": {
-									"name": "State",
+									"name": "NY",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -160,7 +160,7 @@
 							},
 							{
 								"source": {
-									"name": "PhoneNumber",
+									"name": "888-123-3210",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -172,7 +172,7 @@
 							},
 							{
 								"source": {
-									"name": "Device  Model",
+									"name": "GENERIC - CUSTOMER PROVIDED HANDSET (CUSTPRM)",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -184,7 +184,7 @@
 							},
 							{
 								"source": {
-									"name": "Device Make",
+									"name": "GENERIC",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -196,7 +196,7 @@
 							},
 							{
 								"source": {
-									"name": "Device Serial Number",
+									"name": "9999999999999999",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -208,7 +208,7 @@
 							},
 							{
 								"source": {
-									"name": "Purchase Price",
+									"name": "$2.08",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -220,34 +220,29 @@
 							},
 							{
 								"source": {
-									"name": "Plan Start Date",
+									"name": "12/2/2021",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Plan_Start_Date",
-									"type": "DateTime",
-									"physicalType": "datetime2"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "Deactivation Date",
+									"name": "12/6/2021",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Deactivation_Date",
-									"type": "DateTime",
-									"physicalType": "datetime2"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
-								"source": {
-									"name": "Ran Diagnostic Test?",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "Ran_Diagnostic_Test",
 									"type": "String",
