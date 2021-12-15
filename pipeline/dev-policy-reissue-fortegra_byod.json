@@ -64,8 +64,9 @@
 						"mappings": [
 							{
 								"source": {
+									"name": "Plan_Number",
 									"type": "String",
-									"ordinal": 1
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Plan_Number",
@@ -75,8 +76,9 @@
 							},
 							{
 								"source": {
+									"name": "Plan_Name",
 									"type": "String",
-									"ordinal": 2
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Plan_Name",
@@ -86,8 +88,9 @@
 							},
 							{
 								"source": {
+									"name": "Customer_Name",
 									"type": "String",
-									"ordinal": 3
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Customer_Name",
@@ -97,8 +100,9 @@
 							},
 							{
 								"source": {
+									"name": "ReferenceNumber1",
 									"type": "String",
-									"ordinal": 4
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Reference_Number",
@@ -108,8 +112,9 @@
 							},
 							{
 								"source": {
+									"name": "Address_1",
 									"type": "String",
-									"ordinal": 5
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Customer_Address_Line_1",
@@ -119,8 +124,9 @@
 							},
 							{
 								"source": {
+									"name": "Address_2",
 									"type": "String",
-									"ordinal": 6
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Customer_Address_Line_2",
@@ -130,8 +136,9 @@
 							},
 							{
 								"source": {
+									"name": "City",
 									"type": "String",
-									"ordinal": 7
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "City",
@@ -141,8 +148,9 @@
 							},
 							{
 								"source": {
+									"name": "State",
 									"type": "String",
-									"ordinal": 8
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "State",
@@ -152,8 +160,9 @@
 							},
 							{
 								"source": {
+									"name": "Contact_Number",
 									"type": "String",
-									"ordinal": 9
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "PhoneNumber",
@@ -163,8 +172,9 @@
 							},
 							{
 								"source": {
+									"name": "Device_Model",
 									"type": "String",
-									"ordinal": 10
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Device_Model",
@@ -174,8 +184,9 @@
 							},
 							{
 								"source": {
+									"name": "Device_Make",
 									"type": "String",
-									"ordinal": 11
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Device_Make",
@@ -185,8 +196,9 @@
 							},
 							{
 								"source": {
+									"name": "Device_SN",
 									"type": "String",
-									"ordinal": 12
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Device_Serial_Number",
@@ -196,8 +208,9 @@
 							},
 							{
 								"source": {
+									"name": "Purchase_Price",
 									"type": "String",
-									"ordinal": 13
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Purchase_Price",
@@ -207,8 +220,9 @@
 							},
 							{
 								"source": {
+									"name": "Plan_Start_Date",
 									"type": "String",
-									"ordinal": 14
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Plan_Start_Date",
@@ -218,8 +232,9 @@
 							},
 							{
 								"source": {
+									"name": "Cancel_Date",
 									"type": "String",
-									"ordinal": 15
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Deactivation_Date",
@@ -229,7 +244,9 @@
 							},
 							{
 								"source": {
-									"ordinal": 16
+									"name": "LastDiagnosticTestDate",
+									"type": "String",
+									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Ran_Diagnostic_Test",
