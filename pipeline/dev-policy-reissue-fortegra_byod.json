@@ -35,7 +35,7 @@
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings",
-							"skipLineCount": 3
+							"skipLineCount": 2
 						}
 					},
 					"sink": {
@@ -64,9 +64,8 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "P5667196",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 1
 								},
 								"sink": {
 									"name": "Plan_Number",
@@ -76,9 +75,8 @@
 							},
 							{
 								"source": {
-									"name": "ProtectCELL BYOD - All Tiers - Employee Benefits - Recurring - Monthly",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 2
 								},
 								"sink": {
 									"name": "Plan_Name",
@@ -88,9 +86,8 @@
 							},
 							{
 								"source": {
-									"name": "Boba Fet",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 3
 								},
 								"sink": {
 									"name": "Customer_Name",
@@ -100,9 +97,8 @@
 							},
 							{
 								"source": {
-									"name": "55016920211202160010",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 4
 								},
 								"sink": {
 									"name": "Reference_Number",
@@ -112,9 +108,8 @@
 							},
 							{
 								"source": {
-									"name": "350 5th Ave",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 5
 								},
 								"sink": {
 									"name": "Customer_Address_Line_1",
@@ -124,9 +119,8 @@
 							},
 							{
 								"source": {
-									"name": "Prop_5",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 6
 								},
 								"sink": {
 									"name": "Customer_Address_Line_2",
@@ -136,9 +130,8 @@
 							},
 							{
 								"source": {
-									"name": "New York",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 7
 								},
 								"sink": {
 									"name": "City",
@@ -148,9 +141,8 @@
 							},
 							{
 								"source": {
-									"name": "NY",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 8
 								},
 								"sink": {
 									"name": "State",
@@ -160,9 +152,8 @@
 							},
 							{
 								"source": {
-									"name": "888-123-3210",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 9
 								},
 								"sink": {
 									"name": "PhoneNumber",
@@ -172,9 +163,8 @@
 							},
 							{
 								"source": {
-									"name": "GENERIC - CUSTOMER PROVIDED HANDSET (CUSTPRM)",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 10
 								},
 								"sink": {
 									"name": "Device_Model",
@@ -184,9 +174,8 @@
 							},
 							{
 								"source": {
-									"name": "GENERIC",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 11
 								},
 								"sink": {
 									"name": "Device_Make",
@@ -196,9 +185,8 @@
 							},
 							{
 								"source": {
-									"name": "9999999999999999",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 12
 								},
 								"sink": {
 									"name": "Device_Serial_Number",
@@ -208,9 +196,8 @@
 							},
 							{
 								"source": {
-									"name": "$2.08",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 13
 								},
 								"sink": {
 									"name": "Purchase_Price",
@@ -220,9 +207,8 @@
 							},
 							{
 								"source": {
-									"name": "12/2/2021",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 14
 								},
 								"sink": {
 									"name": "Plan_Start_Date",
@@ -232,9 +218,8 @@
 							},
 							{
 								"source": {
-									"name": "12/6/2021",
 									"type": "String",
-									"physicalType": "String"
+									"ordinal": 15
 								},
 								"sink": {
 									"name": "Deactivation_Date",
@@ -243,6 +228,9 @@
 								}
 							},
 							{
+								"source": {
+									"ordinal": 16
+								},
 								"sink": {
 									"name": "Ran_Diagnostic_Test",
 									"type": "String",
