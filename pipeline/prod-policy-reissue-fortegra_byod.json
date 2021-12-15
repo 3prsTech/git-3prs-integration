@@ -64,7 +64,7 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "Plan Number",
+									"name": "Plan_Number",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -76,7 +76,7 @@
 							},
 							{
 								"source": {
-									"name": "Plan Name",
+									"name": "Plan_Name",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -88,7 +88,7 @@
 							},
 							{
 								"source": {
-									"name": "Customer Name",
+									"name": "Customer_Name",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -100,7 +100,7 @@
 							},
 							{
 								"source": {
-									"name": "Reference Number",
+									"name": "ReferenceNumber1",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -112,7 +112,7 @@
 							},
 							{
 								"source": {
-									"name": "Customer Address Line 1",
+									"name": "Address_1",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -124,7 +124,7 @@
 							},
 							{
 								"source": {
-									"name": "Customer Address Line 2",
+									"name": "Address_2",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -160,7 +160,7 @@
 							},
 							{
 								"source": {
-									"name": "PhoneNumber",
+									"name": "Contact_Number",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -172,7 +172,7 @@
 							},
 							{
 								"source": {
-									"name": "Device  Model",
+									"name": "Device_Model",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -184,7 +184,7 @@
 							},
 							{
 								"source": {
-									"name": "Device Make",
+									"name": "Device_Make",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -196,7 +196,7 @@
 							},
 							{
 								"source": {
-									"name": "Device Serial Number",
+									"name": "Device_SN",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -208,7 +208,7 @@
 							},
 							{
 								"source": {
-									"name": "Purchase Price",
+									"name": "Purchase_Price",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -220,31 +220,31 @@
 							},
 							{
 								"source": {
-									"name": "Plan Start Date",
+									"name": "Plan_Start_Date",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Plan_Start_Date",
-									"type": "DateTime",
-									"physicalType": "datetime2"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "Deactivation Date",
+									"name": "Cancel_Date",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
 									"name": "Deactivation_Date",
-									"type": "DateTime",
-									"physicalType": "datetime2"
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "Ran Diagnostic Test?",
+									"name": "LastDiagnosticTestDate",
 									"type": "String",
 									"physicalType": "String"
 								},
