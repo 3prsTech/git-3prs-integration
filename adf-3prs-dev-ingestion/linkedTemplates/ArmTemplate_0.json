@@ -141,7 +141,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": {
-							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
+							"value": "@concat('byod-cancellations-report-',formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
 							"type": "Expression"
 						},
 						"folderPath": "dev/policy-cancel/03-failed/",
@@ -241,7 +241,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": {
-							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
+							"value": "@concat('byod-cancellations-report-',formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
 							"type": "Expression"
 						},
 						"folderPath": "dev/policy-cancel/02-processed/",
@@ -1857,7 +1857,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": {
-							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
+							"value": "@concat('byod-cancellations-report-',formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
 							"type": "Expression"
 						},
 						"folderPath": "prod/policy-cancel/03-failed/",

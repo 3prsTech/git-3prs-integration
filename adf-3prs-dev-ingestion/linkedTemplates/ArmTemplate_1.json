@@ -30,7 +30,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": {
-							"value": "concat('byod-cancellations-report-',@formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
+							"value": "@concat('byod-cancellations-report-',formatDateTime(utcnow(),'yyyyMMddhhmmss'),'.csv')",
 							"type": "Expression"
 						},
 						"folderPath": "prod/policy-cancel/02-processed/",
@@ -3532,7 +3532,8 @@
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
+									"type": "DelimitedTextReadSettings",
+									"skipLineCount": 2
 								}
 							},
 							"sink": {
@@ -3552,72 +3553,72 @@
 								"mappings": [
 									{
 										"source": {
-											"name": "Plan Number",
+											"name": "Plan_Number",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Plan Number",
+											"name": "Plan_Number",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Plan Name",
+											"name": "Plan_Name",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Plan Name",
+											"name": "Plan_Name",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Customer Name",
+											"name": "Customer_Name",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Customer Name",
+											"name": "Customer_Name",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Reference Number",
+											"name": "ReferenceNumber1",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Reference Number",
+											"name": "ReferenceNumber1",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Customer Address Line 1",
+											"name": "Address_1",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Customer Address Line 1",
+											"name": "Address_1",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Customer Address Line 2",
+											"name": "Address_2",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Customer Address Line 2",
+											"name": "Address_2",
 											"type": "String",
 											"physicalType": "String"
 										}
@@ -3648,96 +3649,96 @@
 									},
 									{
 										"source": {
-											"name": "PhoneNumber",
+											"name": "Contact_Number",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "PhoneNumber",
+											"name": "Contact_Number",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Device  Model",
+											"name": "Device_Model",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Device  Model",
+											"name": "Device_Model",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Device Make",
+											"name": "Device_Make",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Device Make",
+											"name": "Device_Make",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Device Serial Number",
+											"name": "Device_SN",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Device Serial Number",
+											"name": "Device_SN",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Purchase Price",
+											"name": "Purchase_Price",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Purchase Price",
+											"name": "Purchase_Price",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Plan Start Date",
+											"name": "Plan_Start_Date",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Plan Start Date",
+											"name": "Plan_Start_Date",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Deactivation Date",
+											"name": "Cancel_Date",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Deactivation Date",
+											"name": "Cancel_Date",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Ran Diagnostic Test?",
+											"name": "LastDiagnosticTestDate",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Ran Diagnostic Test?",
+											"name": "LastDiagnosticTestDate",
 											"type": "String",
 											"physicalType": "String"
 										}
@@ -3827,7 +3828,8 @@
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
+									"type": "DelimitedTextReadSettings",
+									"skipLineCount": 2
 								}
 							},
 							"sink": {
@@ -3847,72 +3849,72 @@
 								"mappings": [
 									{
 										"source": {
-											"name": "Plan Number",
+											"name": "Plan_Number",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Plan Number",
+											"name": "Plan_Number",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Plan Name",
+											"name": "Plan_Name",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Plan Name",
+											"name": "Plan_Name",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Customer Name",
+											"name": "Customer_Name",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Customer Name",
+											"name": "Customer_Name",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Reference Number",
+											"name": "ReferenceNumber1",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Reference Number",
+											"name": "ReferenceNumber1",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Customer Address Line 1",
+											"name": "Address_1",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Customer Address Line 1",
+											"name": "Address_1",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Customer Address Line 2",
+											"name": "Address_2",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Customer Address Line 2",
+											"name": "Address_2",
 											"type": "String",
 											"physicalType": "String"
 										}
@@ -3943,96 +3945,96 @@
 									},
 									{
 										"source": {
-											"name": "PhoneNumber",
+											"name": "Contact_Number",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "PhoneNumber",
+											"name": "Contact_Number",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Device  Model",
+											"name": "Device_Model",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Device  Model",
+											"name": "Device_Model",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Device Make",
+											"name": "Device_Make",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Device Make",
+											"name": "Device_Make",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Device Serial Number",
+											"name": "Device_SN",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Device Serial Number",
+											"name": "Device_SN",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Purchase Price",
+											"name": "Purchase_Price",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Purchase Price",
+											"name": "Purchase_Price",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Plan Start Date",
+											"name": "Plan_Start_Date",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Plan Start Date",
+											"name": "Plan_Start_Date",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Deactivation Date",
+											"name": "Cancel_Date",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Deactivation Date",
+											"name": "Cancel_Date",
 											"type": "String",
 											"physicalType": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "Ran Diagnostic Test?",
+											"name": "LastDiagnosticTestDate",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Ran Diagnostic Test?",
+											"name": "LastDiagnosticTestDate",
 											"type": "String",
 											"physicalType": "String"
 										}
