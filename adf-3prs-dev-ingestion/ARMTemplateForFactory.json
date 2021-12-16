@@ -1735,7 +1735,7 @@
 									},
 									{
 										"source": {
-											"name": "LastDiagnosticTestDate",
+											"name": "RanDiagnosticTest",
 											"type": "String",
 											"physicalType": "String"
 										},
@@ -1829,8 +1829,7 @@
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
-									"type": "DelimitedTextReadSettings",
-									"skipLineCount": 3
+									"type": "DelimitedTextReadSettings"
 								}
 							},
 							"sink": {
@@ -2030,12 +2029,12 @@
 									},
 									{
 										"source": {
-											"name": "LastDiagnosticTestDate",
+											"name": "RanDiagnosticTest",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "LastDiagnosticTestDate",
+											"name": "RanDiagnosticTest",
 											"type": "String",
 											"physicalType": "String"
 										}
@@ -2125,8 +2124,7 @@
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
-									"type": "DelimitedTextReadSettings",
-									"skipLineCount": 3
+									"type": "DelimitedTextReadSettings"
 								}
 							},
 							"sink": {
@@ -2326,12 +2324,12 @@
 									},
 									{
 										"source": {
-											"name": "LastDiagnosticTestDate",
+											"name": "RanDiagnosticTest",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "LastDiagnosticTestDate",
+											"name": "RanDiagnosticTest",
 											"type": "String",
 											"physicalType": "String"
 										}
@@ -3870,8 +3868,7 @@
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
-									"type": "DelimitedTextReadSettings",
-									"skipLineCount": 3
+									"type": "DelimitedTextReadSettings"
 								}
 							},
 							"sink": {
@@ -4080,7 +4077,7 @@
 									},
 									{
 										"source": {
-											"name": "LastDiagnosticTestDate",
+											"name": "RanDiagnosticTest",
 											"type": "String",
 											"physicalType": "String"
 										},
@@ -4174,8 +4171,7 @@
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
-									"type": "DelimitedTextReadSettings",
-									"skipLineCount": 3
+									"type": "DelimitedTextReadSettings"
 								}
 							},
 							"sink": {
@@ -4375,12 +4371,12 @@
 									},
 									{
 										"source": {
-											"name": "LastDiagnosticTestDate",
+											"name": "RanDiagnosticTest",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "LastDiagnosticTestDate",
+											"name": "RanDiagnosticTest",
 											"type": "String",
 											"physicalType": "String"
 										}
@@ -4470,8 +4466,7 @@
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
-									"type": "DelimitedTextReadSettings",
-									"skipLineCount": 3
+									"type": "DelimitedTextReadSettings"
 								}
 							},
 							"sink": {
@@ -4671,12 +4666,12 @@
 									},
 									{
 										"source": {
-											"name": "LastDiagnosticTestDate",
+											"name": "RanDiagnosticTest",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "LastDiagnosticTestDate",
+											"name": "RanDiagnosticTest",
 											"type": "String",
 											"physicalType": "String"
 										}
