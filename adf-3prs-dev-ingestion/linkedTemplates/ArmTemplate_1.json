@@ -3227,8 +3227,7 @@
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
-									"type": "DelimitedTextReadSettings",
-									"skipLineCount": 3
+									"type": "DelimitedTextReadSettings"
 								}
 							},
 							"sink": {
