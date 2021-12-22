@@ -296,7 +296,7 @@
 				"userProperties": [
 					{
 						"name": "LogicAppName",
-						"value": "la-3prs-prod-cancelpolicy-fortegra"
+						"value": "la-3prs-prod-reissue-fortegra"
 					}
 				],
 				"typeProperties": {
