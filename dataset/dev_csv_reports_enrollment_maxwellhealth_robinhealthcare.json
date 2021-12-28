@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "csv_files/dev/springboardbenefits"
+			"name": "csv_files/dev/maxwellhealth"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
