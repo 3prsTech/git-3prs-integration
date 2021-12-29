@@ -468,35 +468,6 @@
 				]
 			},
 			{
-				"name": "call-logic-app-trigger",
-				"type": "WebActivity",
-				"dependsOn": [
-					{
-						"activity": "delete-original-file-processed",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [
-					{
-						"name": "LogicAppName",
-						"value": "la-3prs-dev-bdx-trigger-group"
-					}
-				],
-				"typeProperties": {
-					"url": "https://prod-93.eastus.logic.azure.com:443/workflows/edfa52ef63474ecc82b15114c3cb526c/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=DXYENllcJxT8Ss_L97FCPPuJr8nJA2lC0bWL8vtZDDw",
-					"method": "POST"
-				}
-			},
-			{
 				"name": "copy-to-processed",
 				"type": "Copy",
 				"dependsOn": [
