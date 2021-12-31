@@ -29,6 +29,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
+						"disableMetricsCollection": false,
 						"writeBehavior": "insert"
 					},
 					"enableStaging": false,
@@ -456,13 +457,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
+						"referenceName": "prod_csv_policy_register_maxwellhealth_robinhealthcare",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_stage_InForceRegister",
+						"referenceName": "prod_stage_InForceRegister",
 						"type": "DatasetReference"
 					}
 				]
@@ -522,13 +523,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
+						"referenceName": "prod_csv_policy_register_maxwellhealth_robinhealthcare",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_policy_register_processed",
+						"referenceName": "prod_csv_policy_register_processed",
 						"type": "DatasetReference"
 					}
 				]
@@ -588,13 +589,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
+						"referenceName": "prod_csv_policy_register_maxwellhealth_robinhealthcare",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "dev_csv_policy_register_failed",
+						"referenceName": "prod_csv_policy_register_failed",
 						"type": "DatasetReference"
 					}
 				]
@@ -620,7 +621,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
+						"referenceName": "prod_csv_policy_register_maxwellhealth_robinhealthcare",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
@@ -652,7 +653,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
+						"referenceName": "prod_csv_policy_register_maxwellhealth_robinhealthcare",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
