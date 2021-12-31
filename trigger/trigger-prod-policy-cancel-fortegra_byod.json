@@ -2,7 +2,7 @@
 	"name": "trigger-prod-policy-cancel-fortegra_byod",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
