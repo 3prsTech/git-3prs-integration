@@ -2,7 +2,7 @@
 	"name": "trigger-prod-policy-register-springboard-regionalonehealth",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
