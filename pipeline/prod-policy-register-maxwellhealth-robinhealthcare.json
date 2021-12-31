@@ -1,5 +1,5 @@
 {
-	"name": "prod-policy-register-springboard-regionalonehealth",
+	"name": "prod-policy-register-maxwellhealth-robinhealthcare",
 	"properties": {
 		"activities": [
 			{
@@ -29,7 +29,6 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"disableMetricsCollection": false,
 						"writeBehavior": "insert"
 					},
 					"enableStaging": false,
@@ -45,7 +44,7 @@
 								"referenceName": "AzureBlobStorage1",
 								"type": "LinkedServiceReference"
 							},
-							"path": "csvfiles/prod/policy-register/00-logging"
+							"path": "csvfiles/dev/policy-register/00-logging"
 						}
 					},
 					"translator": {
@@ -457,13 +456,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
+						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "prod_stage_InForceRegister",
+						"referenceName": "dev_stage_InForceRegister",
 						"type": "DatasetReference"
 					}
 				]
@@ -523,13 +522,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
+						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "prod_csv_policy_register_processed",
+						"referenceName": "dev_csv_policy_register_processed",
 						"type": "DatasetReference"
 					}
 				]
@@ -589,13 +588,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
+						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "prod_csv_policy_register_failed",
+						"referenceName": "dev_csv_policy_register_failed",
 						"type": "DatasetReference"
 					}
 				]
@@ -621,7 +620,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
+						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
@@ -653,7 +652,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "prod_csv_policy_register_springboard_regionalonehealth",
+						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
@@ -667,7 +666,7 @@
 		],
 		"concurrency": 1,
 		"folder": {
-			"name": "prod/springboardbenefits"
+			"name": "prod/maxwellhealth"
 		},
 		"annotations": []
 	}
