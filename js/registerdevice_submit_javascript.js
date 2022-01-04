@@ -16,7 +16,7 @@ window.addEventListener( "load", function () {
     } );
 
     // Set up our request
-    XHR.open( "POST", "https://prod-04.eastus.logic.azure.com:443/workflows/09f6e30fe23940bc9dc1ed5f522ad65d/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=91-DfQcrTNnk6lGtcGq6fGd_0KbPqH6tU3PhY0BGLk4" );
+    XHR.open( "POST", "https://prod-48.eastus.logic.azure.com:443/workflows/20a7c042234047d299648fb786c24c2f/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=pUhTG-jdWHefWk_6BCvFLGBiI-6KRQfVh-OQfw0crx4" );
 
     // The data sent is what the user provided in the form
     XHR.send( FD );
