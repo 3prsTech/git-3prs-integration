@@ -108,9 +108,6 @@
 					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
-					},
-					"trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
-						"value": "[parameters('trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]"
 					}
 				}
 			},
@@ -158,6 +155,9 @@
 					},
 					"trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope')]"
+					},
+					"trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]"
 					},
 					"trigger-prod-policy-register-springboard-regionalonehealth_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-prod-policy-register-springboard-regionalonehealth_properties_typeProperties_scope')]"

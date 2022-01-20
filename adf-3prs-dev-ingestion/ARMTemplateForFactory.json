@@ -12580,7 +12580,15 @@
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Stopped",
-				"pipelines": [],
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "prod-policy-register-maxwellhealth-robinhealthcare",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
 					"blobPathBeginsWith": "/csvfiles/blobs/prod/policy-register/maxwellhealth/RobinHealthcare/",
@@ -12591,7 +12599,9 @@
 					]
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/prod-policy-register-maxwellhealth-robinhealthcare')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-register-springboard-regionalonehealth')]",
@@ -12727,7 +12737,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -12757,7 +12767,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
