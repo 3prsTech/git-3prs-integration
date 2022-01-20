@@ -2,7 +2,7 @@
 	"name": "trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
