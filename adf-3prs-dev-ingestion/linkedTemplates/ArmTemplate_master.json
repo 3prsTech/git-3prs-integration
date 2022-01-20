@@ -59,6 +59,14 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
+		"trigger-dev-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -100,6 +108,9 @@
 					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]"
 					}
 				}
 			},
@@ -148,9 +159,6 @@
 					"trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope')]"
 					},
-					"trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
-						"value": "[parameters('trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]"
-					},
 					"trigger-prod-policy-register-springboard-regionalonehealth_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-prod-policy-register-springboard-regionalonehealth_properties_typeProperties_scope')]"
 					},
@@ -162,6 +170,12 @@
 					},
 					"trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope')]"
+					},
+					"trigger-dev-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-dev-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]"
+					},
+					"trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]"
 					}
 				}
 			},
