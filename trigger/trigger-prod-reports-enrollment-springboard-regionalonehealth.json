@@ -6,12 +6,6 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "dev-reports-enrollment-springboard-regionalonehealth",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "prod-reports-enrollment-springboard-regionalonehealth",
 					"type": "PipelineReference"
 				}
