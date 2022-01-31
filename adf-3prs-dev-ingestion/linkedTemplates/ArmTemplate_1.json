@@ -2676,8 +2676,8 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"disableMetricsCollection": false,
-								"writeBehavior": "insert"
+								"writeBehavior": "insert",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"validateDataConsistency": true,
@@ -3885,8 +3885,8 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"disableMetricsCollection": false,
-								"writeBehavior": "insert"
+								"writeBehavior": "insert",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"validateDataConsistency": true,

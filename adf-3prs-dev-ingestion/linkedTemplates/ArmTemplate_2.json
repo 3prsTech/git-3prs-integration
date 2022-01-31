@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-3prs-dev-ingestion"
 		},
+		"trigger-dev-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
 		"trigger-dev-policy-register-sandcreekoutfitters_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
@@ -18,6 +22,10 @@
 		"trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
+		},
+		"trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
 		"trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
 			"type": "string",
@@ -36,14 +44,6 @@
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
 		"trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
-		},
-		"trigger-dev-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
-		},
-		"trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		}
@@ -306,186 +306,6 @@
 										},
 										"sink": {
 											"name": "CoveredDevicePhoneNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Age",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
@@ -1281,8 +1101,8 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"disableMetricsCollection": false,
-								"writeBehavior": "insert"
+								"writeBehavior": "insert",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"validateDataConsistency": false,
@@ -1790,8 +1610,8 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"disableMetricsCollection": false,
-								"writeBehavior": "insert"
+								"writeBehavior": "insert",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"validateDataConsistency": false,
@@ -2489,8 +2309,8 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"disableMetricsCollection": false,
-								"writeBehavior": "insert"
+								"writeBehavior": "insert",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"validateDataConsistency": true,
@@ -3395,8 +3215,8 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"disableMetricsCollection": false,
-								"writeBehavior": "insert"
+								"writeBehavior": "insert",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"validateDataConsistency": false,
@@ -3617,186 +3437,6 @@
 										},
 										"sink": {
 											"name": "CoveredDevicePhoneNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Age",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
@@ -4084,8 +3724,8 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"disableMetricsCollection": false,
-								"writeBehavior": "insert"
+								"writeBehavior": "insert",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"validateDataConsistency": false,
@@ -5212,6 +4852,34 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-maxwellhealth-robinhealthcare')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dev-policy-register-maxwellhealth-robinhealthcare",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/maxwellhealth/RobinHealthcare/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger-dev-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-sandcreekoutfitters')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -5294,6 +4962,36 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dev-reports-enrollment-maxwellhealth-robinhealthcare",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/reports-enrollment/maxwellhealth/RobinHealthcare/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/dev-reports-enrollment-maxwellhealth-robinhealthcare')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-register-maxwellhealth-robinhealthcare')]",
@@ -5451,64 +5149,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/dev-reports-enrollment-springboard-regionalonehealth')]",
 				"[concat(variables('factoryId'), '/pipelines/prod-reports-enrollment-springboard-regionalonehealth')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-maxwellhealth-robinhealthcare')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "dev-policy-register-maxwellhealth-robinhealthcare",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/maxwellhealth/RobinHealthcare/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger-dev-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "dev-reports-enrollment-maxwellhealth-robinhealthcare",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/dev/reports-enrollment/maxwellhealth/RobinHealthcare/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/dev-reports-enrollment-maxwellhealth-robinhealthcare')]"
 			]
 		}
 	]
