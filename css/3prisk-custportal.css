@@ -1,5 +1,12 @@
 /* Below line is used for online Google font */
-@import url(http://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+.header {
+  padding: 60px;
+  text-align: center;
+  background: #eaf6f5;
+  color: white;
+  font-size: 30px;
+}
 h2{
 background-color: #FEFFED;
 padding: 30px 35px;
