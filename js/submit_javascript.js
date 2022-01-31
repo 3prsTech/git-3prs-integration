@@ -25,10 +25,17 @@ window.addEventListener( "load", function () {
     XHR.send( FD );
   }
 
+  function recaptcha_callback() {
+        const submitButton = document.getElementById("submitBtn");
+        submitButton.disabled = false;
+      }
+  
   // Access the form element...
   const form = document.getElementById( "form_id" );
   const submitBtn = document.getElementById( "submitBtn" ); 
 
+  submitBtn.disabled = true;
+  
   // ...and take over its submit event.
   form.addEventListener( "submit", function ( event ) {
     event.preventDefault();
