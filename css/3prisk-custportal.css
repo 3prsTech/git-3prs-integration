@@ -1,5 +1,5 @@
 /* Below line is used for online Google font */
-@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=poppins);
 .header {
   padding: 60px;
   text-align: center;
@@ -8,7 +8,7 @@
   font-size: 30px;
 }
 h2{
-background-color: #FEFFED;
+background-color: #173633;
 padding: 30px 35px;
 margin: -10px -50px;
 text-align:center;
@@ -24,14 +24,14 @@ div.container{
 width: 900px;
 height: 610px;
 margin:35px auto;
-font-family: 'Raleway', sans-serif;
+font-family: 'poppins', sans-serif;
 }
 div.main{
 width: 300px;
 padding: 10px 50px 10px;
 border: 2px solid gray;
 border-radius: 10px;
-font-family: raleway;
+font-family: poppins;
 float:left;
 margin-top:60px;
 }
