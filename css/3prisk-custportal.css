@@ -1,5 +1,5 @@
 /* Below line is used for online Google font */
-@import url(https://fonts.googleapis.com/css?family=poppins);
+@import url(https://fonts.googleapis.com/css2?family=Poppins);
 .header {
   padding: 60px;
   text-align: left;
@@ -25,14 +25,14 @@ div.container{
 width: 900px;
 height: 610px;
 margin:35px auto;
-font-family: 'poppins', sans-serif;
+font-family: 'Poppins', sans-serif;
 }
 div.main{
 width: 300px;
 padding: 10px 50px 10px;
 border: 2px solid gray;
 border-radius: 10px;
-font-family: poppins;
+font-family: Poppins;
 float:left;
 margin-top:60px;
 }
