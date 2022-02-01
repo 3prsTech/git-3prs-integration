@@ -25,7 +25,8 @@ div.container{
 width: 900px;
 height: 610px;
 margin:35px auto;
-font-family: 'Poppins', sans-serif;
+text-align:center;
+  font-family: 'Poppins', sans-serif;
 }
 div.main{
 width: 300px;
@@ -33,7 +34,7 @@ padding: 10px 50px 10px;
 border: 2px solid gray;
 border-radius: 10px;
 font-family: Poppins;
-float:left;
+float:center;
 margin-top:60px;
 }
 input[type=text]{
