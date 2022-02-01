@@ -25,7 +25,8 @@ div.container{
 width: 900px;
 height: 610px;
 margin:35px auto;
-text-align:center;
+float:center;
+  text-align:center;
   font-family: 'Poppins', sans-serif;
 }
 div.main{
