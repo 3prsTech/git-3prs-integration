@@ -35,27 +35,28 @@
             <h4 class="my-0 font-weight-normal" >Register Existing Device</h4>
           </div>
           <div class="card-body">
-			<form action="#" method="post" name="form_name" id="form_id" class="form_class" >
+			<form action="#" method="post" name="form_name" id="form_id" >
+			 <div class="form-group">
+				<label for="phonenumber">Device Phone Number</label>
+				<input type="text" name="phonenumber" id="phonenumber" class="form-control" aria-describedby="phoneHelp" placeholder="Phone Number">
+				<small id="phoneHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+			</div>
+			<div class="form-group">
+				<label for="phonenumber">Email</label>
+				<input type="email" name="email" id="email" class="form-control" aria-describedby="emailHelp" placeholder="Valid Email">
+				<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+			</div>
+			<div class="form-group">
+				<label for="phonenumber">Policy Number</label>
+				<input type="text" name="policynumber" id="policynumber" class="form-control" placeholder="Valid policy number">
+			</div> 			
 			
-			<div class="row">
-			  <div class="col-6 "><p>Device Phone Number :</p></div>
-			  <div class="col-4"><input type="text" name="phonenumber" id="phonenumber" placeholder="Phone Number" /></div>
-			</div>            
-			<div class="row">
-			  <div class="col-6"><p>Email :</p></div>
-			  <div class="col-4"><input type="text" name="email" id="email" placeholder="Valid Email" /></div>
-			</div>
-			<div class="row">
-			  <div class="col-6"><p>Policy Number :</p></div> 
-			  <div class="col-4"><input type="text" name="policynumber" id="policynumber" placeholder="Valid policy number" /></div>
-			</div>
- 			<div class="row">
-			   <div class="col-4"></div> 
-			  <div class="col-6" ><div class="g-recaptcha" data-sitekey="6LevekUeAAAAALVnaXXBCuSSbNWr2iZlS8EKNRCy" data-callback="recaptcha_callback"></div></div>
+ 			<div class="form-group">
+			  <div class="g-recaptcha" data-sitekey="6LevekUeAAAAALVnaXXBCuSSbNWr2iZlS8EKNRCy" data-callback="recaptcha_callback"></div>
 			</div>
 			<div class="row"><div class="col-12"><p></p></div></div>
 			<div class="row">
-			  <div class="col-12"><input type="submit" id="submitBtn" value="submit"></div>
+			  <div class="col-12"><input type="submit" class="btn btn-primary" id="submitBtn" value="submit"></div>
 			</form>
 			</div>
 			
