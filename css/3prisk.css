@@ -1,0 +1,45 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins);
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.container {
+  max-width: 560px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.pricing-header {
+  max-width: 700px;
+}
+
+.card-deck .card {
+  min-width: 220px;
+}
+
+.card-header {
+  color:#FFFFFF;
+  background-color: #173633;
+  max-width: 600px;
+}
+
+.card-body {
+	align-items: center;
+	max-width: 600px;
+}
+
+.card {
+	max-width: 600px;
+}
+.bg-lightgreen {
+  background-color: #eaf6f5 !important;
+}
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }

@@ -1,7 +1,15 @@
 /* Below line is used for online Google font */
-@import url(http://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css2?family=Poppins);
+.header {
+  padding: 60px;
+  text-align: left;
+  background: #eaf6f5;
+  color: white;
+  font-size: 30px;
+}
 h2{
-background-color: #FEFFED;
+background-color: #173633;
+color: white;
 padding: 30px 35px;
 margin: -10px -50px;
 text-align:center;
@@ -17,14 +25,16 @@ div.container{
 width: 900px;
 height: 610px;
 margin:35px auto;
-font-family: 'Raleway', sans-serif;
+float:center;
+  text-align:center;
+  font-family: 'Poppins', sans-serif;
 }
 div.main{
 width: 300px;
 padding: 10px 50px 10px;
 border: 2px solid gray;
 border-radius: 10px;
-font-family: raleway;
+font-family: Poppins;
 float:left;
 margin-top:60px;
 }
@@ -44,6 +54,7 @@ color: #464646;
 text-shadow: 0 1px 0 #fff;
 font-size: 14px;
 font-weight: bold;
+ text-align:left;
 }
 #btn_id,#btn_name,#btn_class,#btn_tag{
 font-size: 16px;

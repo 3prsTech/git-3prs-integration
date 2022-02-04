@@ -30,6 +30,8 @@ window.addEventListener( "load", function () {
   const form = document.getElementById( "form_id" );
   const submitBtn = document.getElementById( "submitBtn" );
 
+  submitBtn.disabled = true;
+  
   // ...and take over its submit event.
   form.addEventListener( "submit", function ( event ) {
     event.preventDefault();
