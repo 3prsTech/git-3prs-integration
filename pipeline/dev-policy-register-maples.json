@@ -276,7 +276,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
+						"referenceName": "dev_csv_policy_register_maples",
 						"type": "DatasetReference"
 					}
 				],
@@ -342,7 +342,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
+						"referenceName": "dev_csv_policy_register_maples",
 						"type": "DatasetReference"
 					}
 				],
@@ -408,7 +408,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
+						"referenceName": "dev_csv_policy_register_maples",
 						"type": "DatasetReference"
 					}
 				],
@@ -440,7 +440,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
+						"referenceName": "dev_csv_policy_register_maples",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
@@ -472,7 +472,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "dev_csv_policy_register_maxwellhealth_robinhealthcare",
+						"referenceName": "dev_csv_policy_register_maples",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
