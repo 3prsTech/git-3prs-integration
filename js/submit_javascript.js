@@ -20,7 +20,7 @@ window.addEventListener( "load", function () {
 
     // Set up our request
     //la-3prs-prod-rewrite-fortegra
-    XHR.open( "POST", "https://prod-25.eastus.logic.azure.com:443/workflows/fda362c9fba54184a108f4d4720ed132/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=WQzAoEKN63Qe41_hBpMDgPoX3a8VUq_fLzNSLo7LN5s" );
+    XHR.open( "POST", "https://prod-04.eastus.logic.azure.com:443/workflows/09f6e30fe23940bc9dc1ed5f522ad65d/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=91-DfQcrTNnk6lGtcGq6fGd_0KbPqH6tU3PhY0BGLk4" );
 
     // The data sent is what the user provided in the form
     XHR.send( FD );
