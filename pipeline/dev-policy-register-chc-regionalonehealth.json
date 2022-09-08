@@ -342,7 +342,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
+						"referenceName": "dev_csv_policy_register_chc_regionalonehealth",
 						"type": "DatasetReference"
 					}
 				],
@@ -408,7 +408,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dev_csv_policy_register_springboard_regionalonehealth",
+						"referenceName": "dev_csv_policy_register_chc_regionalonehealth",
 						"type": "DatasetReference"
 					}
 				],
