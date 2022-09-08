@@ -7,7 +7,23 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-3prs-dev-ingestion"
 		},
-		"trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
+		"trigger-dev-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-policy-register-sandcreekoutfitters_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-policy-register-springboard-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
+		},
+		"trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
@@ -15,7 +31,39 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
-		"trigger-dev-policy-register-maples_properties_typeProperties_scope": {
+		"trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-policy-register-springboard-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
+		},
+		"trigger-prod-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		}
@@ -25,7 +73,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger-prod-reports-enrollment-springboard-regionalonehealth')]",
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-maxwellhealth-robinhealthcare')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -34,7 +82,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "prod-reports-enrollment-springboard-regionalonehealth",
+							"referenceName": "dev-policy-register-maxwellhealth-robinhealthcare",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -42,9 +90,121 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/prod/reports-enrollment/springboardbenefits/RegionalOneHealth/",
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/maxwellhealth/RobinHealthcare/",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope')]",
+					"scope": "[parameters('trigger-dev-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-sandcreekoutfitters')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dev-policy-register-sandcreekoutfitters",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/sandcreekoutfitters/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger-dev-policy-register-sandcreekoutfitters_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-springboard-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dev-policy-register-springboard-regionalonehealth",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/springboardbenefits/RegionalOneHealth/",
+					"ignoreEmptyBlobs": false,
+					"scope": "[parameters('trigger-dev-policy-register-springboard-regionalonehealth_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-reissue-fortegra_byod')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dev-policy-reissue-fortegra_byod",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/dev/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dev-reports-enrollment-maxwellhealth-robinhealthcare",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/reports-enrollment/maxwellhealth/RobinHealthcare/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
@@ -81,7 +241,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-maples')]",
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-register-maxwellhealth-robinhealthcare')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -90,7 +250,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "dev-policy-register-maples",
+							"referenceName": "prod-policy-register-maxwellhealth-robinhealthcare",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -98,9 +258,233 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/maples/",
+					"blobPathBeginsWith": "/csvfiles/blobs/prod/policy-register/maxwellhealth/RobinHealthcare/",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger-dev-policy-register-maples_properties_typeProperties_scope')]",
+					"scope": "[parameters('trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-register-springboard-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "prod-policy-register-springboard-regionalonehealth",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/prod/policy-register/springboardbenefits/RegionalOneHealth/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger-prod-policy-register-springboard-regionalonehealth_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-reissue-fortegra_byod')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "prod-policy-reissue-fortegra_byod",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/prod/blobs/",
+					"ignoreEmptyBlobs": false,
+					"scope": "[parameters('trigger-prod-policy-reissue-fortegra_byod_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-reports-enrollment-maxwellhealth-robinhealthcare')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "prod-reports-enrollment-maxwellhealth-robinhealthcare",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/prod/reports-enrollment/maxwellhealth/RobinHealthcare/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger-prod-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-reports-enrollment-springboard-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "prod-reports-enrollment-springboard-regionalonehealth",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/prod/reports-enrollment/springboardbenefits/RegionalOneHealth/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-chc-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dev-policy-register-chc-regionalonehealth",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/connect-healthcare-collaboration/RegionalOneHealth/",
+					"ignoreEmptyBlobs": false,
+					"scope": "[parameters('trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-reports-enrollment-chc-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dev-reports-enrollment-chc-regionalonehealth",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/reports-enrollment/connect-healthcare-collaboration/RegionalOneHealth/",
+					"ignoreEmptyBlobs": false,
+					"scope": "[parameters('trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-register-chc-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "prod-policy-register-chc-regionalonehealth",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/prod/policy-register/connect-healthcare-collaboration/RegionalOneHealth/",
+					"ignoreEmptyBlobs": false,
+					"scope": "[parameters('trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-reports-enrollment-chc-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "prod-reports-enrollment-chc-regionalonehealth",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/prod/reports-enrollment/connect-healthcare-collaboration/RegionalOneHealth/",
+					"ignoreEmptyBlobs": false,
+					"scope": "[parameters('trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
