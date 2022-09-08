@@ -1,0 +1,24 @@
+{
+	"name": "trigger-prod-reports-enrollment-chc-regionalonehealth",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "prod-reports-enrollment-chc-regionalonehealth",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/csvfiles/blobs/prod/reports-enrollment/connect-healthcare-collaboration/RegionalOneHealth/",
+			"ignoreEmptyBlobs": false,
+			"scope": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
