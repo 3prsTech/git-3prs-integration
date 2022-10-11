@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
+		"trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
 		"trigger-dev-policy-register-maples_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
@@ -47,11 +51,19 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
+		"trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
 		"trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
 		"trigger-dev-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
@@ -67,6 +79,10 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
+		"trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
 		"trigger-prod-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
@@ -75,19 +91,11 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
-		"trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
+		"trigger-dev-policy-register-eoa_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
-		"trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
-		},
-		"trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
-		},
-		"trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
+		"trigger-prod-policy-register-eoa_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
@@ -170,9 +178,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"trigger-dev-policy-register-maples_properties_typeProperties_scope": {
-						"value": "[parameters('trigger-dev-policy-register-maples_properties_typeProperties_scope')]"
 					}
 				}
 			},
@@ -194,6 +199,12 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope')]"
+					},
+					"trigger-dev-policy-register-maples_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-dev-policy-register-maples_properties_typeProperties_scope')]"
+					},
 					"trigger-dev-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-dev-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]"
 					},
@@ -206,11 +217,17 @@
 					"trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope')]"
 					},
+					"trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope')]"
+					},
 					"trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]"
 					},
 					"trigger-dev-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-dev-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope')]"
+					},
+					"trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope')]"
 					},
 					"trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]"
@@ -221,28 +238,45 @@
 					"trigger-prod-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-prod-policy-reissue-fortegra_byod_properties_typeProperties_scope')]"
 					},
+					"trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope')]"
+					},
 					"trigger-prod-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-prod-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope')]"
 					},
 					"trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
 						"value": "[parameters('trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope')]"
 					},
-					"trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
-						"value": "[parameters('trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope')]"
-					},
-					"trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
-						"value": "[parameters('trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope')]"
-					},
-					"trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
-						"value": "[parameters('trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope')]"
-					},
-					"trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
-						"value": "[parameters('trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope')]"
+					"trigger-dev-policy-register-eoa_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-dev-policy-register-eoa_properties_typeProperties_scope')]"
 					}
 				}
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'adf-3prs-dev-ingestion_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "adf-3prs-dev-ingestion_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"trigger-prod-policy-register-eoa_properties_typeProperties_scope": {
+						"value": "[parameters('trigger-prod-policy-register-eoa_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adf-3prs-dev-ingestion_ArmTemplate_3')]"
 			]
 		}
 	]

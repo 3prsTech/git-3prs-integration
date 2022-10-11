@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
+		"trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
 		"trigger-dev-policy-register-maples_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
@@ -47,11 +51,19 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
+		"trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
 		"trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
 		"trigger-dev-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
@@ -67,6 +79,10 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
 		},
+		"trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
 		"trigger-prod-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
@@ -75,19 +91,11 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
-		"trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
+		"trigger-dev-policy-register-eoa_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		},
-		"trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
-		},
-		"trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
-		},
-		"trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
+		"trigger-prod-policy-register-eoa_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		}
@@ -96,6 +104,520 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/dev-policy-register-chc-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ingest-to-database",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*InForceRegister*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert"
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorage1",
+										"type": "LinkedServiceReference"
+									},
+									"path": "csvfiles/dev/policy-register/00-logging"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ReportDate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ReportDate",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MasterAgreementID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MasterAgreementID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ProgramID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ProgramID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CertificateNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CertificateNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductSKU",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ProductSKU",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberFirst",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberFirst",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberLast",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberLast",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberMiddle",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberMiddle",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberPrefix",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberPrefix",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberSuffix",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberSuffix",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberEmail",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberEmail",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingAddress1",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingAddress1",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingAddress2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingAddress2",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingCity",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingCity",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingStateCode",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingStateCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingPostalCode",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingPostalCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CoveredDevicePhoneNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CoveredDevicePhoneNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "EnrollmentDate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EnrollmentDate",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "dev_csv_policy_register_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dev_stage_InForceRegister",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "copy-to-processed",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ingest-to-database",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*InForceRegister*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "dev_csv_policy_register_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dev_csv_policy_register_processed",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "copy-to-failed",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ingest-to-database",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*InForceRegister*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "dev_csv_policy_register_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dev_csv_policy_register_failed",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "delete-original-file-processed",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-to-processed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "dev_csv_policy_register_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "delete-original-file-failed",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-to-failed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "dev_csv_policy_register_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"concurrency": 1,
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "dev/connect-heathcare-collaboration"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_chc_regionalonehealth')]",
+				"[concat(variables('factoryId'), '/datasets/dev_stage_InForceRegister')]",
+				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_processed')]",
+				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_failed')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/dev-policy-register-maples')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -3268,6 +3790,520 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/dev-reports-enrollment-chc-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ingest-to-database",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*Enrollment*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert"
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorage1",
+										"type": "LinkedServiceReference"
+									},
+									"path": "csvfiles/dev/reports-enrollment/00-logging"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ReportDate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ReportDate",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MasterAgreementID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MasterAgreementID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ProgramID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ProgramID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CertificateNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CertificateNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductSKU",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ProductSKU",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberFirst",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberFirst",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberLast",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberLast",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberMiddle",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberMiddle",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberPrefix",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberPrefix",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberSuffix",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberSuffix",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberEmail",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberEmail",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingAddress1",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingAddress1",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingAddress2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingAddress2",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingCity",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingCity",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingStateCode",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingStateCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingPostalCode",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingPostalCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CoveredDevicePhoneNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CoveredDevicePhoneNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "EnrollmentDate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EnrollmentDate",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "dev_csv_reports_enrollment_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dev_stage_Enrollments",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "copy-to-processed",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ingest-to-database",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*Enrollment*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "dev_csv_reports_enrollment_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dev_csv_reports_enrollment_processed",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "copy-to-failed",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ingest-to-database",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*Enrollment*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "dev_csv_reports_enrollment_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dev_csv_policy_register_failed",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "delete-original-file-processed",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-to-processed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "dev_csv_reports_enrollment_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "delete-original-file-failed",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-to-failed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "dev_csv_reports_enrollment_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"concurrency": 1,
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "dev/connect-heathcare-collaboration"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/dev_csv_reports_enrollment_chc_regionalonehealth')]",
+				"[concat(variables('factoryId'), '/datasets/dev_stage_Enrollments')]",
+				"[concat(variables('factoryId'), '/datasets/dev_csv_reports_enrollment_processed')]",
+				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_failed')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/dev-reports-enrollment-maxwellhealth-robinhealthcare')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -4292,6 +5328,701 @@
 				"[concat(variables('factoryId'), '/datasets/dev_stage_Enrollments')]",
 				"[concat(variables('factoryId'), '/datasets/dev_csv_reports_enrollment_processed')]",
 				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_failed')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prod-policy-register-chc-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ingest-to-database",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*InForceRegister*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorage1",
+										"type": "LinkedServiceReference"
+									},
+									"path": "csvfiles/prod/policy-register/00-logging"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ReportDate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ReportDate",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MasterAgreementID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MasterAgreementID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ProgramID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ProgramID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CertificateNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CertificateNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductSKU",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ProductSKU",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberFirst",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberFirst",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberLast",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberLast",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberMiddle",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberMiddle",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberPrefix",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberPrefix",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberSuffix",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberSuffix",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberEmail",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberEmail",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingAddress1",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingAddress1",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingAddress2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingAddress2",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingCity",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingCity",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingStateCode",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingStateCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingPostalCode",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingPostalCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CoveredDevicePhoneNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CoveredDevicePhoneNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "EnrollmentDate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EnrollmentDate",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "prod_csv_policy_register_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "prod_stage_InForceRegister",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "copy-to-processed",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ingest-to-database",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*InForceRegister*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "prod_csv_policy_register_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "prod_csv_policy_register_processed",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "copy-to-failed",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ingest-to-database",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*InForceRegister*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "prod_csv_policy_register_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "prod_csv_policy_register_failed",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "delete-original-file-processed",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-to-processed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "prod_csv_policy_register_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "delete-original-file-failed",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-to-failed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "prod_csv_policy_register_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"concurrency": 1,
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "prod/connect-healthcare-collaboration"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_chc_regionalonehealth')]",
+				"[concat(variables('factoryId'), '/datasets/prod_stage_InForceRegister')]",
+				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_processed')]",
+				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_failed')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
@@ -6428,6 +8159,701 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/prod-reports-enrollment-chc-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ingest-to-database",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*Enrollment*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorage1",
+										"type": "LinkedServiceReference"
+									},
+									"path": "csvfiles/prod/reports-enrollment/00-logging"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ReportDate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ReportDate",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MasterAgreementID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MasterAgreementID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ProgramID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ProgramID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CertificateNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CertificateNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductSKU",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ProductSKU",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberFirst",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberFirst",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberLast",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberLast",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberMiddle",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberMiddle",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberPrefix",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberPrefix",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberSuffix",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberSuffix",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SubscriberEmail",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SubscriberEmail",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingAddress1",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingAddress1",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingAddress2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingAddress2",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingCity",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingCity",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingStateCode",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingStateCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "MailingPostalCode",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MailingPostalCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CoveredDevicePhoneNumber",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CoveredDevicePhoneNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "EnrollmentDate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EnrollmentDate",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "prod_csv_reports_enrollment_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "prod_stage_Enrollments",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "copy-to-processed",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ingest-to-database",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*Enrollment*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "prod_csv_reports_enrollment_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "prod_csv_reports_enrollment_processed",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "copy-to-failed",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ingest-to-database",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*Enrollment*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "prod_csv_reports_enrollment_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "prod_csv_reports_enrollment_failed",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "delete-original-file-processed",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-to-processed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "prod_csv_reports_enrollment_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "delete-original-file-failed",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-to-failed",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "prod_csv_reports_enrollment_chc_regionalonehealth",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"concurrency": 1,
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "prod/connect-healthcare-collaboration"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/prod_csv_reports_enrollment_chc_regionalonehealth')]",
+				"[concat(variables('factoryId'), '/datasets/prod_stage_Enrollments')]",
+				"[concat(variables('factoryId'), '/datasets/prod_csv_reports_enrollment_processed')]",
+				"[concat(variables('factoryId'), '/datasets/prod_csv_reports_enrollment_failed')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/prod-reports-enrollment-maxwellhealth-robinhealthcare')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -8407,6 +10833,137 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/dev_csv_policy_register_chc_regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "csv_files/dev/connect-healthcare-collaboration"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "dev/policy-register/connect-healthcare-collaboration/RegionalOneHealth",
+						"container": "csvfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/dev_csv_policy_register_failed')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -9112,6 +11669,137 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"folderPath": "dev/policy-register/springboardbenefits/RegionalOneHealth",
+						"container": "csvfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dev_csv_reports_enrollment_chc_regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "csv_files/dev/connect-healthcare-collaboration"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "dev/reports-enrollment/connect-healthcare-collaboration/RegionalOneHealth",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -10520,6 +13208,137 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/prod_csv_policy_register_chc_regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "csv_files/prod/connect-healthcare-collaboration"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "prod/policy-register/connect-healthcare-collaboration/RegionalOneHealth",
+						"container": "csvfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/prod_csv_policy_register_failed')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -11225,6 +14044,137 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"folderPath": "prod/policy-register/springboardbenefits/RegionalOneHealth",
+						"container": "csvfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prod_csv_reports_enrollment_chc_regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "csv_files/prod/connect-healthcare-collaboration"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "prod/reports-enrollment/connect-healthcare-collaboration/RegionalOneHealth",
 						"container": "csvfiles"
 					},
 					"columnDelimiter": ",",
@@ -12564,6 +15514,36 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-chc-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dev-policy-register-chc-regionalonehealth",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/connect-healthcare-collaboration/RegionalOneHealth/",
+					"ignoreEmptyBlobs": false,
+					"scope": "[parameters('trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/dev-policy-register-chc-regionalonehealth')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-maples')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -12714,6 +15694,36 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-reports-enrollment-chc-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "dev-reports-enrollment-chc-regionalonehealth",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/reports-enrollment/connect-healthcare-collaboration/RegionalOneHealth/",
+					"ignoreEmptyBlobs": false,
+					"scope": "[parameters('trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/dev-reports-enrollment-chc-regionalonehealth')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -12771,6 +15781,36 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/dev-reports-enrollment-springboard-regionalonehealth')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-register-chc-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "prod-policy-register-chc-regionalonehealth",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/prod/policy-register/connect-healthcare-collaboration/RegionalOneHealth/",
+					"ignoreEmptyBlobs": false,
+					"scope": "[parameters('trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/prod-policy-register-chc-regionalonehealth')]"
 			]
 		},
 		{
@@ -12864,6 +15904,36 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-reports-enrollment-chc-regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "prod-reports-enrollment-chc-regionalonehealth",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/csvfiles/blobs/prod/reports-enrollment/connect-healthcare-collaboration/RegionalOneHealth/",
+					"ignoreEmptyBlobs": false,
+					"scope": "[parameters('trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/prod-reports-enrollment-chc-regionalonehealth')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/trigger-prod-reports-enrollment-maxwellhealth-robinhealthcare')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -12924,13 +15994,342 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev-policy-register-chc-regionalonehealth')]",
+			"name": "[concat(parameters('factoryName'), '/dev_csv_policy_register_eoa')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "csv_files/dev/outfitters"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "dev/policy-register/executive-outdoor-adventures",
+						"container": "csvfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ReportDate",
+						"type": "String"
+					},
+					{
+						"name": "MasterAgreementID",
+						"type": "String"
+					},
+					{
+						"name": "ProgramID",
+						"type": "String"
+					},
+					{
+						"name": "CertificateNumber",
+						"type": "String"
+					},
+					{
+						"name": "ProductSKU",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberFirst",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberLast",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberMiddle",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberPrefix",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberSuffix",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberEmail",
+						"type": "String"
+					},
+					{
+						"name": "MailingAddress1",
+						"type": "String"
+					},
+					{
+						"name": "MailingAddress2",
+						"type": "String"
+					},
+					{
+						"name": "MailingCity",
+						"type": "String"
+					},
+					{
+						"name": "MailingStateCode",
+						"type": "String"
+					},
+					{
+						"name": "MailingPostalCode",
+						"type": "String"
+					},
+					{
+						"name": "CoveredDevicePhoneNumber",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Name",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Gender",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Type",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Breed",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Age",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Name",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Gender",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Type",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Breed",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Age",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Name",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Gender",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Type",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Breed",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Age",
+						"type": "String"
+					},
+					{
+						"name": "EnrollmentDate",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prod_csv_policy_register_eoa')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "csv_files/prod/outfitters"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "prod/policy-register/executive-outdoor-adventures",
+						"container": "csvfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ReportDate",
+						"type": "String"
+					},
+					{
+						"name": "MasterAgreementID",
+						"type": "String"
+					},
+					{
+						"name": "ProgramID",
+						"type": "String"
+					},
+					{
+						"name": "CertificateNumber",
+						"type": "String"
+					},
+					{
+						"name": "ProductSKU",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberFirst",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberLast",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberMiddle",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberPrefix",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberSuffix",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberEmail",
+						"type": "String"
+					},
+					{
+						"name": "MailingAddress1",
+						"type": "String"
+					},
+					{
+						"name": "MailingAddress2",
+						"type": "String"
+					},
+					{
+						"name": "MailingCity",
+						"type": "String"
+					},
+					{
+						"name": "MailingStateCode",
+						"type": "String"
+					},
+					{
+						"name": "MailingPostalCode",
+						"type": "String"
+					},
+					{
+						"name": "CoveredDevicePhoneNumber",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Name",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Gender",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Type",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Breed",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Age",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Name",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Gender",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Type",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Breed",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Age",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Name",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Gender",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Type",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Breed",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Age",
+						"type": "String"
+					},
+					{
+						"name": "EnrollmentDate",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dev-policy-register-eoa')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
 						"name": "ingest-to-database",
+						"description": "data ingestion for Sand Creek Outfitters",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -12940,7 +16339,16 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "csvfiles/policy_register/sandcreekoutfitters/EPP_InForceRegister_2022-03-01.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "stage.EPP_InForceRegister"
+							}
+						],
 						"typeProperties": {
 							"source": {
 								"type": "DelimitedTextSource",
@@ -12956,10 +16364,11 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"writeBehavior": "insert"
+								"writeBehavior": "insert",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
-							"validateDataConsistency": false,
+							"validateDataConsistency": true,
 							"logSettings": {
 								"enableCopyActivityLog": true,
 								"copyActivityLogSettings": {
@@ -13183,6 +16592,186 @@
 									},
 									{
 										"source": {
+											"name": "Pet1Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
 											"name": "EnrollmentDate",
 											"type": "String",
 											"physicalType": "String"
@@ -13197,13 +16786,14 @@
 								"typeConversion": true,
 								"typeConversionSettings": {
 									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
+									"treatBooleanAsNumber": false,
+									"dateTimeFormat": "\"yyyy-MM-dd HH:mm:ss.fff\""
 								}
 							}
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_policy_register_chc_regionalonehealth",
+								"referenceName": "dev_csv_policy_register_eoa",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -13241,7 +16831,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
-									"wildcardFileName": "*InForceRegister*.csv",
+									"wildcardFileName": "*",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -13271,7 +16861,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_policy_register_chc_regionalonehealth",
+								"referenceName": "dev_csv_policy_register_eoa",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -13309,7 +16899,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
-									"wildcardFileName": "*InForceRegister*.csv",
+									"wildcardFileName": "*",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -13339,7 +16929,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_policy_register_chc_regionalonehealth",
+								"referenceName": "dev_csv_policy_register_eoa",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -13373,7 +16963,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "dev_csv_policy_register_chc_regionalonehealth",
+								"referenceName": "dev_csv_policy_register_eoa",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -13406,7 +16996,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "dev_csv_policy_register_chc_regionalonehealth",
+								"referenceName": "dev_csv_policy_register_eoa",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -13425,12 +17015,13 @@
 					"cancelAfter": {}
 				},
 				"folder": {
-					"name": "dev/connect-heathcare-collaboration"
+					"name": "dev/outfitters"
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2021-07-27T12:56:44Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_chc_regionalonehealth')]",
+				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_eoa')]",
 				"[concat(variables('factoryId'), '/datasets/dev_stage_InForceRegister')]",
 				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_processed')]",
 				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_failed')]",
@@ -13438,13 +17029,14 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev-reports-enrollment-chc-regionalonehealth')]",
+			"name": "[concat(parameters('factoryName'), '/prod-policy-register-eoa')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
 						"name": "ingest-to-database",
+						"description": "data ingestion for Sand Creek Outfitters",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -13454,14 +17046,23 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "csvfiles/policy_register/sandcreekoutfitters/EPP_InForceRegister_2022-03-01.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "stage.EPP_InForceRegister"
+							}
+						],
 						"typeProperties": {
 							"source": {
 								"type": "DelimitedTextSource",
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
-									"wildcardFileName": "*Enrollment*.csv",
+									"wildcardFileName": "*InForceRegister*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -13470,10 +17071,11 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"writeBehavior": "insert"
+								"writeBehavior": "insert",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
-							"validateDataConsistency": false,
+							"validateDataConsistency": true,
 							"logSettings": {
 								"enableCopyActivityLog": true,
 								"copyActivityLogSettings": {
@@ -13485,7 +17087,7 @@
 										"referenceName": "AzureBlobStorage1",
 										"type": "LinkedServiceReference"
 									},
-									"path": "csvfiles/dev/reports-enrollment/00-logging"
+									"path": "csvfiles/dev/policy-register/00-logging"
 								}
 							},
 							"translator": {
@@ -13697,6 +17299,186 @@
 									},
 									{
 										"source": {
+											"name": "Pet1Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet1Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet1Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet2Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet2Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Name",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Gender",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Gender",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Breed",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Breed",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Pet3Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Pet3Age",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
 											"name": "EnrollmentDate",
 											"type": "String",
 											"physicalType": "String"
@@ -13711,20 +17493,21 @@
 								"typeConversion": true,
 								"typeConversionSettings": {
 									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
+									"treatBooleanAsNumber": false,
+									"dateTimeFormat": "\"yyyy-MM-dd HH:mm:ss.fff\""
 								}
 							}
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_reports_enrollment_chc_regionalonehealth",
+								"referenceName": "prod_csv_policy_register_eoa",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_stage_Enrollments",
+								"referenceName": "dev_stage_InForceRegister",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -13755,7 +17538,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
-									"wildcardFileName": "*Enrollment*.csv",
+									"wildcardFileName": "*",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -13785,14 +17568,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_reports_enrollment_chc_regionalonehealth",
+								"referenceName": "prod_csv_policy_register_eoa",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_csv_reports_enrollment_processed",
+								"referenceName": "dev_csv_policy_register_processed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -13823,7 +17606,7 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
-									"wildcardFileName": "*Enrollment*.csv",
+									"wildcardFileName": "*",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -13853,7 +17636,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "dev_csv_reports_enrollment_chc_regionalonehealth",
+								"referenceName": "prod_csv_policy_register_eoa",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -13887,7 +17670,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "dev_csv_reports_enrollment_chc_regionalonehealth",
+								"referenceName": "prod_csv_policy_register_eoa",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -13920,7 +17703,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "dev_csv_reports_enrollment_chc_regionalonehealth",
+								"referenceName": "prod_csv_policy_register_eoa",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -13939,1934 +17722,21 @@
 					"cancelAfter": {}
 				},
 				"folder": {
-					"name": "dev/connect-heathcare-collaboration"
+					"name": "prod/outfitters"
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2021-07-27T12:56:44Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/dev_csv_reports_enrollment_chc_regionalonehealth')]",
-				"[concat(variables('factoryId'), '/datasets/dev_stage_Enrollments')]",
-				"[concat(variables('factoryId'), '/datasets/dev_csv_reports_enrollment_processed')]",
+				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_eoa')]",
+				"[concat(variables('factoryId'), '/datasets/dev_stage_InForceRegister')]",
+				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_processed')]",
 				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_failed')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dev_csv_policy_register_chc_regionalonehealth')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "csv_files/dev/connect-healthcare-collaboration"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "dev/policy-register/connect-healthcare-collaboration/RegionalOneHealth",
-						"container": "csvfiles"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dev_csv_reports_enrollment_chc_regionalonehealth')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "csv_files/dev/connect-healthcare-collaboration"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "dev/reports-enrollment/connect-healthcare-collaboration/RegionalOneHealth",
-						"container": "csvfiles"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod_csv_policy_register_chc_regionalonehealth')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "csv_files/prod/connect-healthcare-collaboration"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "prod/policy-register/connect-healthcare-collaboration/RegionalOneHealth",
-						"container": "csvfiles"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod_csv_reports_enrollment_chc_regionalonehealth')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "csv_files/prod/connect-healthcare-collaboration"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "prod/reports-enrollment/connect-healthcare-collaboration/RegionalOneHealth",
-						"container": "csvfiles"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod-policy-register-chc-regionalonehealth')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ingest-to-database",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*InForceRegister*.csv",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"writeBehavior": "insert",
-								"disableMetricsCollection": false
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Warning",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "AzureBlobStorage1",
-										"type": "LinkedServiceReference"
-									},
-									"path": "csvfiles/prod/policy-register/00-logging"
-								}
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "ReportDate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ReportDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MasterAgreementID",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MasterAgreementID",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ProgramID",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ProgramID",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "CertificateNumber",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "CertificateNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ProductSKU",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ProductSKU",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberFirst",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberFirst",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberLast",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberLast",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberMiddle",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberMiddle",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberPrefix",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberPrefix",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberSuffix",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberSuffix",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberEmail",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberEmail",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingAddress1",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingAddress1",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingAddress2",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingAddress2",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingCity",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingCity",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingStateCode",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingStateCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingPostalCode",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingPostalCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "CoveredDevicePhoneNumber",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "CoveredDevicePhoneNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "EnrollmentDate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "EnrollmentDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "prod_csv_policy_register_chc_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "prod_stage_InForceRegister",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "copy-to-processed",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "ingest-to-database",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*InForceRegister*.csv",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "prod_csv_policy_register_chc_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "prod_csv_policy_register_processed",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "copy-to-failed",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "ingest-to-database",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*InForceRegister*.csv",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "prod_csv_policy_register_chc_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "prod_csv_policy_register_failed",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "delete-original-file-processed",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "copy-to-processed",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "prod_csv_policy_register_chc_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"enableLogging": false,
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							}
-						}
-					},
-					{
-						"name": "delete-original-file-failed",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "copy-to-failed",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "prod_csv_policy_register_chc_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"enableLogging": false,
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							}
-						}
-					}
-				],
-				"concurrency": 1,
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "prod/connect-healthcare-collaboration"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_chc_regionalonehealth')]",
-				"[concat(variables('factoryId'), '/datasets/prod_stage_InForceRegister')]",
-				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_processed')]",
-				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_failed')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod-reports-enrollment-chc-regionalonehealth')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ingest-to-database",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*Enrollment*.csv",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"writeBehavior": "insert",
-								"disableMetricsCollection": false
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Warning",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "AzureBlobStorage1",
-										"type": "LinkedServiceReference"
-									},
-									"path": "csvfiles/prod/reports-enrollment/00-logging"
-								}
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "ReportDate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ReportDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MasterAgreementID",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MasterAgreementID",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ProgramID",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ProgramID",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "CertificateNumber",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "CertificateNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ProductSKU",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ProductSKU",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberFirst",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberFirst",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberLast",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberLast",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberMiddle",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberMiddle",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberPrefix",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberPrefix",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberSuffix",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberSuffix",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SubscriberEmail",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "SubscriberEmail",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingAddress1",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingAddress1",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingAddress2",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingAddress2",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingCity",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingCity",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingStateCode",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingStateCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "MailingPostalCode",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "MailingPostalCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "CoveredDevicePhoneNumber",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "CoveredDevicePhoneNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet1Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet1Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet2Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet2Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Name",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Name",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Gender",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Gender",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Type",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Type",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Breed",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Breed",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Pet3Age",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Pet3Age",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "EnrollmentDate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "EnrollmentDate",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "prod_csv_reports_enrollment_chc_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "prod_stage_Enrollments",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "copy-to-processed",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "ingest-to-database",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*Enrollment*.csv",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "prod_csv_reports_enrollment_chc_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "prod_csv_reports_enrollment_processed",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "copy-to-failed",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "ingest-to-database",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*Enrollment*.csv",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "prod_csv_reports_enrollment_chc_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "prod_csv_reports_enrollment_failed",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "delete-original-file-processed",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "copy-to-processed",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "prod_csv_reports_enrollment_chc_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"enableLogging": false,
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							}
-						}
-					},
-					{
-						"name": "delete-original-file-failed",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "copy-to-failed",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "prod_csv_reports_enrollment_chc_regionalonehealth",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"enableLogging": false,
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							}
-						}
-					}
-				],
-				"concurrency": 1,
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "prod/connect-healthcare-collaboration"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/prod_csv_reports_enrollment_chc_regionalonehealth')]",
-				"[concat(variables('factoryId'), '/datasets/prod_stage_Enrollments')]",
-				"[concat(variables('factoryId'), '/datasets/prod_csv_reports_enrollment_processed')]",
-				"[concat(variables('factoryId'), '/datasets/prod_csv_reports_enrollment_failed')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-chc-regionalonehealth')]",
+			"name": "[concat(parameters('factoryName'), '/trigger-dev-policy-register-eoa')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -15875,7 +17745,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "dev-policy-register-chc-regionalonehealth",
+							"referenceName": "dev-policy-register-eoa",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -15883,20 +17753,20 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/connect-healthcare-collaboration/RegionalOneHealth/",
-					"ignoreEmptyBlobs": false,
-					"scope": "[parameters('trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope')]",
+					"blobPathBeginsWith": "/csvfiles/blobs/dev/policy-register/executive-outdoor-adventures/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger-dev-policy-register-eoa_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/dev-policy-register-chc-regionalonehealth')]"
+				"[concat(variables('factoryId'), '/pipelines/dev-policy-register-eoa')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger-dev-reports-enrollment-chc-regionalonehealth')]",
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-register-eoa')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -15905,7 +17775,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "dev-reports-enrollment-chc-regionalonehealth",
+							"referenceName": "prod-policy-register-eoa",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -15913,76 +17783,16 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/dev/reports-enrollment/connect-healthcare-collaboration/RegionalOneHealth/",
-					"ignoreEmptyBlobs": false,
-					"scope": "[parameters('trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope')]",
+					"blobPathBeginsWith": "/csvfiles/blobs/prod/policy-register/executive-outdoor-adventures/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger-prod-policy-register-eoa_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/dev-reports-enrollment-chc-regionalonehealth')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-register-chc-regionalonehealth')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "prod-policy-register-chc-regionalonehealth",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/prod/policy-register/connect-healthcare-collaboration/RegionalOneHealth/",
-					"ignoreEmptyBlobs": false,
-					"scope": "[parameters('trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/prod-policy-register-chc-regionalonehealth')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger-prod-reports-enrollment-chc-regionalonehealth')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "prod-reports-enrollment-chc-regionalonehealth",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/prod/reports-enrollment/connect-healthcare-collaboration/RegionalOneHealth/",
-					"ignoreEmptyBlobs": false,
-					"scope": "[parameters('trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/prod-reports-enrollment-chc-regionalonehealth')]"
+				"[concat(variables('factoryId'), '/pipelines/prod-policy-register-eoa')]"
 			]
 		}
 	]
