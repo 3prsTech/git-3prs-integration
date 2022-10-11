@@ -1260,7 +1260,7 @@
 				"activities": [
 					{
 						"name": "ingest-to-database",
-						"description": "data ingestion for Sand Creek Outfitters",
+						"description": "data ingestion for Executive Outdoor Adventures",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -1731,7 +1731,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_stage_InForceRegister",
+								"referenceName": "prod_stage_InForceRegister",
 								"type": "DatasetReference",
 								"parameters": {}
 							}

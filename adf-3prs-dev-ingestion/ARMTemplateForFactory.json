@@ -17036,7 +17036,7 @@
 				"activities": [
 					{
 						"name": "ingest-to-database",
-						"description": "data ingestion for Sand Creek Outfitters",
+						"description": "data ingestion for Executive Outdoor Adventures",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -17507,7 +17507,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_stage_InForceRegister",
+								"referenceName": "prod_stage_InForceRegister",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -17729,7 +17729,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/prod_csv_policy_register_eoa')]",
-				"[concat(variables('factoryId'), '/datasets/dev_stage_InForceRegister')]",
+				"[concat(variables('factoryId'), '/datasets/prod_stage_InForceRegister')]",
 				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_processed')]",
 				"[concat(variables('factoryId'), '/datasets/dev_csv_policy_register_failed')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
