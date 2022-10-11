@@ -1799,7 +1799,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_csv_policy_register_processed",
+								"referenceName": "prod_csv_policy_register_processed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -1867,7 +1867,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "dev_csv_policy_register_failed",
+								"referenceName": "prod_csv_policy_register_failed",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
