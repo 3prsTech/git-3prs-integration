@@ -2,7 +2,7 @@
 	"name": "trigger-prod-reports-enrollment-chc-regionalonehealth",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
