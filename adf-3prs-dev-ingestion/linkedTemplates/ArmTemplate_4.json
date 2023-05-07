@@ -7,7 +7,7 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-3prs-dev-ingestion"
 		},
-		"trigger-prod-policy-register-eoa_properties_typeProperties_scope": {
+		"trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
 		}
@@ -17,16 +17,16 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger-prod-policy-register-eoa')]",
+			"name": "[concat(parameters('factoryName'), '/trigger-prod-reports-enrollment-springboard-regionalonehealth')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "prod-policy-register-eoa",
+							"referenceName": "prod-reports-enrollment-springboard-regionalonehealth",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -34,9 +34,9 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/csvfiles/blobs/prod/policy-register/executive-outdoor-adventures/",
+					"blobPathBeginsWith": "/csvfiles/blobs/prod/reports-enrollment/springboardbenefits/RegionalOneHealth/",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger-prod-policy-register-eoa_properties_typeProperties_scope')]",
+					"scope": "[parameters('trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]

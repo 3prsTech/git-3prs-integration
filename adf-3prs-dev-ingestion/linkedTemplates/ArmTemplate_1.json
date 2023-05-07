@@ -13,6 +13,135 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/dev_csv_reports_enrollment_springboard_regionalonehealth')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "csv_files/dev/springboardbenefits"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "dev/reports-enrollment/springboardbenefits/RegionalOneHealth",
+						"container": "csvfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/dev_stage_BYODCancellations')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -893,6 +1022,168 @@
 						"type": "String"
 					},
 					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prod_csv_policy_register_eoa')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "csv_files/prod/outfitters"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "prod/policy-register/executive-outdoor-adventures",
+						"container": "csvfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ReportDate",
+						"type": "String"
+					},
+					{
+						"name": "MasterAgreementID",
+						"type": "String"
+					},
+					{
+						"name": "ProgramID",
+						"type": "String"
+					},
+					{
+						"name": "CertificateNumber",
+						"type": "String"
+					},
+					{
+						"name": "ProductSKU",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberFirst",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberLast",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberMiddle",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberPrefix",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberSuffix",
+						"type": "String"
+					},
+					{
+						"name": "SubscriberEmail",
+						"type": "String"
+					},
+					{
+						"name": "MailingAddress1",
+						"type": "String"
+					},
+					{
+						"name": "MailingAddress2",
+						"type": "String"
+					},
+					{
+						"name": "MailingCity",
+						"type": "String"
+					},
+					{
+						"name": "MailingStateCode",
+						"type": "String"
+					},
+					{
+						"name": "MailingPostalCode",
+						"type": "String"
+					},
+					{
+						"name": "CoveredDevicePhoneNumber",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Name",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Gender",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Type",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Breed",
+						"type": "String"
+					},
+					{
+						"name": "Pet1Age",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Name",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Gender",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Type",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Breed",
+						"type": "String"
+					},
+					{
+						"name": "Pet2Age",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Name",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Gender",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Type",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Breed",
+						"type": "String"
+					},
+					{
+						"name": "Pet3Age",
+						"type": "String"
+					},
+					{
+						"name": "EnrollmentDate",
 						"type": "String"
 					}
 				]
@@ -2348,316 +2639,6 @@
 						"type": "String"
 					}
 				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod_stage_BYODCancellations')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "3prsProdODS",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "sql_tables/prod"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ReportDate",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MasterAgreementID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProgramID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CertificateNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProductSKU",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberFirst",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberLast",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberMiddle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberPrefix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberSuffix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberEmail",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingCity",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingStateCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingPostalCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CoveredDevicePhoneNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "EnrollmentDate",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "stage",
-					"table": "BYODCancellations"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod_stage_Enrollments')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "3prsProdODS",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "sql_tables/prod"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ReportDate",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MasterAgreementID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProgramID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CertificateNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ProductSKU",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberFirst",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberLast",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberMiddle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberPrefix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberSuffix",
-						"type": "nvarchar"
-					},
-					{
-						"name": "SubscriberEmail",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingAddress2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingCity",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingStateCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MailingPostalCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CoveredDevicePhoneNumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet1Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet2Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Gender",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Breed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pet3Age",
-						"type": "nvarchar"
-					},
-					{
-						"name": "EnrollmentDate",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "stage",
-					"table": "Enrollments"
-				}
 			},
 			"dependsOn": []
 		}
