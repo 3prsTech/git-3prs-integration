@@ -1,0 +1,78 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-3prs-dev-ingestion"
+		},
+		"3prsDevODS_connectionString": {
+			"value": ""
+		},
+		"3prsProdODS_connectionString": {
+			"value": ""
+		},
+		"3prsfortegra_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"trigger-dev-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-policy-register-eoa_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-policy-register-maples_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-policy-register-sandcreekoutfitters_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-policy-register-springboard-regionalonehealth_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
+		},
+		"trigger-dev-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-dev-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-policy-register-chc-regionalonehealth_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-policy-register-eoa_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-policy-register-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-policy-register-springboard-regionalonehealth_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-policy-reissue-fortegra_byod_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfortegra"
+		},
+		"trigger-prod-reports-enrollment-chc-regionalonehealth_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-reports-enrollment-maxwellhealth-robinhealthcare_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		},
+		"trigger-prod-reports-enrollment-springboard-regionalonehealth_properties_typeProperties_scope": {
+			"value": "/subscriptions/dd41f8f4-7805-4ceb-a22b-864ca2689509/resourceGroups/rg-3prs-dev-sql/providers/Microsoft.Storage/storageAccounts/3prsfileupload"
+		}
+	}
+}
